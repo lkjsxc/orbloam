@@ -26,15 +26,9 @@ jobs:
           test -x "$bin"
           echo "LKJSCRIPT=$bin" >> "$GITHUB_ENV"
           "$bin" --version
+          git archive --format=zip -o .runtime/source.zip HEAD
       - name: Verify authoring boundary
-        shell: bash
-        run: |
-          set -euo pipefail
-          if test -f tools/build.py; then
-            python3 tools/build.py
-          else
-            "$LKJSCRIPT" capabilities --generate-docs .runtime/discovery
-          fi
+        run: python3 tools/build.py
       - name: Native acceptance
         if: ${{ hashFiles('tests/acceptance.py') != '' }}
         run: python3 tests/acceptance.py
@@ -43,6 +37,9 @@ jobs:
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: native-diagnostics
-          path: .runtime/
+          path: |
+            .runtime/
+            .build/
+            dist/
           include-hidden-files: true
           retention-days: 7
