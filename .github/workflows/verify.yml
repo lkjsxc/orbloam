@@ -1,0 +1,46 @@
+name: Verify Orbloam
+on:
+  push:
+    branches: [main, 'reconstruct/**']
+  pull_request:
+permissions:
+  contents: read
+concurrency:
+  group: verify-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  native:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Acquire immutable runtime
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .runtime
+          curl --fail --location --silent --show-error --proto '=https' --proto-redir '=https' --retry 2 --max-time 180 -o .runtime/runtime.tar.gz https://github.com/lkjsxc/lkjscript/releases/download/v0.1.38/lkjscript-x86_64-unknown-linux-musl.tar.gz
+          echo 'fa10e7afb09c06e4a243f421050a0497ca9acd331cdf34c046650c85aef377aa  .runtime/runtime.tar.gz' | sha256sum -c -
+          tar -xzf .runtime/runtime.tar.gz -C .runtime
+          find .runtime -maxdepth 3 -type f
+          bin=$(find "$PWD/.runtime" -type f -name lkjscript | head -n1)
+          test -n "$bin"
+          chmod +x "$bin"
+          echo "LKJSCRIPT=$bin" >> "$GITHUB_ENV"
+          "$bin" --version
+      - name: Verify authoring boundary
+        shell: bash
+        run: |
+          set -euo pipefail
+          if test -f tools/build.py; then
+            python3 tools/build.py
+          else
+            "$LKJSCRIPT" new /tmp/orbloam-probe --template http --name orbloam-probe
+            cat /tmp/orbloam-probe/http.deployment.json
+            "$LKJSCRIPT" --project /tmp/orbloam-probe status
+            "$LKJSCRIPT" --project /tmp/orbloam-probe query owners --class module
+            "$LKJSCRIPT" package builtin query owners | grep -Ei 'clock|crypto|sign|verify|hash|random|i64|text|bytes|bool|list|request|response|condition' || true
+          fi
+      - name: Native acceptance
+        if: ${{ hashFiles('tests/acceptance.py') != '' }}
+        run: python3 tests/acceptance.py
