@@ -33,13 +33,16 @@ jobs:
           if test -f tools/build.py; then
             python3 tools/build.py
           else
-            "$LKJSCRIPT" new /tmp/orbloam-probe --template http --name orbloam-probe
-            cat /tmp/orbloam-probe/service.deployment.json
-            "$LKJSCRIPT" --project /tmp/orbloam-probe query owners
-            "$LKJSCRIPT" capabilities --generate-docs /tmp/orbloam-discovery
-            grep -E '^owner kind=(external|pure_function|interface)' /tmp/orbloam-discovery/builtin-standard.md
-            grep -E '^operation |^type path=operation' /tmp/orbloam-discovery/builtin-standard.md | head -200 || true
+            "$LKJSCRIPT" capabilities --generate-docs .runtime/discovery
           fi
       - name: Native acceptance
         if: ${{ hashFiles('tests/acceptance.py') != '' }}
         run: python3 tests/acceptance.py
+      - name: Preserve reconstruction diagnostics
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: native-diagnostics
+          path: .runtime/
+          include-hidden-files: true
+          retention-days: 7
