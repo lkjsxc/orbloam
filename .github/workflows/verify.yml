@@ -22,10 +22,8 @@ jobs:
           curl --fail --location --silent --show-error --proto '=https' --proto-redir '=https' --retry 2 --max-time 180 -o .runtime/runtime.tar.gz https://github.com/lkjsxc/lkjscript/releases/download/v0.1.38/lkjscript-x86_64-unknown-linux-musl.tar.gz
           echo 'fa10e7afb09c06e4a243f421050a0497ca9acd331cdf34c046650c85aef377aa  .runtime/runtime.tar.gz' | sha256sum -c -
           tar -xzf .runtime/runtime.tar.gz -C .runtime
-          find .runtime -maxdepth 3 -type f
-          bin=$(find "$PWD/.runtime" -type f -name lkjscript | head -n1)
-          test -n "$bin"
-          chmod +x "$bin"
+          bin="$PWD/.runtime/lkjscript/lkjscript"
+          test -x "$bin"
           echo "LKJSCRIPT=$bin" >> "$GITHUB_ENV"
           "$bin" --version
       - name: Verify authoring boundary
@@ -36,10 +34,11 @@ jobs:
             python3 tools/build.py
           else
             "$LKJSCRIPT" new /tmp/orbloam-probe --template http --name orbloam-probe
-            cat /tmp/orbloam-probe/http.deployment.json
-            "$LKJSCRIPT" --project /tmp/orbloam-probe status
-            "$LKJSCRIPT" --project /tmp/orbloam-probe query owners --class module
-            "$LKJSCRIPT" package builtin query owners | grep -Ei 'clock|crypto|sign|verify|hash|random|i64|text|bytes|bool|list|request|response|condition' || true
+            cat /tmp/orbloam-probe/service.deployment.json
+            "$LKJSCRIPT" --project /tmp/orbloam-probe query owners
+            "$LKJSCRIPT" capabilities --generate-docs /tmp/orbloam-discovery
+            grep -E '^owner kind=(external|pure_function|interface)' /tmp/orbloam-discovery/builtin-standard.md
+            grep -E '^operation |^type path=operation' /tmp/orbloam-discovery/builtin-standard.md | head -200 || true
           fi
       - name: Native acceptance
         if: ${{ hashFiles('tests/acceptance.py') != '' }}
