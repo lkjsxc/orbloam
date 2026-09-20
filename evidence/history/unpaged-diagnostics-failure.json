@@ -1,0 +1,57 @@
+{
+  "schema": "orbloam-native-acceptance-v1",
+  "artifact_sha256": "b133eaf5af1e5bb1244698c4a673f7bc0ac3aca270e49e1a24fe9391d515f7c5",
+  "runtime_sha256": "98a39bd192c1e98187a1a954f916f5ffc89ef2586317c25e1efa06c61b888c32",
+  "groups": {
+    "http-and-recovery": {
+      "status": "passed",
+      "elapsed_seconds": 1.5264200699998582,
+      "observations": {
+        "http_observations": 66,
+        "registered_cores": 2,
+        "registration_retry_same_identity": true,
+        "owned_commands": [
+          "move",
+          "rename",
+          "research",
+          "build",
+          "pause",
+          "recipe",
+          "transfer",
+          "repair",
+          "dismantle"
+        ],
+        "replay_after_later_action": true,
+        "concurrent_identical_intent_once": true,
+        "restart_equal": true,
+        "logical_restore_equal": true,
+        "credentials_absent_from_public_world_and_backup": true,
+        "data_verified": true
+      }
+    },
+    "independent-native-oracles": {
+      "status": "failed",
+      "elapsed_seconds": 0.7367831890001071,
+      "error": "Native run failed (4): result status=failure command=run\ndiagnostic class=resource code=control_render_record_bytes message=\"compact output record exceeds the 65536-byte format bound\" notes=\"[\\\"earlier application effects may already be visible; automatic retry is not safe\\\"]\"\n",
+      "traceback": "Traceback (most recent call last):\n  File \"/mnt/data/orbloam/tests/acceptance.py\", line 199, in main\n    facts = test()\n  File \"/mnt/data/orbloam/tests/acceptance.py\", line 148, in native_oracles\n    report = json.loads(execution_value(app.command('diagnostics', [])))\n                                        ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/data/orbloam/tests/native.py\", line 93, in command\n    return native('run', '--deployment', path, '--arguments', json.dumps(arguments), timeout=180)\n  File \"/mnt/data/orbloam/tests/native.py\", line 35, in native\n    raise RuntimeError(f'Native {args[0]} failed ({result.returncode}): {redact(result.stdout + result.stderr)[-4000:]}')\nRuntimeError: Native run failed (4): result status=failure command=run\ndiagnostic class=resource code=control_render_record_bytes message=\"compact output record exceeds the 65536-byte format bound\" notes=\"[\\\"earlier application effects may already be visible; automatic retry is not safe\\\"]\"\n\n"
+    },
+    "one-hour-exact-catchup": {
+      "status": "passed",
+      "elapsed_seconds": 4.28425554200021,
+      "observations": {
+        "fixture_population": 512,
+        "fixture_workshops": 8,
+        "requested_absence_ticks": 360,
+        "processed_ticks": 360,
+        "calculated_deaths": 512,
+        "actual_deaths": 512,
+        "catchup_wall_seconds": 3.0832042429997273,
+        "final_backlog_ticks": 0,
+        "all_eight_processing_totals_exact": true,
+        "post_load_move_and_replay": true,
+        "existing_world_not_overwritten": true
+      }
+    }
+  },
+  "status": "failed"
+}

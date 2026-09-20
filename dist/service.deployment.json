@@ -1,0 +1,81 @@
+{
+  "artifact": "application.lkja",
+  "target": "world",
+  "listen": "127.0.0.1:8080",
+  "runtime": {
+    "maximum_concurrent_tasks": 1,
+    "maximum_queued_tasks": 64,
+    "request_deadline_milliseconds": 30000,
+    "shutdown_grace_milliseconds": 30000,
+    "cancellation_grace_milliseconds": 5000
+  },
+  "execution": {
+    "instruction_fuel": 10000000,
+    "maximum_call_depth": 4096,
+    "maximum_value_stack": 1000000
+  },
+  "http": {
+    "maximum_request_body_bytes": 4096,
+    "maximum_response_body_bytes": 4194304,
+    "maximum_header_bytes": 32768,
+    "maximum_headers": 128
+  },
+  "session": null,
+  "worker": null,
+  "streams": {
+    "maximum_chunk_bytes": 65536,
+    "maximum_buffered_chunks": 8,
+    "maximum_total_bytes": 67108864,
+    "maximum_live_streams": 1024
+  },
+  "configuration": {},
+  "secrets": [],
+  "grants": [
+    {
+      "requirement": "streams",
+      "sharing_domain": "orbloam-streams",
+      "authority_revision": "9a57ccc8cc39ef683ec3a20acf31699457b9dc97812bfc49447ce58665449d79",
+      "adapter": {
+        "kind": "byte_stream"
+      }
+    },
+    {
+      "requirement": "clock",
+      "sharing_domain": "orbloam-clock",
+      "authority_revision": "6ff3c01d3167c7758129bd8a405f07b409dbc5535d6d0db52738e9fe9181a6f7",
+      "adapter": {
+        "kind": "wall_clock"
+      }
+    },
+    {
+      "requirement": "random",
+      "sharing_domain": "orbloam-random",
+      "authority_revision": "489dabc23f19b036b4b89d5b79a3579ada251c70df8a4e798b712d9dd00a0ab3",
+      "adapter": {
+        "kind": "secure_random"
+      }
+    },
+    {
+      "requirement": "data",
+      "sharing_domain": "orbloam-data",
+      "authority_revision": "1b5e6140838670cd3baa3ef3abe7180be11966a9bc96f529d53f281ed6c5287f",
+      "adapter": {
+        "kind": "data",
+        "root": "data",
+        "namespace": "orbloam",
+        "limits": {
+          "maximum_space_name_bytes": 128,
+          "maximum_key_parts": 4,
+          "maximum_key_bytes": 512,
+          "maximum_value_bytes": 1048576,
+          "maximum_transaction_mutations": 64,
+          "maximum_transaction_bytes": 4194304,
+          "maximum_scan_items": 256,
+          "maximum_scan_bytes": 4194304,
+          "maximum_scan_work": 10000,
+          "maximum_live_transactions": 8
+        }
+      }
+    }
+  ]
+}

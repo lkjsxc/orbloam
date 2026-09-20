@@ -1,0 +1,15 @@
+{
+  "schema": "orbloam-catalogue-reachability-v1",
+  "status": "passed",
+  "artifact_sha256": "afd5213d7663e88d0a3fe1a13a1a8946bdd610f3f65279041536a66cae055828",
+  "acyclic_recipes": 72,
+  "reachable_research_steps": 96,
+  "reachable_products": 72,
+  "facility_gate_consistent": true,
+  "assumption": "unlimited obtainable inputs and essence; logical unlock graph only",
+  "nonclaims": [
+    "earned end-to-end progression",
+    "economy balance",
+    "time to completion"
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "schema": "orbloam-native-acceptance-v1",
+  "artifact_sha256": "afd5213d7663e88d0a3fe1a13a1a8946bdd610f3f65279041536a66cae055828",
+  "runtime_sha256": "98a39bd192c1e98187a1a954f916f5ffc89ef2586317c25e1efa06c61b888c32",
+  "groups": {
+    "http-and-recovery": {
+      "status": "passed",
+      "elapsed_seconds": 1.3885551450002822,
+      "observations": {
+        "http_observations": 66,
+        "registered_cores": 2,
+        "registration_retry_same_identity": true,
+        "owned_commands": [
+          "move",
+          "rename",
+          "research",
+          "build",
+          "pause",
+          "recipe",
+          "transfer",
+          "repair",
+          "dismantle"
+        ],
+        "replay_after_later_action": true,
+        "concurrent_identical_intent_once": true,
+        "restart_equal": true,
+        "logical_restore_equal": true,
+        "credentials_absent_from_public_world_and_backup": true,
+        "data_verified": true
+      }
+    },
+    "independent-native-oracles": {
+      "status": "passed",
+      "elapsed_seconds": 10.784006280000085,
+      "observations": {
+        "enumerative_population_cases": 48,
+        "native_recipe_cases": 72,
+        "recipe_paths_per_case": [
+          "completion",
+          "missing-input",
+          "full-warehouse"
+        ],
+        "shared_world_cores": 2,
+        "inhabitants_per_core": 512,
+        "full_world_equal_to_independent_oracle": true,
+        "split_canonical_world_equal": true
+      }
+    },
+    "one-hour-exact-catchup": {
+      "status": "passed",
+      "elapsed_seconds": 5.020688810000138,
+      "observations": {
+        "fixture_population": 512,
+        "fixture_workshops": 8,
+        "requested_absence_ticks": 360,
+        "processed_ticks": 361,
+        "calculated_deaths": 513,
+        "actual_deaths": 513,
+        "catchup_wall_seconds": 3.625368136999896,
+        "final_backlog_ticks": 0,
+        "all_eight_processing_totals_exact": true,
+        "post_load_move_and_replay": true,
+        "existing_world_not_overwritten": true
+      }
+    }
+  },
+  "status": "passed"
+}

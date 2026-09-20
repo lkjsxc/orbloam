@@ -1,0 +1,47 @@
+{
+  "schema": "orbloam-browser-acceptance-v1",
+  "artifact_sha256": "b133eaf5af1e5bb1244698c4a673f7bc0ac3aca270e49e1a24fe9391d515f7c5",
+  "runtime_sha256": "98a39bd192c1e98187a1a954f916f5ffc89ef2586317c25e1efa06c61b888c32",
+  "status": "passed",
+  "mode": "blank-document-native-http-bridge",
+  "page_errors": [],
+  "browser": "144.0.7559.96",
+  "served_asset_sha256": {
+    "index.html": "450b9fe69777af3fc64291f86e7fb47dfc67ce40bb8ea306a5872ae107f7d69c",
+    "styles.css": "74733a2c8522f0a7a57edbab591724adf4fed0eaebdde428fa514a70442eb1be",
+    "api.js": "1fabfae1a26238ec519042e7f3c34f463fbc9f599a956e2e09764749e4e5f9b7",
+    "world.js": "335a692200770b6239825f6bb616d25ae7dc6d09f4a3d6aeac9f4b15aca46c19",
+    "research.js": "dbab92d54aa4ab70a15a71c0747873a0f631511ff90bc5e06f7d4173cf0c0b6d",
+    "client.js": "688c1f885cae7fe534ec8254f4a592621a39d7475458ff1dc114545c37663eaa"
+  },
+  "navigation_error": "Page.goto: net::ERR_BLOCKED_BY_ADMINISTRATOR at http://127.0.0.1:34909/\n",
+  "nonclaims": [
+    "normal browser navigation",
+    "CSP enforcement",
+    "CORS enforcement",
+    "TLS",
+    "native localStorage persistence/permissions",
+    "clipboard permissions",
+    "external reverse proxy"
+  ],
+  "lost_action_response_replayed_once": true,
+  "observations": {
+    "desktop": [
+      1440,
+      960
+    ],
+    "mobile": [
+      390,
+      844
+    ],
+    "native_registration": true,
+    "real_research_purchase": true,
+    "real_build_and_move": true,
+    "two_identities_one_world": true,
+    "mobile_recovery_same_core": true,
+    "untrusted_name_is_text": true,
+    "maximum_game_requests": 1,
+    "finite_extreme_zoom": true,
+    "mobile_no_horizontal_overflow": true
+  }
+}

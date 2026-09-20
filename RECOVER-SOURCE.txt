@@ -1,0 +1,5 @@
+The complete source and accepted graph are present in this ZIP.
+For Git history, from an unrelated directory use:
+  git clone --branch main /path/to/orbloam-reconstructed.bundle orbloam-recovered
+The local main commit is a97e029ad09736bf56612e7cf5694ec26a445d3a.
+This bundle does not mean remote GitHub main was updated.

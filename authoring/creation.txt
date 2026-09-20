@@ -1,0 +1,16 @@
+result status=success command=new
+project path=/mnt/data/orbloam/.build/author-c45ern8h/project template=http name=orbloam
+repository id=repo_10402312054de7e1f7a6a69d96460099
+package id=pkg_8e4d55489066456031faaa0d27c35ead
+revision id=rev_c98c2b4743f4d1eb25830cc48c18bda80551e5b34a8fa76602fe086dc73e50f5
+state digest=semantic_state_a87a24da903a8c672803abb6ee7ef9baac3044942219890d78fa3768f7fedb29
+root digest=semantic_root_e1319e1321aa1629181f9f373389a3aaf3d897a920a011840cd2e5fa89bdb5ca
+receipt digest=receipt_object_fdfa42afe673ae3780b02543c7d20f60fc1d4935edebd343ea97baaab7c14e11 revision-record=revision_object_a320549b05c760c527df3cf13d9d87cd9f7fcedba1660bf3a6ac7c4e35c626a8
+summary owners=21 dependencies=1 retirements=0 targets=1 tests=1
+deployment descriptor=/mnt/data/orbloam/.build/author-c45ern8h/project/service.deployment.json artifact-output=/mnt/data/orbloam/.build/author-c45ern8h/project/generated/application.lkja target=serve runner=http listener=127.0.0.1:0
+next order=1 kind=status operation=status project=/mnt/data/orbloam/.build/author-c45ern8h/project
+next order=2 kind=check operation=check project=/mnt/data/orbloam/.build/author-c45ern8h/project
+next order=3 kind=response-change-plan operation=change mode=plan project=/mnt/data/orbloam/.build/author-c45ern8h/project base=rev_c98c2b4743f4d1eb25830cc48c18bda80551e5b34a8fa76602fe086dc73e50f5 expression=expression.static-text binding=$response function=application/response-text replacement=replace.body
+next order=4 kind=response-change-apply operation=change mode=apply project=/mnt/data/orbloam/.build/author-c45ern8h/project input=same-normalized-request plan=token-from-order-3
+next order=5 kind=build operation=build project=/mnt/data/orbloam/.build/author-c45ern8h/project output=/mnt/data/orbloam/.build/author-c45ern8h/project/generated/application.lkja
+next order=6 kind=serve operation=serve deployment=/mnt/data/orbloam/.build/author-c45ern8h/project/service.deployment.json

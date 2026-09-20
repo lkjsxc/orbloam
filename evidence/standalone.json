@@ -1,0 +1,24 @@
+{
+  "schema": "orbloam-standalone-v1",
+  "status": "passed",
+  "artifact_sha256": "afd5213d7663e88d0a3fe1a13a1a8946bdd610f3f65279041536a66cae055828",
+  "runtime_sha256": "98a39bd192c1e98187a1a954f916f5ffc89ef2586317c25e1efa06c61b888c32",
+  "no_authoring_or_web_checkout": true,
+  "only_native_server_child": true,
+  "launch_from_unrelated_directory": true,
+  "paths_with_spaces": true,
+  "embedded_assets_equal": true,
+  "registration": true,
+  "restart_world_equal": true,
+  "all_ipv4_listener_via_second_loopback": true,
+  "data_verified": true,
+  "corrupt_store_not_reset": true,
+  "parent_traversal_rejected": true,
+  "ephemeral_descriptors_removed": true,
+  "nonclaims": [
+    "remote LAN reachability",
+    "TLS",
+    "old Stillworld data migration"
+  ],
+  "artifact_unchanged": true
+}

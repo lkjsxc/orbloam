@@ -1,0 +1,11 @@
+{
+  "schema": "orbloam-remote-observation-v1",
+  "observed_at_utc": "2026-09-20T13:00:14.309600+00:00",
+  "repository": "lkjsxc/orbloam",
+  "branch": "main",
+  "observed_head": "9b3d8db72e2483bcf083aeb604d5366848417bf9",
+  "source": "GitHub connector GET /repos/lkjsxc/orbloam/branches/main",
+  "connection_scope": "read operations only in this continuation",
+  "remote_delivery_complete": false,
+  "note": "Local reconstruction is based on this exact existing signed ancestor. Local commits and bundles are not remote main updates."
+}

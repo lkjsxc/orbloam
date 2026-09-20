@@ -1,0 +1,13 @@
+{
+  "schema": "orbloam-accepted-rebuild-v1",
+  "artifact_sha256": "afd5213d7663e88d0a3fe1a13a1a8946bdd610f3f65279041536a66cae055828",
+  "runtime_sha256": "98a39bd192c1e98187a1a954f916f5ffc89ef2586317c25e1efa06c61b888c32",
+  "status": "passed",
+  "check_seconds": 299.49964431900025,
+  "first-build_seconds": 22.206002353000258,
+  "second-build_seconds": 21.142263298000216,
+  "canonical_head_unchanged": true,
+  "clean_check_passed": true,
+  "first_and_second_artifacts_equal": true,
+  "shipped_artifact_equal": true
+}

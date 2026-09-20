@@ -1,0 +1,37 @@
+{
+  "runtime": "v0.1.38",
+  "artifact_sha256": "afd5213d7663e88d0a3fe1a13a1a8946bdd610f3f65279041536a66cae055828",
+  "accepted_revision": "rev_6aaf8ee080b208c3852bdbdcd1ce7aa4309ed9eca9354971d0a483969d5d713d",
+  "authoring_stages": [
+    {
+      "stage": "ecology",
+      "request_sha256": "19bd2a957e2061c3c3a41788f7081ea619c59f6e95636d43ce74f3f5ba1675e0",
+      "accepted_revision": "rev_d58328b20e874361efa349b09ce2310d70c597f1def623d3202b8989df65a8fa",
+      "request": "01-ecology.lkjc"
+    },
+    {
+      "stage": "industry-and-actions",
+      "request_sha256": "09954fafb02e083c67180d33c287323188436f2a36d9d585a2e3d4fca05e22d1",
+      "accepted_revision": "rev_7050ba7416fb4b5d427afa0902ac0a222e3766ac1fb12ab1407f6f90d3c4c808",
+      "request": "02-industry-and-actions.lkjc"
+    },
+    {
+      "stage": "service-and-client",
+      "request_sha256": "33a1d1eaef5ce061602db9f6dbfe7e7864084d3418019a4bd39165fedcb29dcc",
+      "accepted_revision": "rev_4bc35b7f1e9e024a464d8a60f5c7e0dfbe1da3a3d5c10ed34b60e042eac38e40",
+      "request": "03-service-and-client.lkjc"
+    },
+    {
+      "stage": "verification-probes",
+      "request_sha256": "4f097985bce92fe6b084187d6745d35ac272de38f836f989ceb6ab6135d49460",
+      "accepted_revision": "rev_d5886e2717de27a4e59471734953b7d021f0c64ff6b7aa17b459d920939a3b97",
+      "request": "04-verification-probes.lkjc"
+    },
+    {
+      "stage": "bounded-verification-pages",
+      "request_sha256": "e6d04bbaac92c44ca1a3c4501aa2cb28433747f546555c6858f049690bf8df5f",
+      "accepted_revision": "rev_6aaf8ee080b208c3852bdbdcd1ce7aa4309ed9eca9354971d0a483969d5d713d",
+      "request": "05-bounded-verification-pages.lkjc"
+    }
+  ]
+}

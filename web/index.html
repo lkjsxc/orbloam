@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#10171c"><meta name="description" content="小さな命が、大きな文明をつくる。Orbloam — 静かな共有世界のコロニーと工房。">
+<title>Orbloam — 小さな命が、大きな文明をつくる。</title>
+<link rel="stylesheet" href="./styles.css"><script type="module" src="./client.js"></script>
+</head>
+<body>
+<canvas id="world" aria-label="共有世界。ドラッグで移動、ホイールで拡大縮小。右クリックまたは移動ボタンでコアに指示。"></canvas>
+<header class="topbar glass">
+  <button id="home-brand" class="brand" title="自分のコアを表示"><span class="brand-orb"></span><span>Orbloam<small>小さな命が、大きな文明をつくる。</small></span></button>
+  <div class="top-stats"><span><i class="status-dot" id="status-dot"></i><b id="network">接続前</b></span><span id="colony-count">共有世界</span></div>
+  <button id="help-button" class="quiet">遊び方</button><button id="key-button" class="quiet">復帰キー</button>
+</header>
+<section id="colony-hud" class="colony-hud glass hidden" aria-label="コロニーの状態">
+  <div class="hud-name"><span class="eyebrow">YOUR COLONY</span><h1 id="colony-name"></h1><span id="core-level" class="pill"></span></div>
+  <div class="metrics"><div><b id="population">0</b><span>住民</span></div><div><b id="essence">0</b><span>エッセンス</span></div><div><b id="generations">0</b><span>還った命</span></div></div>
+  <div class="hud-note" id="life-note">コアから、小さな暮らしがはじまります。</div>
+  <button id="open-research" class="primary wide">研究の樹をひらく <span>↗</span></button>
+</section>
+<aside id="sidebar" class="sidebar glass hidden">
+  <div class="side-heading"><div><span class="eyebrow">COLONY DESK</span><h2 id="panel-title">暮らしと生産</h2></div><button id="close-sidebar" class="icon" aria-label="パネルを閉じる">×</button></div>
+  <nav class="tabs"><button data-tab="inventory" class="active">倉庫</button><button data-tab="industry">工房</button><button data-tab="neighbors">隣人</button></nav>
+  <div id="panel-content" class="panel-content"></div>
+</aside>
+<section id="selection" class="selection glass hidden"><button id="close-selection" class="icon close" aria-label="選択を解除">×</button><div id="selection-body"></div></section>
+<div id="backlog" class="backlog glass hidden" role="status"><span class="spinner"></span><div><b>世界の続きを計算しています</b><span id="backlog-text"></span></div></div>
+<div id="pending" class="notice glass hidden"><span>通信が途切れ、操作結果が未確定です。</span><button id="retry-pending">同じ操作を再確認</button><button id="discard-pending" class="quiet">確認して解除</button></div>
+<div id="backup-key" class="notice glass hidden"><span>このコアの復帰キーを、端末の外にも保存してください。</span><button id="save-first-key">キーを保存</button><button id="dismiss-key" class="icon" aria-label="案内を閉じる">×</button></div>
+<footer id="toolbar" class="toolbar glass hidden">
+  <div class="tool-group"><button id="inspect-mode" class="active">観察</button><button id="move-mode">コアを移動</button><button id="build-mode">建てる</button><button id="inventory-button">倉庫</button></div>
+  <div class="tool-group"><button id="center" title="自分のコアに戻る">◉</button><button id="zoom-out" aria-label="縮小">−</button><span id="zoom-label">100%</span><button id="zoom-in" aria-label="拡大">＋</button></div>
+</footer>
+<div id="mode-hint" class="mode-hint hidden">空いている場所をクリックして移動先を指定</div>
+<div id="survey" class="survey hidden">俯瞰表示 · 遠方の資源・住民は集約しています</div>
+<div id="coordinates" class="coordinates">0, 0</div>
+<div id="toast" class="toast hidden" role="status"></div>
+<div id="auth" class="veil">
+ <section class="auth-card glass">
+  <div class="large-orb"><span></span></div><span class="eyebrow">A QUIET, SHARED WORLD</span>
+  <h1>Orbloam</h1><p class="tagline">小さな命が、大きな文明をつくる。</p>
+  <p class="intro">ひとつのコアから住民が生まれ、資源を集め、工房が育つ。<br>あなたの隣にも、誰かの小さな暮らしが続いています。</p>
+  <form id="join-form"><label for="nickname">コロニーの名前</label><input id="nickname" name="nickname" required maxlength="32" placeholder="たとえば、こもれび" autocomplete="off"><button class="primary wide" type="submit">新しいコアをつくる</button></form>
+  <details><summary>復帰キーから戻る</summary><form id="recover-form"><label for="recovery-key">64文字の復帰キー</label><input id="recovery-key" type="password" required minlength="64" maxlength="64" spellcheck="false" autocomplete="off" placeholder="保存したキーを貼り付け"><button type="submit" class="wide">このコアに戻る</button></form></details>
+  <label class="remember"><input id="remember" type="checkbox" checked>このブラウザに復帰キーを保存する</label>
+  <p id="auth-error" class="error" role="alert"></p><p class="small muted">共有端末では保存を外してください。名前だけでは復帰できません。</p>
+ </section>
+</div>
+<div id="research-overlay" class="research-overlay hidden">
+ <canvas id="research-canvas" aria-label="中心から8つに枝分かれする研究の樹。ノードをクリックすると詳細を表示。"></canvas>
+ <header class="research-heading glass"><div><span class="eyebrow">THE TREE OF KNOWLEDGE</span><h2>研究の樹 <span id="research-progress"></span></h2></div><div><button id="research-fit">全体を見る</button><button id="research-minus">−</button><button id="research-plus">＋</button><button id="research-close">世界に戻る ×</button></div></header>
+ <aside id="research-detail" class="research-detail glass"><span class="eyebrow">96 STEPS · 8 BRANCHES</span><h2>知識は、次の世代へ。</h2><p>住民が約1時間の生涯を終えると、エッセンスがコアへ還ります。研究は世代を越えて残ります。</p><p class="muted">円を選んで詳細を確認。ドラッグとホイールで樹を探索できます。</p></aside>
+</div>
+<dialog id="help-dialog" class="glass dialog"><button class="icon close" data-close="help-dialog">×</button><span class="eyebrow">WELCOME TO ORBLOAM</span><h2>眺めて、整えて、育てる。</h2>
+ <h3>住民とコア</h3><p>最初は4人。10秒ごとに新しい住民が現れ、最初の16席を満たします。8つの採集職と2つの工房職があり、仕事は自動です。1時間で世代が交代し、エッセンスが還ります。</p>
+ <h3>共有される、小さな世界</h3><p>資源の円は、全員で使う有限の鉱床・植生です。ゆっくり再生します。遠くの資源ほど高い階位。探索研究で扱える階位が上がります。自然の海や敵はいません。</p>
+ <h3>工房を育てる</h3><p>「建てる」から施設を選び、コアの近くをクリック。工房職が現れるまで稼働を待つことがあります。加工には入力素材と人手が必要です。建物は1分ごとに原木と石材を各1使って維持され、放置すると傷みます。</p>
+ <h3>操作</h3><p>ドラッグで地図を動かし、ホイールまたは＋−で拡大縮小。右クリック、または「コアを移動」→地面をクリック。住民・資源・工房・コアをクリックすると詳細が見られます。</p>
+ <h3>留守のあいだ</h3><p>閉じたあいだの時間は、戻ったときに順番に計算します。長い不在では追いつくまで操作を待ちます。近道の報酬計算や人口の削除はしません。</p>
+ <h3>大切な復帰キー</h3><p>キーを知っている人は、このコアを操作できます。公開しないでください。サーバーのバックアップとキーの控えは別々に保管します。</p><button class="primary wide" data-close="help-dialog">世界へ</button></dialog>
+<dialog id="key-dialog" class="glass dialog"><button class="icon close" data-close="key-dialog">×</button><span class="eyebrow">YOUR RECOVERY KEY</span><h2>このコアに戻るための鍵。</h2><p>このキーはパスワードと同じです。ほかの人に渡さないでください。</p><input id="key-value" type="password" readonly autocomplete="off"><div class="button-row"><button id="reveal-key">表示する</button><button id="copy-key">コピー</button><button id="download-key" class="primary">ファイルに保存</button></div><p class="small muted">別のURL・別の端末でも、同じサーバーならこのキーで戻れます。キーだけではサーバーのデータは復元できません。</p><button id="logout" class="wide quiet">この端末からログアウト</button></dialog>
+</body>
+</html>
