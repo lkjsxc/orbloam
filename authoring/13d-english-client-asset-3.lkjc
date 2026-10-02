@@ -1,0 +1,277 @@
+request base=rev_654ed9595d4f56a11f4ce9c7e8ebf65451090901cf9efaf672dc32562e0831e7
+type.structural-record as=@Header
+type.field parent=@Header index=0 name=name type=text
+type.field parent=@Header index=1 name=value type=bytes
+type.list as=@Headers item=@Header
+type.stream as=@Body item=bytes
+type.list as=@Texts item=text
+type.map as=@Query key=text value=@Texts
+type.structural-record as=@Request
+type.field parent=@Request index=0 name=body type=@Body
+type.field parent=@Request index=1 name=headers type=@Headers
+type.field parent=@Request index=2 name=method type=text
+type.field parent=@Request index=3 name=path type=text
+type.field parent=@Request index=4 name=query type=text
+type.field parent=@Request index=5 name=query_parameters type=@Query
+type.structural-record as=@Response
+type.field parent=@Response index=0 name=body type=bytes
+type.field parent=@Response index=1 name=headers type=@Headers
+type.field parent=@Response index=2 name=status type=i64
+type.named as=@DataKeyPart declaration=pkg_10000000000000000000000000000001/decl_14b03b7e7e25e1cf4bd5a5e3932e73ab
+type.named as=@DataEntry declaration=pkg_10000000000000000000000000000001/decl_8b2cf37fae3bc1fd3cdd43367ac5b3e6
+type.named as=@DataSchema declaration=pkg_10000000000000000000000000000001/decl_5ad011a7306a7a1da03f982c3d96318c
+type.named as=@DataExpectation declaration=pkg_10000000000000000000000000000001/decl_388aa498465975c5de5d579e6230a28a
+type.named as=@TransactionAbortReason declaration=pkg_10000000000000000000000000000001/decl_717a93982fa4cfc42d0397150df09872
+type.list as=@Entries item=@DataEntry
+type.function as=@authoring-ready-port result=bool
+type.structural-record as=@Point
+type.field parent=@Point index=0 name=x type=i64
+type.field parent=@Point index=1 name=y type=i64
+type.map as=@Inventory key=text value=i64
+type.map as=@Receipts key=text value=text
+type.structural-record as=@Cohort
+type.field parent=@Cohort index=0 name=first type=i64
+type.field parent=@Cohort index=1 name=count type=i64
+type.field parent=@Cohort index=2 name=start type=i64
+type.list as=@Cohorts item=@Cohort
+type.structural-record as=@Building
+type.field parent=@Building index=0 name=id type=i64
+type.field parent=@Building index=1 name=kind type=i64
+type.field parent=@Building index=2 name=recipe type=i64
+type.field parent=@Building index=3 name=x type=i64
+type.field parent=@Building index=4 name=y type=i64
+type.field parent=@Building index=5 name=health type=i64
+type.field parent=@Building index=6 name=progress type=i64
+type.field parent=@Building index=7 name=produced type=i64
+type.field parent=@Building index=8 name=enabled type=bool
+type.field parent=@Building index=9 name=status type=text
+type.list as=@Buildings item=@Building
+type.structural-record as=@Route
+type.field parent=@Route index=0 name=job type=i64
+type.field parent=@Route index=1 name=x type=i64
+type.field parent=@Route index=2 name=y type=i64
+type.field parent=@Route index=3 name=tier type=i64
+type.field parent=@Route index=4 name=units type=i64
+type.field parent=@Route index=5 name=workers type=i64
+type.list as=@Routes item=@Route
+type.structural-record as=@Colony
+type.field parent=@Colony index=0 name=id type=i64
+type.field parent=@Colony index=1 name=name type=text
+type.field parent=@Colony index=2 name=created_tick type=i64
+type.field parent=@Colony index=3 name=from_x type=i64
+type.field parent=@Colony index=4 name=from_y type=i64
+type.field parent=@Colony index=5 name=to_x type=i64
+type.field parent=@Colony index=6 name=to_y type=i64
+type.field parent=@Colony index=7 name=move_at type=i64
+type.field parent=@Colony index=8 name=move_ms type=i64
+type.field parent=@Colony index=9 name=cohorts type=@Cohorts
+type.field parent=@Colony index=10 name=inventory type=@Inventory
+type.field parent=@Colony index=11 name=research type=@Inventory
+type.field parent=@Colony index=12 name=buildings type=@Buildings
+type.field parent=@Colony index=13 name=routes type=@Routes
+type.field parent=@Colony index=14 name=essence type=i64
+type.field parent=@Colony index=15 name=experience type=i64
+type.field parent=@Colony index=16 name=deaths type=i64
+type.field parent=@Colony index=17 name=gathered type=i64
+type.field parent=@Colony index=18 name=conversations type=i64
+type.field parent=@Colony index=19 name=neighbor type=i64
+type.field parent=@Colony index=20 name=next_building type=i64
+type.field parent=@Colony index=21 name=sequence type=i64
+type.field parent=@Colony index=22 name=last_intent type=text
+type.field parent=@Colony index=23 name=receipts type=@Receipts
+type.list as=@Colonies item=@Colony
+type.structural-record as=@Node
+type.field parent=@Node index=0 name=stock type=i64
+type.field parent=@Node index=1 name=tick type=i64
+type.field parent=@Node index=2 name=x type=i64
+type.field parent=@Node index=3 name=y type=i64
+type.field parent=@Node index=4 name=kind type=i64
+type.field parent=@Node index=5 name=tier type=i64
+type.map as=@Nodes key=text value=@Node
+type.structural-record as=@World
+type.field parent=@World index=0 name=version type=i64
+type.field parent=@World index=1 name=tick type=i64
+type.field parent=@World index=2 name=next_id type=i64
+type.field parent=@World index=3 name=colonies type=@Colonies
+type.field parent=@World index=4 name=nodes type=@Nodes
+type.structural-record as=@Recipe
+type.field parent=@Recipe index=0 name=id type=i64
+type.field parent=@Recipe index=1 name=kind type=i64
+type.field parent=@Recipe index=2 name=tier type=i64
+type.field parent=@Recipe index=3 name=branch type=i64
+type.field parent=@Recipe index=4 name=rank type=i64
+type.field parent=@Recipe index=5 name=period type=i64
+type.field parent=@Recipe index=6 name=workers type=i64
+type.field parent=@Recipe index=7 name=output type=text
+type.field parent=@Recipe index=8 name=amount type=i64
+type.field parent=@Recipe index=9 name=a type=text
+type.field parent=@Recipe index=10 name=na type=i64
+type.field parent=@Recipe index=11 name=b type=text
+type.field parent=@Recipe index=12 name=nb type=i64
+type.field parent=@Recipe index=13 name=c type=text
+type.field parent=@Recipe index=14 name=nc type=i64
+type.structural-record as=@Research
+type.field parent=@Research index=0 name=id type=i64
+type.field parent=@Research index=1 name=branch type=i64
+type.field parent=@Research index=2 name=tier type=i64
+type.field parent=@Research index=3 name=essence type=i64
+type.field parent=@Research index=4 name=raw type=text
+type.field parent=@Research index=5 name=raw_amount type=i64
+type.field parent=@Research index=6 name=product type=text
+type.field parent=@Research index=7 name=product_amount type=i64
+type.structural-record as=@Envelope
+type.field parent=@Envelope index=0 name=me type=i64
+type.field parent=@Envelope index=1 name=world type=@World
+type.field parent=@Envelope index=2 name=now_ms type=i64
+type.field parent=@Envelope index=3 name=backlog_ticks type=i64
+type.structural-record as=@Population
+type.field parent=@Population index=0 name=tick type=i64
+type.field parent=@Population index=1 name=count type=i64
+type.field parent=@Population index=2 name=capacity type=i64
+type.field parent=@Population index=3 name=deaths type=i64
+type.field parent=@Population index=4 name=roles type=@Inventory
+type.structural-record as=@Candidate
+type.field parent=@Candidate index=0 name=key type=text
+type.field parent=@Candidate index=1 name=node type=@Node
+type.field parent=@Candidate index=2 name=distance type=i64
+type.field parent=@Candidate index=3 name=valid type=bool
+type.structural-record as=@GatherContext
+type.field parent=@GatherContext index=0 name=point type=@Point
+type.field parent=@GatherContext index=1 name=tick type=i64
+type.field parent=@GatherContext index=2 name=roles type=@Inventory
+type.field parent=@GatherContext index=3 name=tier type=i64
+type.field parent=@GatherContext index=4 name=radius type=i64
+type.field parent=@GatherContext index=5 name=multiplier type=i64
+type.field parent=@GatherContext index=6 name=storage type=i64
+type.field parent=@GatherContext index=7 name=min_x type=i64
+type.field parent=@GatherContext index=8 name=max_x type=i64
+type.field parent=@GatherContext index=9 name=min_y type=i64
+type.field parent=@GatherContext index=10 name=max_y type=i64
+type.structural-record as=@GatherState
+type.field parent=@GatherState index=0 name=inventory type=@Inventory
+type.field parent=@GatherState index=1 name=nodes type=@Nodes
+type.field parent=@GatherState index=2 name=routes type=@Routes
+type.field parent=@GatherState index=3 name=units type=i64
+type.structural-record as=@NodeEntry
+type.field parent=@NodeEntry index=0 name=key type=text
+type.field parent=@NodeEntry index=1 name=value type=@Node
+type.list as=@NodeEntries item=@NodeEntry
+type.structural-record as=@RecipeChoice
+type.field parent=@RecipeChoice index=0 name=id type=i64
+type.field parent=@RecipeChoice index=1 name=score type=i64
+type.structural-record as=@FactoryContext
+type.field parent=@FactoryContext index=0 name=tick type=i64
+type.field parent=@FactoryContext index=1 name=point type=@Point
+type.field parent=@FactoryContext index=2 name=radius type=i64
+type.field parent=@FactoryContext index=3 name=storage type=i64
+type.field parent=@FactoryContext index=4 name=research type=@Inventory
+type.structural-record as=@FactoryState
+type.field parent=@FactoryState index=0 name=inventory type=@Inventory
+type.field parent=@FactoryState index=1 name=buildings type=@Buildings
+type.field parent=@FactoryState index=2 name=workers type=i64
+type.field parent=@FactoryState index=3 name=experience type=i64
+type.structural-record as=@MachineResult
+type.field parent=@MachineResult index=0 name=inventory type=@Inventory
+type.field parent=@MachineResult index=1 name=building type=@Building
+type.field parent=@MachineResult index=2 name=experience type=i64
+type.structural-record as=@ColonyStep
+type.field parent=@ColonyStep index=0 name=colony type=@Colony
+type.field parent=@ColonyStep index=1 name=nodes type=@Nodes
+type.structural-record as=@Action
+type.field parent=@Action index=0 name=op type=text
+type.field parent=@Action index=1 name=sequence type=i64
+type.field parent=@Action index=2 name=index type=i64
+type.field parent=@Action index=3 name=value type=i64
+type.field parent=@Action index=4 name=x type=i64
+type.field parent=@Action index=5 name=y type=i64
+type.field parent=@Action index=6 name=text type=text
+type.structural-record as=@ActionResult
+type.field parent=@ActionResult index=0 name=world type=@World
+type.field parent=@ActionResult index=1 name=ok type=bool
+type.field parent=@ActionResult index=2 name=error type=text
+type.structural-record as=@Error
+type.field parent=@Error index=0 name=error type=text
+type.structural-record as=@Join
+type.field parent=@Join index=0 name=name type=text
+type.field parent=@Join index=1 name=token type=text
+type.structural-record as=@Joined
+type.field parent=@Joined index=0 name=id type=i64
+type.field parent=@Joined index=1 name=token type=text
+type.structural-record as=@WorldRead
+type.field parent=@WorldRead index=0 name=exists type=bool
+type.field parent=@WorldRead index=1 name=valid type=bool
+type.field parent=@WorldRead index=2 name=world type=@World
+type.field parent=@WorldRead index=3 name=expectation type=@DataExpectation
+type.structural-record as=@Media
+type.field parent=@Media index=0 name=count type=i64
+type.field parent=@Media index=1 name=valid type=bool
+effect.row as=@view-effects
+effect.requirement parent=@view-effects index=0 requirement=pkg_8e4d55489066456031faaa0d27c35ead/req_df92ad3de8475d92b7faca0a216bbf52
+effect.requirement parent=@view-effects index=1 requirement=pkg_8e4d55489066456031faaa0d27c35ead/req_1d67b8e3de3101aa0799f20fd084dd0b
+type.task-function as=@view-port result=@Response effect=@view-effects
+type.argument parent=@view-port index=0 type=@Request
+effect.row as=@sync-effects
+effect.requirement parent=@sync-effects index=0 requirement=pkg_8e4d55489066456031faaa0d27c35ead/req_df92ad3de8475d92b7faca0a216bbf52
+effect.requirement parent=@sync-effects index=1 requirement=pkg_8e4d55489066456031faaa0d27c35ead/req_1d67b8e3de3101aa0799f20fd084dd0b
+type.task-function as=@sync-port result=@Response effect=@sync-effects
+type.argument parent=@sync-port index=0 type=@Request
+effect.row as=@join-effects
+effect.requirement parent=@join-effects index=0 requirement=pkg_8e4d55489066456031faaa0d27c35ead/req_df92ad3de8475d92b7faca0a216bbf52
+effect.requirement parent=@join-effects index=1 requirement=pkg_8e4d55489066456031faaa0d27c35ead/req_5fe21121fa8b61ed3e41cb720efe64ef
+effect.requirement parent=@join-effects index=2 requirement=pkg_8e4d55489066456031faaa0d27c35ead/req_1d67b8e3de3101aa0799f20fd084dd0b
+type.task-function as=@join-port result=@Response effect=@join-effects
+type.argument parent=@join-port index=0 type=@Request
+effect.row as=@action-effects
+effect.requirement parent=@action-effects index=0 requirement=pkg_8e4d55489066456031faaa0d27c35ead/req_df92ad3de8475d92b7faca0a216bbf52
+effect.requirement parent=@action-effects index=1 requirement=pkg_8e4d55489066456031faaa0d27c35ead/req_1d67b8e3de3101aa0799f20fd084dd0b
+effect.requirement parent=@action-effects index=2 requirement=pkg_8e4d55489066456031faaa0d27c35ead/req_5fe21121fa8b61ed3e41cb720efe64ef
+type.task-function as=@action-port result=@Response effect=@action-effects
+type.argument parent=@action-port index=0 type=@Request
+type.function as=@health-port result=@Response
+type.argument parent=@health-port index=0 type=@Request
+type.function as=@catalog-port result=@Response
+type.argument parent=@catalog-port index=0 type=@Request
+type.function as=@asset-0-port result=@Response
+type.argument parent=@asset-0-port index=0 type=@Request
+type.function as=@asset-1-port result=@Response
+type.argument parent=@asset-1-port index=0 type=@Request
+type.function as=@asset-2-port result=@Response
+type.argument parent=@asset-2-port index=0 type=@Request
+type.function as=@asset-2-index-port result=@Response
+type.argument parent=@asset-2-index-port index=0 type=@Request
+type.function as=@asset-3-port result=@Response
+type.argument parent=@asset-3-port index=0 type=@Request
+type.function as=@asset-4-port result=@Response
+type.argument parent=@asset-4-port index=0 type=@Request
+type.function as=@asset-5-port result=@Response
+type.argument parent=@asset-5-port index=0 type=@Request
+effect.row as=@fixture-create-effects
+effect.requirement parent=@fixture-create-effects index=0 requirement=pkg_8e4d55489066456031faaa0d27c35ead/req_df92ad3de8475d92b7faca0a216bbf52
+effect.requirement parent=@fixture-create-effects index=1 requirement=pkg_8e4d55489066456031faaa0d27c35ead/req_1d67b8e3de3101aa0799f20fd084dd0b
+effect.requirement parent=@fixture-create-effects index=2 requirement=pkg_8e4d55489066456031faaa0d27c35ead/req_d22ed8ef4b4779fb4047e6216a0e862e
+type.task-function as=@fixture-create-port result=text effect=@fixture-create-effects
+type.argument parent=@fixture-create-port index=0 type=i64
+type.argument parent=@fixture-create-port index=1 type=i64
+type.function as=@population-probe-port result=@Population
+type.argument parent=@population-probe-port index=0 type=i64
+type.argument parent=@population-probe-port index=1 type=i64
+type.list as=@Populations item=@Population
+type.structural-record as=@MachineProbe
+type.field parent=@MachineProbe index=0 name=id type=i64
+type.field parent=@MachineProbe index=1 name=ready type=@MachineResult
+type.field parent=@MachineProbe index=2 name=blocked type=@MachineResult
+type.field parent=@MachineProbe index=3 name=warehouse type=@MachineResult
+type.list as=@MachineProbes item=@MachineProbe
+type.structural-record as=@ProbeReport
+type.field parent=@ProbeReport index=0 name=populations type=@Populations
+type.field parent=@ProbeReport index=1 name=machines type=@MachineProbes
+type.field parent=@ProbeReport index=2 name=before type=@World
+type.field parent=@ProbeReport index=3 name=after type=@World
+type.field parent=@ProbeReport index=4 name=split_equal type=bool
+type.function as=@diagnostics-port result=text
+type.function as=@diagnostic-page-port result=text
+type.argument parent=@diagnostic-page-port index=0 type=i64
+expression.block as=$update-asset-3-body
+  (call decl_c7f997eedeaf51885599c21a1e253c0f (i64 200) (call pkg_10000000000000000000000000000001/decl_a84fb8598c42e86ff66208829b86ae55 (text "import {clamp, circle, makeOrb, researchOwned, researchReady} from './world.js';\nconst TAU=Math.PI*2;\n// Each leaf receives a non-overlapping angular interval. Internal nodes sit at\n// the weighted center of their descendants, so forks are structural, not jittered\n// radial chains. The exact parent IDs are also enforced by the native server.\nexport function layoutResearch(catalog) {\n  const nodes=catalog.research.map(node=>({...node,children:[],depth:1}));\n  for(const node of nodes)if(node.parent>=0)nodes[node.parent].children.push(node.id);\n  const leaves=id=>nodes[id].children.length?nodes[id].children.reduce((n,child)=>n+leaves(child),0):1;\n  function place(id,lo,hi,depth,branchAngle){const node=nodes[id];node.depth=depth;\n    const angle=branchAngle+(lo+hi)/2,radius=[0,145,285,425,605][depth]??(605+(depth-4)*160);\n    node.angle=angle;node.x=Math.cos(angle)*radius;node.y=Math.sin(angle)*radius;\n    let cursor=lo;const total=leaves(id);\n    for(const child of node.children){const width=(hi-lo)*leaves(child)/total;place(child,cursor,cursor+width,depth+1,branchAngle);cursor+=width;}}\n  for(const root of nodes.filter(n=>n.parent<0))place(root.id,-.32,.32,1,-Math.PI/2+root.branch*TAU/8);\n  return nodes;\n}\nexport class ResearchTree {\n  constructor(canvas,onSelect){this.canvas=canvas;this.ctx=canvas.getContext('2d');this.onSelect=onSelect;\n    this.opened=false;this.catalog=null;this.colony=null;this.camera={x:0,y:0,zoom:.6};this.nodes=[];this.selected=null;this.hover=null;\n    this.orb=makeOrb();this.pointers=new Map();this.didFit=false;this.inset=0;this.bindInput();window.addEventListener('resize',()=>{this.resize();if(this.opened)this.fit();});}\n  setCatalog(catalog){this.catalog=catalog;this.nodes=layoutResearch(catalog);}\n  setColony(colony){this.colony=colony;if(this.opened)this.draw();}\n  resize(){this.width=innerWidth;this.height=innerHeight;this.dpr=Math.min(2,devicePixelRatio||1);this.canvas.width=Math.round(this.width*this.dpr);this.canvas.height=Math.round(this.height*this.dpr);}\n  origin(){return{x:this.width/2,y:(this.height+90)/2};}\n  toWorld(x,y){const o=this.origin();return{x:this.camera.x+(x-o.x)/this.camera.zoom,y:this.camera.y+(y-o.y)/this.camera.zoom};}\n  toScreen(x,y){const o=this.origin();return{x:o.x+(x-this.camera.x)*this.camera.zoom,y:o.y+(y-this.camera.y)*this.camera.zoom};}\n  zoom(factor,x,y){const o=this.origin();x??=o.x;y??=o.y;const before=this.toWorld(x,y);this.camera.zoom=clamp(this.camera.zoom*factor,.15,2.5);\n    const after=this.toWorld(x,y);this.camera.x+=before.x-after.x;this.camera.y+=before.y-after.y;this.draw();}\n  open(){this.opened=true;this.resize();if(!this.didFit){this.fit();this.didFit=true;}else this.draw();}\n  fit(){this.camera={x:0,y:0,zoom:clamp(Math.min(this.width-64,this.height-230)/1330,.15,.9)};this.draw();}\n  focus(id){const node=this.nodes[id];if(!node)return;this.selected=id;\n    this.camera.zoom=Math.max(this.camera.zoom,this.width<700?.66:.8);\n    const target={x:this.width<700?this.width/2:(this.width-320)/2,y:this.height*(this.width<700?.35:.50)},o=this.origin();\n    this.camera.x=node.x-(target.x-o.x)/this.camera.zoom;this.camera.y=node.y-(target.y-o.y)/this.camera.zoom;this.draw();}\n  hit(x,y){const p=this.toWorld(x,y);let best=null,distance=Infinity;\n    for(const node of this.nodes){const d=Math.hypot(node.x-p.x,node.y-p.y);if(d<Math.max(17,14/this.camera.zoom)&&d<distance){best=node;distance=d;}}return best;}\n  bindInput(){const c=this.canvas;\n    c.addEventListener('wheel',e=>{e.preventDefault();this.zoom(Math.exp(-clamp(e.deltaY,-200,200)*.0025),e.clientX,e.clientY);},{passive:false});\n    c.addEventListener('pointerdown',e=>{if(e.button!==0)return;this.pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});c.setPointerCapture(e.pointerId);\n      this.drag={x:e.clientX,y:e.clientY,cx:this.camera.x,cy:this.camera.y,moved:false};if(this.pointers.size===2){const[p,q]=[...this.pointers.values()];this.pinch=Math.hypot(p.x-q.x,p.y-q.y);this.gesture=true;}});\n    c.addEventListener('pointermove',e=>{if(!this.pointers.has(e.pointerId)){const hit=this.hit(e.clientX,e.clientY);if(hit?.id!==this.hover){this.hover=hit?.id??null;this.draw();}c.style.cursor=hit?'pointer':'grab';return;}\n      this.pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});\n      if(this.pointers.size===2){const[p,q]=[...this.pointers.values()],d=Math.hypot(p.x-q.x,p.y-q.y);if(this.pinch>0)this.zoom(d/this.pinch,(p.x+q.x)/2,(p.y+q.y)/2);this.pinch=d;return;}\n      if(!this.drag||this.gesture)return;const dx=e.clientX-this.drag.x,dy=e.clientY-this.drag.y;if(Math.hypot(dx,dy)>5)this.drag.moved=true;\n      if(this.drag.moved){this.camera.x=this.drag.cx-dx/this.camera.zoom;this.camera.y=this.drag.cy-dy/this.camera.zoom;c.style.cursor='grabbing';this.draw();}});\n    c.addEventListener('pointerup',e=>{const moved=this.gesture||this.drag?.moved;this.pointers.delete(e.pointerId);if(this.pointers.size){this.drag=null;return;}\n      this.drag=null;this.gesture=false;this.pinch=0;if(!moved){const hit=this.hit(e.clientX,e.clientY);if(hit){this.selected=hit.id;this.onSelect(hit.id);this.draw();}}});\n    c.addEventListener('pointercancel',()=>{this.drag=null;this.gesture=false;this.pointers.clear();});\n    c.addEventListener('pointerleave',()=>{this.hover=null;if(this.opened)this.draw();});\n  }\n  draw(){if(!this.opened||!this.catalog)return;const ctx=this.ctx,z=this.camera.zoom,o=this.origin(),research=this.colony?.research||{};\n    ctx.setTransform(this.dpr,0,0,this.dpr,0,0);ctx.fillStyle='#101e22';ctx.fillRect(0,0,this.width,this.height);\n    const bg=ctx.createRadialGradient(o.x,o.y,0,o.x,o.y,Math.max(this.width,this.height)*.64);bg.addColorStop(0,'#2d454747');bg.addColorStop(1,'#08171d00');ctx.fillStyle=bg;ctx.fillRect(0,0,this.width,this.height);\n    ctx.setTransform(this.dpr*z,0,0,this.dpr*z,this.dpr*(o.x-this.camera.x*z),this.dpr*(o.y-this.camera.y*z));\n    for(const node of this.nodes){const parent=node.parent<0?{x:0,y:0,angle:node.angle}:this.nodes[node.parent],owned=researchOwned(research,node),ready=researchReady(research,node,this.catalog),color=this.catalog.branches[node.branch].color;\n      const distance=Math.hypot(node.x-parent.x,node.y-parent.y),control=distance*.5;\n      ctx.beginPath();ctx.moveTo(parent.x,parent.y);ctx.bezierCurveTo(parent.x+Math.cos(parent.angle)*control,parent.y+Math.sin(parent.angle)*control,node.x-Math.cos(node.angle)*control,node.y-Math.sin(node.angle)*control,node.x,node.y);\n      ctx.strokeStyle=color+(owned?'ad':ready?'6b':'22');ctx.lineWidth=(node.depth===1?2:node.depth===2?1.7:1.1)/z;ctx.stroke();}\n    for(const node of this.nodes){const color=this.catalog.branches[node.branch].color,owned=researchOwned(research,node),ready=researchReady(research,node,this.catalog),active=this.selected===node.id||this.hover===node.id;\n      if(ready||active){const glow=ctx.createRadialGradient(node.x,node.y,4,node.x,node.y,30);glow.addColorStop(0,color+'19');glow.addColorStop(1,color+'00');circle(ctx,node.x,node.y,30,glow);}\n      const r=owned?11:ready?13:9;circle(ctx,node.x,node.y,r,owned?color+'a5':'#172a2d',color+(owned?'cc':ready?'c0':'4a'),(ready?1.5:1)/z);\n      if(active)circle(ctx,node.x,node.y,r+7,null,color+'a0',1/z);\n      if(owned){ctx.strokeStyle='#132628';ctx.lineWidth=1.7/z;ctx.beginPath();ctx.moveTo(node.x-4/z,node.y);ctx.lineTo(node.x-1/z,node.y+3/z);ctx.lineTo(node.x+5/z,node.y-4/z);ctx.stroke();}\n      else if(ready)circle(ctx,node.x,node.y,2/z,color);\n      if(node.parent<0){const tx=node.x*.68,ty=node.y*.68;ctx.fillStyle=color+'cf';ctx.font=`${Math.min(14,10/z)}px system-ui`;ctx.textAlign='center';ctx.fillText(this.catalog.branches[node.branch].name,tx,ty-7/z);}\n      if(z>.68||active){ctx.font=`${11/z}px system-ui`;ctx.fillStyle=active?'#e4ecd9':owned?'#c6d5c1':ready?'#a8bca9':'#66847b';ctx.textAlign='center';ctx.fillText(node.name,node.x,node.y+node.depth%2*(5/z)+r+17/z);}\n    }\n    ctx.drawImage(this.orb,-38,-38,76,76);circle(ctx,0,0,49,null,'#afccae20',1/z);\n    ctx.textAlign='center';ctx.fillStyle='#a6c2ac';ctx.font=`${10/z}px system-ui`;ctx.fillText('YOUR CORE',0,60+10/z);\n  }\n}\n")) (text "text/javascript; charset=utf-8"))
+expression.end
+replace.body function=decl_574a4d437d5273c1a33d2772ddf3bc16 body=$update-asset-3-body

@@ -1,0 +1,277 @@
+request base=rev_a048e09c130986d2325b717416953c093132ef703788a0f13fa9c160194a52f0
+type.structural-record as=@Header
+type.field parent=@Header index=0 name=name type=text
+type.field parent=@Header index=1 name=value type=bytes
+type.list as=@Headers item=@Header
+type.stream as=@Body item=bytes
+type.list as=@Texts item=text
+type.map as=@Query key=text value=@Texts
+type.structural-record as=@Request
+type.field parent=@Request index=0 name=body type=@Body
+type.field parent=@Request index=1 name=headers type=@Headers
+type.field parent=@Request index=2 name=method type=text
+type.field parent=@Request index=3 name=path type=text
+type.field parent=@Request index=4 name=query type=text
+type.field parent=@Request index=5 name=query_parameters type=@Query
+type.structural-record as=@Response
+type.field parent=@Response index=0 name=body type=bytes
+type.field parent=@Response index=1 name=headers type=@Headers
+type.field parent=@Response index=2 name=status type=i64
+type.named as=@DataKeyPart declaration=pkg_10000000000000000000000000000001/decl_14b03b7e7e25e1cf4bd5a5e3932e73ab
+type.named as=@DataEntry declaration=pkg_10000000000000000000000000000001/decl_8b2cf37fae3bc1fd3cdd43367ac5b3e6
+type.named as=@DataSchema declaration=pkg_10000000000000000000000000000001/decl_5ad011a7306a7a1da03f982c3d96318c
+type.named as=@DataExpectation declaration=pkg_10000000000000000000000000000001/decl_388aa498465975c5de5d579e6230a28a
+type.named as=@TransactionAbortReason declaration=pkg_10000000000000000000000000000001/decl_717a93982fa4cfc42d0397150df09872
+type.list as=@Entries item=@DataEntry
+type.function as=@authoring-ready-port result=bool
+type.structural-record as=@Point
+type.field parent=@Point index=0 name=x type=i64
+type.field parent=@Point index=1 name=y type=i64
+type.map as=@Inventory key=text value=i64
+type.map as=@Receipts key=text value=text
+type.structural-record as=@Cohort
+type.field parent=@Cohort index=0 name=first type=i64
+type.field parent=@Cohort index=1 name=count type=i64
+type.field parent=@Cohort index=2 name=start type=i64
+type.list as=@Cohorts item=@Cohort
+type.structural-record as=@Building
+type.field parent=@Building index=0 name=id type=i64
+type.field parent=@Building index=1 name=kind type=i64
+type.field parent=@Building index=2 name=recipe type=i64
+type.field parent=@Building index=3 name=x type=i64
+type.field parent=@Building index=4 name=y type=i64
+type.field parent=@Building index=5 name=health type=i64
+type.field parent=@Building index=6 name=progress type=i64
+type.field parent=@Building index=7 name=produced type=i64
+type.field parent=@Building index=8 name=enabled type=bool
+type.field parent=@Building index=9 name=status type=text
+type.list as=@Buildings item=@Building
+type.structural-record as=@Route
+type.field parent=@Route index=0 name=job type=i64
+type.field parent=@Route index=1 name=x type=i64
+type.field parent=@Route index=2 name=y type=i64
+type.field parent=@Route index=3 name=tier type=i64
+type.field parent=@Route index=4 name=units type=i64
+type.field parent=@Route index=5 name=workers type=i64
+type.list as=@Routes item=@Route
+type.structural-record as=@Colony
+type.field parent=@Colony index=0 name=id type=i64
+type.field parent=@Colony index=1 name=name type=text
+type.field parent=@Colony index=2 name=created_tick type=i64
+type.field parent=@Colony index=3 name=from_x type=i64
+type.field parent=@Colony index=4 name=from_y type=i64
+type.field parent=@Colony index=5 name=to_x type=i64
+type.field parent=@Colony index=6 name=to_y type=i64
+type.field parent=@Colony index=7 name=move_at type=i64
+type.field parent=@Colony index=8 name=move_ms type=i64
+type.field parent=@Colony index=9 name=cohorts type=@Cohorts
+type.field parent=@Colony index=10 name=inventory type=@Inventory
+type.field parent=@Colony index=11 name=research type=@Inventory
+type.field parent=@Colony index=12 name=buildings type=@Buildings
+type.field parent=@Colony index=13 name=routes type=@Routes
+type.field parent=@Colony index=14 name=essence type=i64
+type.field parent=@Colony index=15 name=experience type=i64
+type.field parent=@Colony index=16 name=deaths type=i64
+type.field parent=@Colony index=17 name=gathered type=i64
+type.field parent=@Colony index=18 name=conversations type=i64
+type.field parent=@Colony index=19 name=neighbor type=i64
+type.field parent=@Colony index=20 name=next_building type=i64
+type.field parent=@Colony index=21 name=sequence type=i64
+type.field parent=@Colony index=22 name=last_intent type=text
+type.field parent=@Colony index=23 name=receipts type=@Receipts
+type.list as=@Colonies item=@Colony
+type.structural-record as=@Node
+type.field parent=@Node index=0 name=stock type=i64
+type.field parent=@Node index=1 name=tick type=i64
+type.field parent=@Node index=2 name=x type=i64
+type.field parent=@Node index=3 name=y type=i64
+type.field parent=@Node index=4 name=kind type=i64
+type.field parent=@Node index=5 name=tier type=i64
+type.map as=@Nodes key=text value=@Node
+type.structural-record as=@World
+type.field parent=@World index=0 name=version type=i64
+type.field parent=@World index=1 name=tick type=i64
+type.field parent=@World index=2 name=next_id type=i64
+type.field parent=@World index=3 name=colonies type=@Colonies
+type.field parent=@World index=4 name=nodes type=@Nodes
+type.structural-record as=@Recipe
+type.field parent=@Recipe index=0 name=id type=i64
+type.field parent=@Recipe index=1 name=kind type=i64
+type.field parent=@Recipe index=2 name=tier type=i64
+type.field parent=@Recipe index=3 name=branch type=i64
+type.field parent=@Recipe index=4 name=rank type=i64
+type.field parent=@Recipe index=5 name=period type=i64
+type.field parent=@Recipe index=6 name=workers type=i64
+type.field parent=@Recipe index=7 name=output type=text
+type.field parent=@Recipe index=8 name=amount type=i64
+type.field parent=@Recipe index=9 name=a type=text
+type.field parent=@Recipe index=10 name=na type=i64
+type.field parent=@Recipe index=11 name=b type=text
+type.field parent=@Recipe index=12 name=nb type=i64
+type.field parent=@Recipe index=13 name=c type=text
+type.field parent=@Recipe index=14 name=nc type=i64
+type.structural-record as=@Research
+type.field parent=@Research index=0 name=id type=i64
+type.field parent=@Research index=1 name=branch type=i64
+type.field parent=@Research index=2 name=tier type=i64
+type.field parent=@Research index=3 name=essence type=i64
+type.field parent=@Research index=4 name=raw type=text
+type.field parent=@Research index=5 name=raw_amount type=i64
+type.field parent=@Research index=6 name=product type=text
+type.field parent=@Research index=7 name=product_amount type=i64
+type.structural-record as=@Envelope
+type.field parent=@Envelope index=0 name=me type=i64
+type.field parent=@Envelope index=1 name=world type=@World
+type.field parent=@Envelope index=2 name=now_ms type=i64
+type.field parent=@Envelope index=3 name=backlog_ticks type=i64
+type.structural-record as=@Population
+type.field parent=@Population index=0 name=tick type=i64
+type.field parent=@Population index=1 name=count type=i64
+type.field parent=@Population index=2 name=capacity type=i64
+type.field parent=@Population index=3 name=deaths type=i64
+type.field parent=@Population index=4 name=roles type=@Inventory
+type.structural-record as=@Candidate
+type.field parent=@Candidate index=0 name=key type=text
+type.field parent=@Candidate index=1 name=node type=@Node
+type.field parent=@Candidate index=2 name=distance type=i64
+type.field parent=@Candidate index=3 name=valid type=bool
+type.structural-record as=@GatherContext
+type.field parent=@GatherContext index=0 name=point type=@Point
+type.field parent=@GatherContext index=1 name=tick type=i64
+type.field parent=@GatherContext index=2 name=roles type=@Inventory
+type.field parent=@GatherContext index=3 name=tier type=i64
+type.field parent=@GatherContext index=4 name=radius type=i64
+type.field parent=@GatherContext index=5 name=multiplier type=i64
+type.field parent=@GatherContext index=6 name=storage type=i64
+type.field parent=@GatherContext index=7 name=min_x type=i64
+type.field parent=@GatherContext index=8 name=max_x type=i64
+type.field parent=@GatherContext index=9 name=min_y type=i64
+type.field parent=@GatherContext index=10 name=max_y type=i64
+type.structural-record as=@GatherState
+type.field parent=@GatherState index=0 name=inventory type=@Inventory
+type.field parent=@GatherState index=1 name=nodes type=@Nodes
+type.field parent=@GatherState index=2 name=routes type=@Routes
+type.field parent=@GatherState index=3 name=units type=i64
+type.structural-record as=@NodeEntry
+type.field parent=@NodeEntry index=0 name=key type=text
+type.field parent=@NodeEntry index=1 name=value type=@Node
+type.list as=@NodeEntries item=@NodeEntry
+type.structural-record as=@RecipeChoice
+type.field parent=@RecipeChoice index=0 name=id type=i64
+type.field parent=@RecipeChoice index=1 name=score type=i64
+type.structural-record as=@FactoryContext
+type.field parent=@FactoryContext index=0 name=tick type=i64
+type.field parent=@FactoryContext index=1 name=point type=@Point
+type.field parent=@FactoryContext index=2 name=radius type=i64
+type.field parent=@FactoryContext index=3 name=storage type=i64
+type.field parent=@FactoryContext index=4 name=research type=@Inventory
+type.structural-record as=@FactoryState
+type.field parent=@FactoryState index=0 name=inventory type=@Inventory
+type.field parent=@FactoryState index=1 name=buildings type=@Buildings
+type.field parent=@FactoryState index=2 name=workers type=i64
+type.field parent=@FactoryState index=3 name=experience type=i64
+type.structural-record as=@MachineResult
+type.field parent=@MachineResult index=0 name=inventory type=@Inventory
+type.field parent=@MachineResult index=1 name=building type=@Building
+type.field parent=@MachineResult index=2 name=experience type=i64
+type.structural-record as=@ColonyStep
+type.field parent=@ColonyStep index=0 name=colony type=@Colony
+type.field parent=@ColonyStep index=1 name=nodes type=@Nodes
+type.structural-record as=@Action
+type.field parent=@Action index=0 name=op type=text
+type.field parent=@Action index=1 name=sequence type=i64
+type.field parent=@Action index=2 name=index type=i64
+type.field parent=@Action index=3 name=value type=i64
+type.field parent=@Action index=4 name=x type=i64
+type.field parent=@Action index=5 name=y type=i64
+type.field parent=@Action index=6 name=text type=text
+type.structural-record as=@ActionResult
+type.field parent=@ActionResult index=0 name=world type=@World
+type.field parent=@ActionResult index=1 name=ok type=bool
+type.field parent=@ActionResult index=2 name=error type=text
+type.structural-record as=@Error
+type.field parent=@Error index=0 name=error type=text
+type.structural-record as=@Join
+type.field parent=@Join index=0 name=name type=text
+type.field parent=@Join index=1 name=token type=text
+type.structural-record as=@Joined
+type.field parent=@Joined index=0 name=id type=i64
+type.field parent=@Joined index=1 name=token type=text
+type.structural-record as=@WorldRead
+type.field parent=@WorldRead index=0 name=exists type=bool
+type.field parent=@WorldRead index=1 name=valid type=bool
+type.field parent=@WorldRead index=2 name=world type=@World
+type.field parent=@WorldRead index=3 name=expectation type=@DataExpectation
+type.structural-record as=@Media
+type.field parent=@Media index=0 name=count type=i64
+type.field parent=@Media index=1 name=valid type=bool
+effect.row as=@view-effects
+effect.requirement parent=@view-effects index=0 requirement=pkg_8e4d55489066456031faaa0d27c35ead/req_df92ad3de8475d92b7faca0a216bbf52
+effect.requirement parent=@view-effects index=1 requirement=pkg_8e4d55489066456031faaa0d27c35ead/req_1d67b8e3de3101aa0799f20fd084dd0b
+type.task-function as=@view-port result=@Response effect=@view-effects
+type.argument parent=@view-port index=0 type=@Request
+effect.row as=@sync-effects
+effect.requirement parent=@sync-effects index=0 requirement=pkg_8e4d55489066456031faaa0d27c35ead/req_df92ad3de8475d92b7faca0a216bbf52
+effect.requirement parent=@sync-effects index=1 requirement=pkg_8e4d55489066456031faaa0d27c35ead/req_1d67b8e3de3101aa0799f20fd084dd0b
+type.task-function as=@sync-port result=@Response effect=@sync-effects
+type.argument parent=@sync-port index=0 type=@Request
+effect.row as=@join-effects
+effect.requirement parent=@join-effects index=0 requirement=pkg_8e4d55489066456031faaa0d27c35ead/req_df92ad3de8475d92b7faca0a216bbf52
+effect.requirement parent=@join-effects index=1 requirement=pkg_8e4d55489066456031faaa0d27c35ead/req_5fe21121fa8b61ed3e41cb720efe64ef
+effect.requirement parent=@join-effects index=2 requirement=pkg_8e4d55489066456031faaa0d27c35ead/req_1d67b8e3de3101aa0799f20fd084dd0b
+type.task-function as=@join-port result=@Response effect=@join-effects
+type.argument parent=@join-port index=0 type=@Request
+effect.row as=@action-effects
+effect.requirement parent=@action-effects index=0 requirement=pkg_8e4d55489066456031faaa0d27c35ead/req_df92ad3de8475d92b7faca0a216bbf52
+effect.requirement parent=@action-effects index=1 requirement=pkg_8e4d55489066456031faaa0d27c35ead/req_1d67b8e3de3101aa0799f20fd084dd0b
+effect.requirement parent=@action-effects index=2 requirement=pkg_8e4d55489066456031faaa0d27c35ead/req_5fe21121fa8b61ed3e41cb720efe64ef
+type.task-function as=@action-port result=@Response effect=@action-effects
+type.argument parent=@action-port index=0 type=@Request
+type.function as=@health-port result=@Response
+type.argument parent=@health-port index=0 type=@Request
+type.function as=@catalog-port result=@Response
+type.argument parent=@catalog-port index=0 type=@Request
+type.function as=@asset-0-port result=@Response
+type.argument parent=@asset-0-port index=0 type=@Request
+type.function as=@asset-1-port result=@Response
+type.argument parent=@asset-1-port index=0 type=@Request
+type.function as=@asset-2-port result=@Response
+type.argument parent=@asset-2-port index=0 type=@Request
+type.function as=@asset-2-index-port result=@Response
+type.argument parent=@asset-2-index-port index=0 type=@Request
+type.function as=@asset-3-port result=@Response
+type.argument parent=@asset-3-port index=0 type=@Request
+type.function as=@asset-4-port result=@Response
+type.argument parent=@asset-4-port index=0 type=@Request
+type.function as=@asset-5-port result=@Response
+type.argument parent=@asset-5-port index=0 type=@Request
+effect.row as=@fixture-create-effects
+effect.requirement parent=@fixture-create-effects index=0 requirement=pkg_8e4d55489066456031faaa0d27c35ead/req_df92ad3de8475d92b7faca0a216bbf52
+effect.requirement parent=@fixture-create-effects index=1 requirement=pkg_8e4d55489066456031faaa0d27c35ead/req_1d67b8e3de3101aa0799f20fd084dd0b
+effect.requirement parent=@fixture-create-effects index=2 requirement=pkg_8e4d55489066456031faaa0d27c35ead/req_d22ed8ef4b4779fb4047e6216a0e862e
+type.task-function as=@fixture-create-port result=text effect=@fixture-create-effects
+type.argument parent=@fixture-create-port index=0 type=i64
+type.argument parent=@fixture-create-port index=1 type=i64
+type.function as=@population-probe-port result=@Population
+type.argument parent=@population-probe-port index=0 type=i64
+type.argument parent=@population-probe-port index=1 type=i64
+type.list as=@Populations item=@Population
+type.structural-record as=@MachineProbe
+type.field parent=@MachineProbe index=0 name=id type=i64
+type.field parent=@MachineProbe index=1 name=ready type=@MachineResult
+type.field parent=@MachineProbe index=2 name=blocked type=@MachineResult
+type.field parent=@MachineProbe index=3 name=warehouse type=@MachineResult
+type.list as=@MachineProbes item=@MachineProbe
+type.structural-record as=@ProbeReport
+type.field parent=@ProbeReport index=0 name=populations type=@Populations
+type.field parent=@ProbeReport index=1 name=machines type=@MachineProbes
+type.field parent=@ProbeReport index=2 name=before type=@World
+type.field parent=@ProbeReport index=3 name=after type=@World
+type.field parent=@ProbeReport index=4 name=split_equal type=bool
+type.function as=@diagnostics-port result=text
+type.function as=@diagnostic-page-port result=text
+type.argument parent=@diagnostic-page-port index=0 type=i64
+expression.block as=$update-asset-4-body
+  (call decl_c7f997eedeaf51885599c21a1e253c0f (i64 200) (call pkg_10000000000000000000000000000001/decl_a84fb8598c42e86ff66208829b86ae55 (text ":root{color-scheme:dark;--bg:#111e22;--surface:rgba(20,35,39,.93);--line:#afcabb21;--text:#e1e9df;--muted:#96aaa3;--green:#b8d9c1;--purple:#c4b1eb;--shadow:0 20px 80px #020d184d;font:14px/1.5 ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,\"Segoe UI\",sans-serif}\n*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);overflow:hidden}button,input,select{font:inherit}button{color:inherit;background:#d0e5d708;border:1px solid var(--line);border-radius:10px;min-height:40px;padding:9px 14px;cursor:pointer;transition:background .16s,border-color .16s}button:hover:not(:disabled){background:#c9e1cc12;border-color:#cce8d34a}button:active:not(:disabled){background:#c9e1cc22}button:disabled{opacity:.4;cursor:not-allowed}button:focus-visible,summary:focus-visible,input:focus-visible,select:focus-visible,canvas:focus-visible{outline:2px solid #c1dab2;outline-offset:4px}button.primary{background:var(--green);border-color:var(--green);color:#1a3430;font-weight:600}button.primary:hover:not(:disabled){background:#d3e6cb}.quiet{background:transparent;border-color:transparent}.icon{background:transparent;border:0;font-size:22px;line-height:1;padding:6px 10px}.close{position:absolute;right:10px;top:10px}.wide{display:flex;justify-content:center;align-items:center;gap:12px;width:100%}.glass{background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px)}.hidden{display:none!important}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;clip:rect(0,0,0,0);white-space:nowrap;overflow:hidden}.eyebrow{display:block;font-size:9px;letter-spacing:.19em;font-weight:550;color:var(--muted)}.muted,.small{color:var(--muted)}.small{font-size:11px;line-height:1.8}.error{color:#e6a89d}.essence{color:var(--purple);font-variant-numeric:tabular-nums}.essence i{font-style:normal;font-size:17px}.pill{border:1px solid #b6d9bd29;border-radius:30px;padding:3px 9px;font-size:11px;color:#bad8c6}.badge{font-size:10px;color:#b4d4bc}.button-row{display:flex;gap:8px;flex-wrap:wrap}.active{background:#a5d5b415!important;color:#cee6d1!important}h1,h2,h3,p{margin:0}h1,h2{font-weight:450;letter-spacing:-.02em}h2{font-size:23px}h3{font-size:14px;font-weight:550}label{display:block;font-size:11px;color:var(--muted);margin-bottom:7px}input,select{width:100%;min-height:44px;padding:10px 12px;color:var(--text);background:#0c191d80;border:1px solid #bad0bc35;border-radius:9px;outline:none}input::placeholder{color:#748b83}select{font-size:12px}details summary{cursor:pointer;font-size:12px;color:#afc5b8}kbd{font:10px ui-monospace,monospace;border:1px solid var(--line);padding:1px 5px;border-radius:4px}\n#world{position:fixed;inset:0;width:100%;height:100%;touch-action:none;cursor:grab}.topbar{position:fixed;top:22px;left:28px;right:25px;display:flex;align-items:center;gap:20px;z-index:4;pointer-events:none}.topbar>*{pointer-events:auto}.wordmark{font:italic 27px Georgia,serif;letter-spacing:-1px;border:0;background:none;padding:0;min-height:34px;color:#d1dfd1}.wordmark:hover:not(:disabled){background:none;border:0}.brand-dot{display:inline-block;width:4px;height:4px;margin:0 0 1px 4px;background:#b7d6ba;border-radius:50%}.colony-chip{display:flex;align-items:center;gap:15px;min-height:38px;padding:6px 13px;border-radius:25px;font-size:11px;box-shadow:none}.colony-chip #colony-name{max-width:160px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;color:#c3d1c7}.colony-chip b{font-size:12px;font-weight:500}.colony-chip small{margin-left:4px;font-size:10px;color:var(--muted)}.colony-chip .essence{display:flex;align-items:center;gap:4px}.chip-divider{height:12px;width:1px;background:var(--line)}.top-right{margin-left:auto;display:flex;gap:18px;align-items:center}.round-button{border-radius:50%;width:39px;height:39px;padding:0;background:#1a2d318f;border:1px solid var(--line);font-size:20px}.status-dot{display:block;width:5px;height:5px;border-radius:50%;background:#94a59e}.status-dot.online{background:#a8d5b4}.status-dot.offline{background:#deb694;box-shadow:0 0 9px #dbba8d30}.dock{position:fixed;bottom:25px;left:50%;transform:translateX(-50%);z-index:5;display:flex;gap:4px;align-items:center;padding:6px;border-radius:17px;background:#17292be8}.dock button{display:flex;align-items:center;gap:9px;font-size:12px;border:0;background:transparent;padding:9px 15px;min-height:43px}.tool-icon{font-size:21px;line-height:1;color:#b7cdbb}.dock-divider{height:22px;width:1px;background:var(--line);margin:0 2px}.camera-tools{position:fixed;right:25px;bottom:28px;display:flex;gap:10px;z-index:5;align-items:center}.zoom-controls{display:flex;align-items:center;border-radius:25px;box-shadow:none}.zoom-controls button{border:0;background:none;width:35px;padding:0}.zoom-controls span{font:10px ui-monospace,monospace;color:var(--muted);min-width:38px;text-align:center}.map-scale{position:fixed;bottom:31px;left:30px;display:grid;grid-template-columns:80px auto;gap:3px 10px;align-items:center;pointer-events:none;font-size:9px;letter-spacing:.05em;color:#9bad9d}.map-scale #scale-line{height:5px;width:75px;border:1px solid #a7c0a64d;border-top:0}.map-scale small{grid-column:1/3;font-size:9px;color:#819a90;letter-spacing:.08em}.drawer{position:fixed;top:83px;right:24px;bottom:100px;width:352px;border-radius:17px;display:flex;flex-direction:column;z-index:6;overflow:hidden}.side-heading{display:flex;justify-content:space-between;align-items:center;padding:22px 20px 16px}.side-heading h2{margin-top:5px}.tabs{display:flex;gap:2px;padding:0 12px 12px;border-bottom:1px solid var(--line)}.tabs button{flex:1;padding:8px 4px;font-size:11px;min-height:34px;border:0;background:transparent}.panel-content{overflow:auto;padding:20px;flex:1;scrollbar-width:thin;scrollbar-color:#59706450 transparent}.section-label{font-size:9px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin:14px 0 10px}.section-label:first-child{margin-top:0}.inventory-list{display:grid;grid-template-columns:1fr 1fr;gap:7px}.resource{display:flex;align-items:center;gap:9px;padding:10px;background:#0a171c48;border-radius:8px;min-width:0}.resource-dot{width:6px;height:6px;border-radius:50%;flex:none}.resource small{display:block;font-size:10px;color:var(--muted)}.resource b{font-size:15px;font-weight:450;font-variant-numeric:tabular-nums}.panel-note{font-size:11px;line-height:1.85;color:var(--muted);margin:12px 0}.facility-card,.neighbor-card{border:1px solid var(--line);border-radius:11px;padding:14px;margin:10px 0}.facility-card h3,.neighbor-card h3{font-size:13px}.facility-card p,.neighbor-card p{color:var(--muted);font-size:11px;line-height:1.7;margin:6px 0}.facility-card .button-row{margin-top:10px}.facility-card button,.neighbor-card button{font-size:11px;padding:7px 10px;min-height:33px}.card-top{display:flex;justify-content:space-between;align-items:center;gap:8px}.locked{opacity:.55}.empty{color:var(--muted);font-size:12px;line-height:1.9;padding:12px 0}.overview-numbers{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:22px 0}.overview-numbers b{display:block;font-size:28px;font-weight:350}.overview-numbers small{font-size:10px;color:var(--muted)}.micro-bar{height:3px;background:#abc6b519;border-radius:4px;margin:12px 0;overflow:hidden}.micro-bar span{display:block;height:100%;background:#b4d5b3}.selection{position:fixed;right:24px;top:83px;width:310px;max-height:calc(100vh - 190px);overflow:auto;border-radius:17px;padding:23px;z-index:6}.selection h2{margin:7px 20px 13px 0;font-size:21px}.selection p{font-size:12px;line-height:1.85;color:var(--muted);margin:7px 0}.selection .numbers{font-size:22px;color:var(--text)}.selection .button-row{margin-top:14px}.selection button{font-size:11px}.selection select{margin:8px 0}.selection .cost{font-size:11px}.selection .resource{padding:7px}.selection .inventory-list{margin-top:12px}.hover-label{position:fixed;z-index:9;pointer-events:none;padding:5px 9px;border-radius:5px;font-size:10px;background:#0f2024e8;border:1px solid #cee5c326;color:#c2d6c7;white-space:nowrap}.mode-hint{position:fixed;bottom:98px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:14px;padding:6px 8px 6px 16px;background:#182e30f5;border:1px solid #b6d3b43a;border-radius:30px;z-index:10;max-width:92vw;font-size:11px}.mode-hint button{border:0;min-height:30px;font-size:10px}.notice{position:fixed;bottom:96px;left:50%;transform:translateX(-50%);z-index:11;border-radius:12px;padding:9px 12px;display:flex;align-items:center;gap:10px;font-size:11px;max-width:calc(100vw - 30px)}.notice button{font-size:11px;padding:6px 10px;min-height:32px;white-space:nowrap}.notice small{display:block;font-size:10px;color:var(--muted)}.progress-notice{top:82px;bottom:auto}.notice#pending{bottom:155px;border-color:#d9bb8d50}.spinner{display:inline-block;width:14px;height:14px;border:1px solid #9dd5bc22;border-top-color:#c4dbba;border-radius:50%;animation:spin 1.5s linear infinite}.toast{position:fixed;bottom:165px;left:50%;transform:translateX(-50%);max-width:min(90vw,480px);padding:11px 17px;border-radius:10px;background:#28413fee;border:1px solid #b6dec144;color:#e2eedc;z-index:30;font-size:12px;text-align:center;pointer-events:none;line-height:1.7}.veil{position:fixed;inset:0;z-index:20;display:flex;justify-content:center;align-items:center;padding:20px;overflow:auto;background:radial-gradient(ellipse at center,#1d343a1a,#08141aa3)}.auth-card{position:relative;max-width:100%;width:412px;text-align:center;padding:28px 36px;border-radius:25px;background:rgba(20,35,39,.9)}#auth-orb{display:block;width:86px;height:86px;margin:0 auto 15px;filter:drop-shadow(0 0 25px #8fcbb125)}.auth-card h1{font:48px Georgia,serif;letter-spacing:-2px;margin:9px 0}.tagline{font-size:12px;color:#c1d0be}.intro{font:15px/1.9 Georgia,serif;color:#9bb3a7;margin:18px 0 25px}.auth-card form{text-align:left}.auth-card form button{margin-top:12px;justify-content:space-between}.auth-card details{text-align:left;border-top:1px solid var(--line);padding-top:15px;margin-top:22px}.auth-card details form{margin-top:15px}.remember{display:flex;justify-content:center;align-items:center;gap:7px;font-size:10px;margin:19px 0 11px}.remember input{width:13px;height:13px;min-height:0;accent-color:#b6d5b7}.auth-card .small{font-size:9px}.auth-card .error{margin-bottom:8px;font-size:11px}.dialog{position:relative;width:520px;max-width:94vw;max-height:86vh;color:var(--text);padding:32px;border-radius:19px;overflow:auto}.dialog::backdrop{background:#061218b0;backdrop-filter:blur(7px)}.dialog h2{margin:10px 0 22px}.dialog h3{margin:20px 0 7px}.dialog p{font-size:12px;line-height:1.9;color:var(--muted)}.dialog .wide{margin-top:12px}.dialog input{margin-top:17px;font:12px ui-monospace,monospace}.dialog .button-row{margin:12px 0 18px}.menu-dialog{width:350px}.menu-dialog .small{margin-top:23px}.menu-dialog .wide{justify-content:space-between}\n.research-overlay{position:fixed;inset:0;z-index:15;background:#101d21}.research-overlay canvas{position:absolute;inset:0;width:100%;height:100%;touch-action:none;cursor:grab}.research-heading{position:absolute;top:25px;left:30px;right:26px;display:flex;justify-content:space-between;align-items:flex-start;pointer-events:none}.research-heading>*{pointer-events:auto}.research-heading h1{font:32px Georgia,serif;margin-top:6px;letter-spacing:-.5px}.research-heading h1 small{font:11px system-ui;color:var(--muted);margin-left:10px}.research-heading .eyebrow{margin-top:20px}.research-heading .quiet{padding:0;color:#b6cdbc;min-height:30px;font-size:12px}.research-tools{display:flex;align-items:center;border-radius:25px;padding:4px;gap:3px;box-shadow:none}.research-tools button{border:0;background:none;font-size:11px;padding:7px 10px;min-height:32px}.research-tools .essence{padding:0 12px;font-size:12px;border-right:1px solid var(--line)}.research-detail,.research-list{position:absolute;right:25px;top:90px;width:300px;max-height:calc(100vh - 120px);overflow:auto;border-radius:16px;padding:23px}.research-detail h2{font:26px Georgia,serif;letter-spacing:-.5px;margin:10px 0 15px}.research-detail p{font-size:12px;line-height:1.8;color:var(--muted);margin:10px 0}.research-detail .primary{margin-top:18px;font-size:12px}.research-detail .branch-color{height:2px;width:30px;margin:0 0 20px}.cost{display:flex;justify-content:space-between;gap:10px;font-size:11px;padding:8px 0;border-bottom:1px solid var(--line)}.cost .enough{color:#b1d1b9}.cost .short{color:#ddb596}.research-list h2{font-size:19px;margin:8px 0 15px}.research-list button.discovery-row{display:flex;width:100%;text-align:left;align-items:center;justify-content:space-between;border:0;background:none;font-size:11px;margin:3px 0}.research-list small{color:var(--muted);font-size:9px}.tree-guide{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);text-align:center;font:italic 14px Georgia,serif;color:#95aa9e;pointer-events:none;white-space:nowrap}.tree-guide span{display:block;font:10px system-ui;color:#728f83;margin-top:7px}.restore-ui{position:fixed;right:22px;top:20px;z-index:40;opacity:.35;border:0;font-size:10px;min-height:33px;background:#182c2db5}.restore-ui:hover{opacity:1}.cinema .chrome{visibility:hidden}.cinema .hover-label{display:none}.cinema .notice,.cinema .toast{visibility:visible}\n@keyframes spin{to{transform:rotate(360deg)}}\n@media(max-width:1000px){.colony-chip #colony-name{max-width:110px}.camera-tools{right:17px;gap:6px}.zoom-controls span{display:none}.dock{bottom:22px}.map-scale{left:20px}.research-detail,.research-list{width:270px;right:18px}}\n@media(max-width:700px){.topbar{top:15px;left:17px;right:15px;gap:12px}.wordmark{font-size:24px}.colony-chip{gap:9px;padding:5px 9px;min-height:34px}.colony-chip #colony-name,.chip-divider{display:none}.colony-chip b{font-size:11px}.top-right{gap:10px}.round-button{height:34px;width:34px;font-size:19px}.colony-chip small{font-size:9px}.drawer,.selection{left:10px;right:10px;top:auto;bottom:94px;width:auto;max-height:56vh;border-radius:17px}.drawer{height:50vh}.side-heading{padding:17px 17px 10px}.side-heading h2{font-size:21px}.panel-content{padding:15px 17px}.selection{padding:20px}.dock{bottom:20px;padding:5px;border-radius:16px}.dock button{padding:7px 13px;gap:7px;min-height:40px;font-size:11px}.tool-icon{font-size:19px}.camera-tools{bottom:81px;right:13px;gap:7px}.zoom-controls button{width:31px;min-height:32px}.map-scale{bottom:83px;left:17px;grid-template-columns:64px auto;font-size:8px;gap:4px 6px}.map-scale #scale-line{width:60px}.map-scale small{font-size:8px}.notice{bottom:130px;width:max-content;max-width:calc(100vw - 24px);font-size:10px;padding:8px 10px;gap:7px}.notice#pending{bottom:181px}.notice button{font-size:10px;padding:6px 8px}.progress-notice{top:64px;bottom:auto}.mode-hint{bottom:127px;width:max-content;font-size:10px;gap:8px}.toast{bottom:178px;font-size:11px}.auth-card{padding:23px 26px}.auth-card h1{font-size:43px}#auth-orb{width:68px;height:68px}.auth-card .intro{font-size:14px;margin:17px 0 22px}.dialog{padding:26px}.dialog h2{font-size:21px}.research-heading{top:13px;left:17px;right:13px;flex-wrap:wrap;gap:9px}.research-heading h1{font-size:27px}.research-heading .eyebrow{margin-top:13px;font-size:8px}.research-tools{padding:3px}.research-tools button{font-size:10px;padding:5px 8px}.research-tools .essence{font-size:11px;padding:0 8px}.research-heading .research-tools{margin-left:auto}.research-detail,.research-list{left:10px;right:10px;top:auto;bottom:12px;width:auto;max-height:40vh;padding:18px}.research-detail h2{font-size:22px;margin:6px 0 10px}.research-detail p{font-size:11px;margin:8px 0}.research-detail .branch-color{margin-bottom:10px}.cost{padding:6px 0}.research-detail .primary{margin-top:12px;min-height:40px}.tree-guide{font-size:12px;bottom:25px}.tree-guide span{font-size:9px}.research-overlay:has(.research-detail:not(.hidden)) .tree-guide,.research-overlay:has(.research-list:not(.hidden)) .tree-guide{display:none}.selection .inventory-list{grid-template-columns:repeat(4,1fr)}.selection .resource small{font-size:9px}.selection .resource b{font-size:11px}.selection .resource-dot{display:none}}\n@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}\n/* Context-only controls; no persistent dashboard or overlapping drawers. */\n.workshop-link{display:block;width:100%;text-align:left;color:var(--text);background:#b2c9b004;cursor:pointer}.workshop-link:hover{background:#b2c9b00b}.overview-numbers{grid-template-columns:repeat(3,1fr)}.overview-numbers span{display:block;font-size:10px;color:var(--muted);margin-top:4px}.selection details{border-top:1px solid var(--line);padding-top:12px;margin-top:15px}.selection details summary{font-size:11px;cursor:pointer}.research-list button.research-list-item{display:block;width:100%;text-align:left;border:0;background:none;font-size:11px;margin:3px 0;padding:7px 4px}.research-list button.research-list-item:hover{background:#a7c6b30d}.research-detail .parent-link{border:0;background:none;padding:3px 0;color:#b3c6b8;font-size:11px}.research-detail .owned-note{color:#b8d9ae}.research-detail .section-label{margin-top:18px}.research-detail .button-row button{font-size:10px;padding:6px 8px;flex:1 0 40%}.selection .button-row button{flex:1 1 auto}\n")) (text "text/css; charset=utf-8"))
+expression.end
+replace.body function=decl_523372e6b724518ed78908f869b1d280 body=$update-asset-4-body

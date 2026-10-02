@@ -1,0 +1,3 @@
+# Keep legacy recovery history in Git, outside newly generated source archives.
+/orbloam-reconstructed.bundle export-ignore
+/RECOVER-SOURCE.txt export-ignore

@@ -13,7 +13,7 @@ import time
 import traceback
 
 from native import NativeApp, BINARY, ARTIFACT, ROOT, native, sha256, redact, execution_value
-from oracle import assert_probe, deaths_between
+from oracle import assert_probe, deaths_between, gather_only_step
 
 
 def owner(state, identifier=None):
@@ -171,9 +171,12 @@ def one_hour_catchup():
         deaths = deaths_between(first['cohorts'], before['world']['tick'], after['world']['tick'])
         assert last['deaths'] - first['deaths'] == deaths
         assert last['essence'] == first['essence'] + 14 * deaths
-        for building in last['buildings']:
-            assert building['produced'] == (delta // 3) * (3 if building['kind'] == 7 else 6), building
-            assert building['health'] == 100 and building['progress'] == delta % 3
+        catalogue = app.expect(200, 'api/catalog')
+        expected_world = before['world']
+        for _ in range(delta):
+            expected_world = gather_only_step(expected_world, catalogue)
+        assert after['world'] == expected_world, 'Independent chronological world/automatic-production mismatch'
+        assert all(b['health'] == 100 for b in last['buildings'])
         assert len(after['world']['nodes']) <= 4096
         assert all(0 <= n['stock'] <= 180 + 30 * n['tier'] for n in after['world']['nodes'].values())
         assert after['backlog_ticks'] == 0
@@ -187,7 +190,7 @@ def one_hour_catchup():
     assert 'refused: existing world' in refused
     return {'fixture_population': 512, 'fixture_workshops': 8, 'requested_absence_ticks': 360,
             'processed_ticks': delta, 'calculated_deaths': deaths, 'actual_deaths': last['deaths'] - first['deaths'],
-            'catchup_wall_seconds': elapsed, 'final_backlog_ticks': 0, 'all_eight_processing_totals_exact': True,
+            'catchup_wall_seconds': elapsed, 'final_backlog_ticks': 0, 'all_eight_processing_totals_exact': True, 'automatic_recipe_choices_and_entire_world_equal': True, 'life_ticks': 90,
             'post_load_move_and_replay': True, 'existing_world_not_overwritten': True}
 
 

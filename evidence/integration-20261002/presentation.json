@@ -1,0 +1,17 @@
+{
+  "schema": "orbloam-presentation-v2",
+  "artifact_sha256": "5b925822ae0f1351d1d41efef5ccc877cd90281d2f7097d046352d30ecda6693",
+  "source_sha256": {
+    "world": "0cc4dee4775c1245d2abc6fecb0bad3fffbc8afddcc866b1ca398b79d9e7d2bb",
+    "research": "e23ecc3db798a9a878ef621af349af86fc65fe8ecd2cb431ee83286015ef5df0",
+    "catalogue": "b00901daf80dc5b73ccd608bac57f88f415c3f78e76235159cb81186328cb148"
+  },
+  "status": "passed",
+  "regions": 63,
+  "terrainCases": 63,
+  "treeNodes": 96,
+  "structuralForks": 32,
+  "minimumNodeSeparation": 54.36287053826285,
+  "continuousLODSamples": 3980,
+  "lifetimeSeconds": 900
+}

@@ -1,0 +1,277 @@
+request base=rev_de3fd94b3497472cbc67e4513edc9bdee25d9a2828c5408f80a1a7c8189df05e
+type.structural-record as=@Header
+type.field parent=@Header index=0 name=name type=text
+type.field parent=@Header index=1 name=value type=bytes
+type.list as=@Headers item=@Header
+type.stream as=@Body item=bytes
+type.list as=@Texts item=text
+type.map as=@Query key=text value=@Texts
+type.structural-record as=@Request
+type.field parent=@Request index=0 name=body type=@Body
+type.field parent=@Request index=1 name=headers type=@Headers
+type.field parent=@Request index=2 name=method type=text
+type.field parent=@Request index=3 name=path type=text
+type.field parent=@Request index=4 name=query type=text
+type.field parent=@Request index=5 name=query_parameters type=@Query
+type.structural-record as=@Response
+type.field parent=@Response index=0 name=body type=bytes
+type.field parent=@Response index=1 name=headers type=@Headers
+type.field parent=@Response index=2 name=status type=i64
+type.named as=@DataKeyPart declaration=pkg_10000000000000000000000000000001/decl_14b03b7e7e25e1cf4bd5a5e3932e73ab
+type.named as=@DataEntry declaration=pkg_10000000000000000000000000000001/decl_8b2cf37fae3bc1fd3cdd43367ac5b3e6
+type.named as=@DataSchema declaration=pkg_10000000000000000000000000000001/decl_5ad011a7306a7a1da03f982c3d96318c
+type.named as=@DataExpectation declaration=pkg_10000000000000000000000000000001/decl_388aa498465975c5de5d579e6230a28a
+type.named as=@TransactionAbortReason declaration=pkg_10000000000000000000000000000001/decl_717a93982fa4cfc42d0397150df09872
+type.list as=@Entries item=@DataEntry
+type.function as=@authoring-ready-port result=bool
+type.structural-record as=@Point
+type.field parent=@Point index=0 name=x type=i64
+type.field parent=@Point index=1 name=y type=i64
+type.map as=@Inventory key=text value=i64
+type.map as=@Receipts key=text value=text
+type.structural-record as=@Cohort
+type.field parent=@Cohort index=0 name=first type=i64
+type.field parent=@Cohort index=1 name=count type=i64
+type.field parent=@Cohort index=2 name=start type=i64
+type.list as=@Cohorts item=@Cohort
+type.structural-record as=@Building
+type.field parent=@Building index=0 name=id type=i64
+type.field parent=@Building index=1 name=kind type=i64
+type.field parent=@Building index=2 name=recipe type=i64
+type.field parent=@Building index=3 name=x type=i64
+type.field parent=@Building index=4 name=y type=i64
+type.field parent=@Building index=5 name=health type=i64
+type.field parent=@Building index=6 name=progress type=i64
+type.field parent=@Building index=7 name=produced type=i64
+type.field parent=@Building index=8 name=enabled type=bool
+type.field parent=@Building index=9 name=status type=text
+type.list as=@Buildings item=@Building
+type.structural-record as=@Route
+type.field parent=@Route index=0 name=job type=i64
+type.field parent=@Route index=1 name=x type=i64
+type.field parent=@Route index=2 name=y type=i64
+type.field parent=@Route index=3 name=tier type=i64
+type.field parent=@Route index=4 name=units type=i64
+type.field parent=@Route index=5 name=workers type=i64
+type.list as=@Routes item=@Route
+type.structural-record as=@Colony
+type.field parent=@Colony index=0 name=id type=i64
+type.field parent=@Colony index=1 name=name type=text
+type.field parent=@Colony index=2 name=created_tick type=i64
+type.field parent=@Colony index=3 name=from_x type=i64
+type.field parent=@Colony index=4 name=from_y type=i64
+type.field parent=@Colony index=5 name=to_x type=i64
+type.field parent=@Colony index=6 name=to_y type=i64
+type.field parent=@Colony index=7 name=move_at type=i64
+type.field parent=@Colony index=8 name=move_ms type=i64
+type.field parent=@Colony index=9 name=cohorts type=@Cohorts
+type.field parent=@Colony index=10 name=inventory type=@Inventory
+type.field parent=@Colony index=11 name=research type=@Inventory
+type.field parent=@Colony index=12 name=buildings type=@Buildings
+type.field parent=@Colony index=13 name=routes type=@Routes
+type.field parent=@Colony index=14 name=essence type=i64
+type.field parent=@Colony index=15 name=experience type=i64
+type.field parent=@Colony index=16 name=deaths type=i64
+type.field parent=@Colony index=17 name=gathered type=i64
+type.field parent=@Colony index=18 name=conversations type=i64
+type.field parent=@Colony index=19 name=neighbor type=i64
+type.field parent=@Colony index=20 name=next_building type=i64
+type.field parent=@Colony index=21 name=sequence type=i64
+type.field parent=@Colony index=22 name=last_intent type=text
+type.field parent=@Colony index=23 name=receipts type=@Receipts
+type.list as=@Colonies item=@Colony
+type.structural-record as=@Node
+type.field parent=@Node index=0 name=stock type=i64
+type.field parent=@Node index=1 name=tick type=i64
+type.field parent=@Node index=2 name=x type=i64
+type.field parent=@Node index=3 name=y type=i64
+type.field parent=@Node index=4 name=kind type=i64
+type.field parent=@Node index=5 name=tier type=i64
+type.map as=@Nodes key=text value=@Node
+type.structural-record as=@World
+type.field parent=@World index=0 name=version type=i64
+type.field parent=@World index=1 name=tick type=i64
+type.field parent=@World index=2 name=next_id type=i64
+type.field parent=@World index=3 name=colonies type=@Colonies
+type.field parent=@World index=4 name=nodes type=@Nodes
+type.structural-record as=@Recipe
+type.field parent=@Recipe index=0 name=id type=i64
+type.field parent=@Recipe index=1 name=kind type=i64
+type.field parent=@Recipe index=2 name=tier type=i64
+type.field parent=@Recipe index=3 name=branch type=i64
+type.field parent=@Recipe index=4 name=rank type=i64
+type.field parent=@Recipe index=5 name=period type=i64
+type.field parent=@Recipe index=6 name=workers type=i64
+type.field parent=@Recipe index=7 name=output type=text
+type.field parent=@Recipe index=8 name=amount type=i64
+type.field parent=@Recipe index=9 name=a type=text
+type.field parent=@Recipe index=10 name=na type=i64
+type.field parent=@Recipe index=11 name=b type=text
+type.field parent=@Recipe index=12 name=nb type=i64
+type.field parent=@Recipe index=13 name=c type=text
+type.field parent=@Recipe index=14 name=nc type=i64
+type.structural-record as=@Research
+type.field parent=@Research index=0 name=id type=i64
+type.field parent=@Research index=1 name=branch type=i64
+type.field parent=@Research index=2 name=tier type=i64
+type.field parent=@Research index=3 name=essence type=i64
+type.field parent=@Research index=4 name=raw type=text
+type.field parent=@Research index=5 name=raw_amount type=i64
+type.field parent=@Research index=6 name=product type=text
+type.field parent=@Research index=7 name=product_amount type=i64
+type.structural-record as=@Envelope
+type.field parent=@Envelope index=0 name=me type=i64
+type.field parent=@Envelope index=1 name=world type=@World
+type.field parent=@Envelope index=2 name=now_ms type=i64
+type.field parent=@Envelope index=3 name=backlog_ticks type=i64
+type.structural-record as=@Population
+type.field parent=@Population index=0 name=tick type=i64
+type.field parent=@Population index=1 name=count type=i64
+type.field parent=@Population index=2 name=capacity type=i64
+type.field parent=@Population index=3 name=deaths type=i64
+type.field parent=@Population index=4 name=roles type=@Inventory
+type.structural-record as=@Candidate
+type.field parent=@Candidate index=0 name=key type=text
+type.field parent=@Candidate index=1 name=node type=@Node
+type.field parent=@Candidate index=2 name=distance type=i64
+type.field parent=@Candidate index=3 name=valid type=bool
+type.structural-record as=@GatherContext
+type.field parent=@GatherContext index=0 name=point type=@Point
+type.field parent=@GatherContext index=1 name=tick type=i64
+type.field parent=@GatherContext index=2 name=roles type=@Inventory
+type.field parent=@GatherContext index=3 name=tier type=i64
+type.field parent=@GatherContext index=4 name=radius type=i64
+type.field parent=@GatherContext index=5 name=multiplier type=i64
+type.field parent=@GatherContext index=6 name=storage type=i64
+type.field parent=@GatherContext index=7 name=min_x type=i64
+type.field parent=@GatherContext index=8 name=max_x type=i64
+type.field parent=@GatherContext index=9 name=min_y type=i64
+type.field parent=@GatherContext index=10 name=max_y type=i64
+type.structural-record as=@GatherState
+type.field parent=@GatherState index=0 name=inventory type=@Inventory
+type.field parent=@GatherState index=1 name=nodes type=@Nodes
+type.field parent=@GatherState index=2 name=routes type=@Routes
+type.field parent=@GatherState index=3 name=units type=i64
+type.structural-record as=@NodeEntry
+type.field parent=@NodeEntry index=0 name=key type=text
+type.field parent=@NodeEntry index=1 name=value type=@Node
+type.list as=@NodeEntries item=@NodeEntry
+type.structural-record as=@RecipeChoice
+type.field parent=@RecipeChoice index=0 name=id type=i64
+type.field parent=@RecipeChoice index=1 name=score type=i64
+type.structural-record as=@FactoryContext
+type.field parent=@FactoryContext index=0 name=tick type=i64
+type.field parent=@FactoryContext index=1 name=point type=@Point
+type.field parent=@FactoryContext index=2 name=radius type=i64
+type.field parent=@FactoryContext index=3 name=storage type=i64
+type.field parent=@FactoryContext index=4 name=research type=@Inventory
+type.structural-record as=@FactoryState
+type.field parent=@FactoryState index=0 name=inventory type=@Inventory
+type.field parent=@FactoryState index=1 name=buildings type=@Buildings
+type.field parent=@FactoryState index=2 name=workers type=i64
+type.field parent=@FactoryState index=3 name=experience type=i64
+type.structural-record as=@MachineResult
+type.field parent=@MachineResult index=0 name=inventory type=@Inventory
+type.field parent=@MachineResult index=1 name=building type=@Building
+type.field parent=@MachineResult index=2 name=experience type=i64
+type.structural-record as=@ColonyStep
+type.field parent=@ColonyStep index=0 name=colony type=@Colony
+type.field parent=@ColonyStep index=1 name=nodes type=@Nodes
+type.structural-record as=@Action
+type.field parent=@Action index=0 name=op type=text
+type.field parent=@Action index=1 name=sequence type=i64
+type.field parent=@Action index=2 name=index type=i64
+type.field parent=@Action index=3 name=value type=i64
+type.field parent=@Action index=4 name=x type=i64
+type.field parent=@Action index=5 name=y type=i64
+type.field parent=@Action index=6 name=text type=text
+type.structural-record as=@ActionResult
+type.field parent=@ActionResult index=0 name=world type=@World
+type.field parent=@ActionResult index=1 name=ok type=bool
+type.field parent=@ActionResult index=2 name=error type=text
+type.structural-record as=@Error
+type.field parent=@Error index=0 name=error type=text
+type.structural-record as=@Join
+type.field parent=@Join index=0 name=name type=text
+type.field parent=@Join index=1 name=token type=text
+type.structural-record as=@Joined
+type.field parent=@Joined index=0 name=id type=i64
+type.field parent=@Joined index=1 name=token type=text
+type.structural-record as=@WorldRead
+type.field parent=@WorldRead index=0 name=exists type=bool
+type.field parent=@WorldRead index=1 name=valid type=bool
+type.field parent=@WorldRead index=2 name=world type=@World
+type.field parent=@WorldRead index=3 name=expectation type=@DataExpectation
+type.structural-record as=@Media
+type.field parent=@Media index=0 name=count type=i64
+type.field parent=@Media index=1 name=valid type=bool
+effect.row as=@view-effects
+effect.requirement parent=@view-effects index=0 requirement=pkg_8e4d55489066456031faaa0d27c35ead/req_df92ad3de8475d92b7faca0a216bbf52
+effect.requirement parent=@view-effects index=1 requirement=pkg_8e4d55489066456031faaa0d27c35ead/req_1d67b8e3de3101aa0799f20fd084dd0b
+type.task-function as=@view-port result=@Response effect=@view-effects
+type.argument parent=@view-port index=0 type=@Request
+effect.row as=@sync-effects
+effect.requirement parent=@sync-effects index=0 requirement=pkg_8e4d55489066456031faaa0d27c35ead/req_df92ad3de8475d92b7faca0a216bbf52
+effect.requirement parent=@sync-effects index=1 requirement=pkg_8e4d55489066456031faaa0d27c35ead/req_1d67b8e3de3101aa0799f20fd084dd0b
+type.task-function as=@sync-port result=@Response effect=@sync-effects
+type.argument parent=@sync-port index=0 type=@Request
+effect.row as=@join-effects
+effect.requirement parent=@join-effects index=0 requirement=pkg_8e4d55489066456031faaa0d27c35ead/req_df92ad3de8475d92b7faca0a216bbf52
+effect.requirement parent=@join-effects index=1 requirement=pkg_8e4d55489066456031faaa0d27c35ead/req_5fe21121fa8b61ed3e41cb720efe64ef
+effect.requirement parent=@join-effects index=2 requirement=pkg_8e4d55489066456031faaa0d27c35ead/req_1d67b8e3de3101aa0799f20fd084dd0b
+type.task-function as=@join-port result=@Response effect=@join-effects
+type.argument parent=@join-port index=0 type=@Request
+effect.row as=@action-effects
+effect.requirement parent=@action-effects index=0 requirement=pkg_8e4d55489066456031faaa0d27c35ead/req_df92ad3de8475d92b7faca0a216bbf52
+effect.requirement parent=@action-effects index=1 requirement=pkg_8e4d55489066456031faaa0d27c35ead/req_1d67b8e3de3101aa0799f20fd084dd0b
+effect.requirement parent=@action-effects index=2 requirement=pkg_8e4d55489066456031faaa0d27c35ead/req_5fe21121fa8b61ed3e41cb720efe64ef
+type.task-function as=@action-port result=@Response effect=@action-effects
+type.argument parent=@action-port index=0 type=@Request
+type.function as=@health-port result=@Response
+type.argument parent=@health-port index=0 type=@Request
+type.function as=@catalog-port result=@Response
+type.argument parent=@catalog-port index=0 type=@Request
+type.function as=@asset-0-port result=@Response
+type.argument parent=@asset-0-port index=0 type=@Request
+type.function as=@asset-1-port result=@Response
+type.argument parent=@asset-1-port index=0 type=@Request
+type.function as=@asset-2-port result=@Response
+type.argument parent=@asset-2-port index=0 type=@Request
+type.function as=@asset-2-index-port result=@Response
+type.argument parent=@asset-2-index-port index=0 type=@Request
+type.function as=@asset-3-port result=@Response
+type.argument parent=@asset-3-port index=0 type=@Request
+type.function as=@asset-4-port result=@Response
+type.argument parent=@asset-4-port index=0 type=@Request
+type.function as=@asset-5-port result=@Response
+type.argument parent=@asset-5-port index=0 type=@Request
+effect.row as=@fixture-create-effects
+effect.requirement parent=@fixture-create-effects index=0 requirement=pkg_8e4d55489066456031faaa0d27c35ead/req_df92ad3de8475d92b7faca0a216bbf52
+effect.requirement parent=@fixture-create-effects index=1 requirement=pkg_8e4d55489066456031faaa0d27c35ead/req_1d67b8e3de3101aa0799f20fd084dd0b
+effect.requirement parent=@fixture-create-effects index=2 requirement=pkg_8e4d55489066456031faaa0d27c35ead/req_d22ed8ef4b4779fb4047e6216a0e862e
+type.task-function as=@fixture-create-port result=text effect=@fixture-create-effects
+type.argument parent=@fixture-create-port index=0 type=i64
+type.argument parent=@fixture-create-port index=1 type=i64
+type.function as=@population-probe-port result=@Population
+type.argument parent=@population-probe-port index=0 type=i64
+type.argument parent=@population-probe-port index=1 type=i64
+type.list as=@Populations item=@Population
+type.structural-record as=@MachineProbe
+type.field parent=@MachineProbe index=0 name=id type=i64
+type.field parent=@MachineProbe index=1 name=ready type=@MachineResult
+type.field parent=@MachineProbe index=2 name=blocked type=@MachineResult
+type.field parent=@MachineProbe index=3 name=warehouse type=@MachineResult
+type.list as=@MachineProbes item=@MachineProbe
+type.structural-record as=@ProbeReport
+type.field parent=@ProbeReport index=0 name=populations type=@Populations
+type.field parent=@ProbeReport index=1 name=machines type=@MachineProbes
+type.field parent=@ProbeReport index=2 name=before type=@World
+type.field parent=@ProbeReport index=3 name=after type=@World
+type.field parent=@ProbeReport index=4 name=split_equal type=bool
+type.function as=@diagnostics-port result=text
+type.function as=@diagnostic-page-port result=text
+type.argument parent=@diagnostic-page-port index=0 type=i64
+expression.block as=$update-asset-0-body
+  (call decl_c7f997eedeaf51885599c21a1e253c0f (i64 200) (call pkg_10000000000000000000000000000001/decl_a84fb8598c42e86ff66208829b86ae55 (text "// A single ordered game-request lane. Uncertain writes retain their exact intent.\nconst base = new URL('.', document.baseURI);\nexport const storageScope = `orbloam-v1:${base.pathname}`;\nexport function loadLocal(key) { try { return localStorage.getItem(`${storageScope}:${key}`); } catch { return null; } }\nexport function saveLocal(key, value) { try { value === null ? localStorage.removeItem(`${storageScope}:${key}`) : localStorage.setItem(`${storageScope}:${key}`, value); } catch { /* Private modes may forbid persistence. */ } }\nexport class ApiError extends Error {\n  constructor(status, code) { super(code); this.status = status; this.code = code; }\n}\n// The native JSON codec represents maps as ordered [key, value] pairs.\n// This is a view adapter, not an economic simulation or a source of game rewards.\nexport function decodeSnapshot(data) {\n  const map = pairs => {\n    if (!Array.isArray(pairs) || pairs.some(p => !Array.isArray(p) || p.length !== 2 || typeof p[0] !== 'string')) throw new ApiError(502, 'invalid_response');\n    const result = Object.create(null);\n    for (const [key, value] of pairs) { if (Object.hasOwn(result, key)) throw new ApiError(502, 'invalid_response'); result[key] = value; }\n    return result;\n  };\n  if (!Array.isArray(data.world.colonies)) throw new ApiError(502, 'invalid_response');\n  return {...data, world: {...data.world, nodes: map(data.world.nodes), colonies: data.world.colonies.map(colony =>\n    ({...colony, inventory: map(colony.inventory), research: map(colony.research), receipts: map(colony.receipts)}))}};\n}\nexport class GameAPI {\n  constructor(onState, onPending) {\n    this.token = ''; this.state = null; this.queue = []; this.busy = false; this.onState = onState; this.onPending = onPending;\n    this.pollQueued = false; this.pending = null; this.writeQueued = false; this.latency = 0; this.maximumInFlight = 0; this.inFlight = 0;\n  }\n  enqueue(work, urgent = false) {\n    return new Promise((resolve, reject) => { const task = {work, resolve, reject}; urgent ? this.queue.unshift(task) : this.queue.push(task); this.drain(); });\n  }\n  async drain() {\n    if (this.busy) return; this.busy = true;\n    try { while (this.queue.length) { const task = this.queue.shift(); try { task.resolve(await task.work()); } catch (error) { task.reject(error); } } }\n    finally { this.busy = false; }\n  }\n  async request(path, method = 'GET', body) {\n    const controller = new AbortController(), timeout = setTimeout(() => controller.abort(), 20000), started = performance.now();\n    const headers = {}; if (this.token) headers.Authorization = `Bearer ${this.token}`;\n    if (body !== undefined) headers['Content-Type'] = 'application/json';\n    this.inFlight++; this.maximumInFlight = Math.max(this.maximumInFlight, this.inFlight);\n    try {\n      const response = await fetch(new URL(path, base), {method, headers, body: body === undefined ? undefined : JSON.stringify(body),\n        cache: 'no-store', credentials: 'omit', redirect: 'error', signal: controller.signal});\n      let data; try { data = await response.json(); } catch { throw new ApiError(response.status || 502, 'invalid_response'); }\n      this.latency = performance.now() - started;\n      if (!response.ok) throw new ApiError(response.status, typeof data.error === 'string' ? data.error : data.error?.code || `http_${response.status}`);\n      if (data.world && Number.isSafeInteger(data.me)) { data = decodeSnapshot(data); this.state = data; this.onState(data); }\n      return data;\n    } catch (error) { if (error instanceof ApiError) throw error; throw new ApiError(0, 'network_uncertain'); }\n    finally { clearTimeout(timeout); this.inFlight--; }\n  }\n  catalog() { return this.enqueue(() => this.request('api/catalog')); }\n  join(name, token) { return this.enqueue(() => this.request('api/join', 'POST', {name, token}), true); }\n  async restore(token) {\n    this.token = token;\n    const state = await this.enqueue(() => this.request('api/view'), true);\n    try { const saved = JSON.parse(loadLocal('pending') || 'null'); if (saved?.owner === state.me) this.setPending(saved); } catch { saveLocal('pending', null); }\n    return state;\n  }\n  poll() {\n    if (!this.token || this.pollQueued) return Promise.resolve(null);\n    this.pollQueued = true;\n    return this.enqueue(() => this.request('api/sync', 'POST', {})).finally(() => { this.pollQueued = false; });\n  }\n  setPending(record) { this.pending = record; this.pendingError = null; saveLocal('pending', record ? JSON.stringify(record) : null); this.onPending(record); }\n  command(op, parameters = {}) {\n    if (this.writeQueued || this.pending) return Promise.reject(new ApiError(0, 'pending_action'));\n    this.writeQueued = true;\n    return this.enqueue(async () => {\n      if (this.pending) throw new ApiError(0, 'pending_action');\n      const colony = this.state?.world.colonies.find(c => c.id === this.state.me);\n      if (!colony) throw new ApiError(401, 'unauthorized');\n      const action = {op, sequence: colony.sequence + 1, index: 0, value: 0, x: 0, y: 0, text: '', ...parameters};\n      const record = {owner: colony.id, action}; this.setPending(record);\n      return this.sendIntent(record);\n    }, true).finally(() => { this.writeQueued = false; });\n  }\n  async sendIntent(record) {\n    try {\n      for (let attempt = 0; attempt < 4; attempt++) {\n        try { const result = await this.request('api/action', 'POST', record.action); this.setPending(null); return result; }\n        catch (error) {\n          if (error.code !== 'catchup_required' || attempt === 3) throw error;\n          await this.request('api/sync', 'POST', {});\n        }\n      }\n    } catch (error) {\n      // A network/5xx failure may have occurred after publication. Never mint a new sequence.\n      this.pendingError = error.code;\n      if (error.status >= 400 && error.status < 500 && error.code !== 'sequence_conflict') this.setPending(null);\n      throw error;\n    }\n  }\n  retryPending() {\n    if (!this.pending) return Promise.resolve(null);\n    const record = this.pending;\n    return this.enqueue(() => this.pending === record ? this.sendIntent(record) : null, true);\n  }\n  discardPending() { this.setPending(null); }\n}\nexport const ERROR_TEXT = {\n  unauthorized: 'This recovery key does not belong to this world.',\n  network_uncertain: 'Connection interrupted. Any unfinished action will be checked before another is sent.',\n  persistence_shape: 'The save could not be read safely. Keep it intact and contact the server operator.',\n  schema_mismatch: 'This save belongs to a different game format. Keep the original data.',\n  invalid_registration: 'Check your colony name and recovery key.',\n  invalid_json: 'The server could not read this action.', invalid_action: 'That action is not available.',\n  invalid_name: 'Choose a name of 1–32 characters.', world_full: 'All 64 core places are occupied.',\n  research_cost: 'Not enough Essence or research materials.', research_order: 'Discover this node’s parent first. An owned node cannot be purchased again.',\n  recipe_locked: 'This workshop or recipe is still locked.', building_limit: 'No workshop places remain. Discover Industry or grow your core.',\n  building_cost: 'Not enough timber or stone.', building_spacing: 'Leave a little more space between workshops.',\n  out_of_range: 'That is beyond your core’s reach.', building_missing: 'This workshop no longer exists.',\n  transfer_cost: 'Not enough goods, or the recipient’s store is full.', neighbor_missing: 'That core could not be found.',\n  warehouse_full: 'The store is full.', transaction_conflict: 'Another update arrived first. Check the current state before trying again.',\n  sequence_conflict: 'Another device changed the action sequence. Review the current state before clearing the pending action.',\n  catchup_required: 'The world is catching up with elapsed time.', pending_action: 'Finishing the previous action.',\n  content_type: 'Actions must use JSON.', invalid_response: 'A valid game response was not received.'\n};\nexport const errorText = error => ERROR_TEXT[error.code] || `Connection error (${error.status || 0}). Reconnect without deleting your data.`;\n")) (text "text/javascript; charset=utf-8"))
+expression.end
+replace.body function=decl_e93cda3107d00646f911075e0150cb58 body=$update-asset-0-body

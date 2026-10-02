@@ -1,0 +1,14 @@
+{
+  "schema": "orbloam-browser-run-observation-v1",
+  "status": "blocked",
+  "observed_at_utc": "2026-10-02T07:32:35.316590+00:00",
+  "command": "python3 tests/quiet_browser.py",
+  "stage": "Chromium launch before navigation",
+  "error": "chrome/browser/process_singleton_posix.cc: socket() failed: Operation not permitted (1)",
+  "attempts": 2,
+  "second_attempt": "approved environment retry; same local IPC restriction",
+  "fresh_browser_acceptance": false,
+  "fallback_bridge_used": false,
+  "artifact_sha256": "5b925822ae0f1351d1d41efef5ccc877cd90281d2f7097d046352d30ecda6693",
+  "archived_browser_evidence": "evidence/quiet-world/browser/report.json is historical and remains unchanged"
+}

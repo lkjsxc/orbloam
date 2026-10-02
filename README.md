@@ -1,130 +1,175 @@
 # Orbloam
 
-**小さな命が、大きな文明をつくる。**
+**Little lives. A world of their own.**
 
-ひとつの共有世界で、コアを移動させ、住民の暮らしと工房を育てるブラウザーゲームです。
-原木・石材などの資源は全員で共有し、採り尽くすと再生を待ちます。近くの住民は交流し、
-プレイヤー同士で物資を送れます。敵や自然の海はありません。
+A quiet, cooperative browser colony game. Guide a luminous core through a shared
+world, let its residents gather and work, and grow a civilization through branching
+discoveries. The interface stays out of the way until you choose something to inspect.
 
-サーバーは、変更していない公式 **lkjscript v0.1.38** の一つのプロセスです。
-経済・認証・保存・HTTP・フロントエンド配信を、その実行ファイルとアプリケーション成果物だけで処理します。
-稼働時に Python・Node.js・Rust/Cargo・外部データベースは使いません。
+This is the **Quiet World update** to the September 2026 Orbloam reconstruction.
+It is not a recovered copy of the lost Stillworld build.
 
-この版は、失われた Stillworld の最新 ZIP を回収したものではなく、2026年9月20日の再構築版です。
-経済のルールを10秒刻み・出生時刻別の住民管理へ作り直しています。旧版と同じ処理の速度比較ではありません。
-旧セーブデータの互換性も保証しません。元のセーブと対応ランタイムは別に保管してください。
+## Start playing
 
-## 起動
-
-対応環境は **Linux x86_64**。Windows で利用する場合は WSL2 の Linux 環境が候補ですが、WSL2 実機での検証は未実施です。プレイするブラウザーは別の端末でも構いません。
-
-ランタイムを同梱している配布物では、そのディレクトリーで実行します。
+The offline ZIP includes the game and its pinned runtime. On **Linux x86_64**,
+extract the ZIP, open its `orbloam` directory, and run:
 
 ```sh
 sh start.sh
 ```
 
-ZIP の展開ツールが実行権限を保持しない場合は、先に `chmod +x runtime/lkjscript` を実行してください。
+Open **http://127.0.0.1:8080/** in your browser. Choose a colony name. Save your
+private recovery key from the menu; a name alone cannot recover a colony. Keep a
+server-side save backup as well: the key and the save are different things.
 
-ソースのみのチェックアウトでは、一度だけ公式ランタイムを取得します。アプリケーションのビルドは不要です。
+If your extraction tool removed executable permissions, run
+`chmod +x runtime/lkjscript` first. The server is a Linux executable; the browser
+may run on a different device. WSL2 is a possible Windows host but has not been
+tested in this delivery. There is no native macOS/ARM server build in this package.
+
+For a source-only checkout, acquire the pinned official runtime once, then launch:
 
 ```sh
 sh tools/install-runtime.sh
 sh start.sh
 ```
 
-ブラウザーで `http://127.0.0.1:8080/` を開き、コロニーの名前を付けます。
-復帰キーはパスワードと同じです。画面の「復帰キー」から、端末外にも控えを保存してください。
-キーを失うと、名前だけでは戻れません。
+No application compilation is required. Running the game does **not** need Python,
+Node.js, Cargo, an external database, a CDN, or an Internet connection after the
+runtime has been acquired.
+
+Stop with **Ctrl+C**. The default save directory is **`dist/data/`**. Existing saves
+are never automatically erased, replaced, or reset when an error occurs.
 
 ```sh
-# 同じネットワークの端末から接続する場合
+# Share within a trusted network; connect using the server's LAN address.
 sh start.sh --lan --port 8080
 ```
 
-LAN モードはすべての IPv4 インターフェースで待ち受けます。アクセス先はサーバーの LAN アドレスです。
-HTTP 自体は暗号化されないため、信頼できないネットワークでは使わず、TLS リバースプロキシ等で保護してください。
-`0.0.0.0` は待ち受け設定であり、ブラウザーに入力する宛先ではありません。
+LAN mode binds all IPv4 interfaces and uses plaintext HTTP. Protect recovery keys
+with a trusted network or a TLS reverse proxy. `0.0.0.0` is a listener setting,
+not a browser destination. The launcher does not configure DNS, a firewall, or
+router forwarding.
 
-終了は `Ctrl+C`。保存先は既定で **`dist/data/`** です。
-データがない場合だけ初期化し、既存データを自動削除・リセット・移行しません。
-障害時に `dist/data/` を消して「直す」ことは避けてください。
+## What changed
 
-## 暮らしを育てる
+**A quieter world.** The default HUD shows the colony, population, and Essence.
+Inventory, workshops, neighbors, and object details appear only when opened.
+Click empty ground to move your core; drag to pan. Selecting an object opens its
+context, not a dashboard of every statistic. `H` hides the interface for observation.
 
-はじめは4人。10秒ごとに新しい住民が生まれ、最初の16席を満たします。
-住民の役割は10席周期で、8つが採集、2つが工房です。採集・生産・維持・交流は自動です。
-各住民は出生から約1時間でコアへ還り、エッセンスを残します。同じ席から次の世代が生まれます。
+**Faster generations.** Each resident lives **15 minutes**, exactly 90 ten-second
+economic steps, instead of an hour. Each occupied seat then produces a new
+generation and returns Essence. This shortens the wait for returns; it does not
+multiply every reward or promise that all research finishes four times faster.
+Research costs are unchanged.
 
-「研究の樹」には生命・探索・採集・工業・農学・養殖・記憶・交流の8つの枝があり、各12段階、計96段階あります。
-生命研究で48席ずつ増え、通常の研究による最終席数は592人です。
-コアの経験値とレベルは研究の段階数とは別に成長します。
-研究にはエッセンスと資源が必要で、後半には加工品も要求されます。
+**Real research forks.** The tree contains 96 discoveries across eight families,
+with **32 branching points** and explicit prerequisites enforced by the server.
+After a fork, either eligible child can be chosen first. Picking one does not
+silently grant its sibling. Hover or select for details; Browse exposes every
+node as an accessible button. Completed research in an immediate predecessor
+Orbloam save stays owned.
 
-製材所・窯・精錬所・織物工房・製粉所・温室・養殖池・機械工房の8施設に、計72種類の加工レシピがあります。
-原料が足りないときや倉庫が満杯のときは、入力素材を無駄に消費せず待機します。
-工房には人手が必要で、建設順に割り当てられます。維持には原木・石材を毎分各1使い、
-コアから離れたり維持条件が満たせなかったりすると傷みます。
-手動の修理・解体・設定変更は所有者が遠隔で行えますが、自動稼働・維持には距離の条件があります。
+**Less routine management.** Build nearby with one button, or choose an exact
+placement. Workshops automatically select unlocked, feasible recipes according
+to stock coverage. They finish their current batch before reconsidering. Fixed
+recipes remain an explicit override; “Let residents choose” restores automation.
+You still decide what to build, discover, and where to move. The game does not
+spend resources on autonomous construction or research.
 
-ドラッグで地図を移動、ホイールまたは＋−でズームします。
-「コアを移動」から地面をクリックするか、右クリックで移動先を指定します。
-「建てる」で施設を選び、コアの近くをクリックすると建設できます。
-住民・資源・工房・コアはクリックして調べられます。「隣人」から近くのコアに物資を送れます。
+**Distance-aware rendering.** Close views show shaped deposits and residents;
+landscape views use smaller marks; distant views aggregate all eight resource
+kinds into regional summaries with tier contours. Regional stock reflects saved
+depletion and regrowth. Adjacent LOD levels cross-fade rather than dropping
+arbitrary deposits. Distant core markers remain visible without drawing every
+individual. These are display changes, not reduced simulation populations.
 
-世界は一つで、資源の在庫も共有です。表示だけを軽くする俯瞰モードは、経済の計算を簡略化しません。
-ただし、住民の歩行・運搬アニメーションは経済状態の描画であり、旧版の個別経路探索・荷物状態の再現ではありません。
+**A more material core.** The orb has baked spherical lighting, a specular
+highlight, colored rim light, internal filaments, and a ground shadow. Trees have
+forked trunks and layered crowns. These are lightweight canvas graphics, not a
+claim of a physically based 3D renderer.
 
-## 留守・再送・保存
+## Controls and everyday play
 
-閉じていた時間は、次の接続時に10秒刻みで順番に計算します。常駐のバックグラウンド時計ではありません。
-長い不在では、追いつくまで操作を待ちます。未処理の時間を飛ばしたり、住民を減らしたりしません。
+| Action | Control |
+| --- | --- |
+| Move the core | Click empty ground, or right-click a destination |
+| Pan / zoom | Drag / mouse wheel; touch drag and pinch are supported |
+| Return to your core | Center button or `Home` |
+| Research / build | Toolbar, `R` / `B` |
+| Close a panel or placement | Close button or `Escape` |
+| Hide / restore the HUD | `H`, or the restore button |
 
-通信が途切れた操作は、同じ番号と内容を保存して再確認します。
-「未確定」表示が出たら「同じ操作を再確認」を使ってください。確認前に操作を連打しないでください。
-サーバーは直近64件の受理済み操作を識別します。別端末と操作番号が競合した場合は現在の状態を確認します。
+Residents gather automatically. Resources are shared with other colonies, so a
+depleted deposit stays depleted until it regrows. Eight workshop kinds offer
+72 recipes. Input shortages, full stores, workers, health, maintenance, and range
+still matter. The automatic recipe policy is local, not a globally optimal
+production planner. Normal Vitality research raises the population limit from
+16 places to 592. The core's experience level is separate from discovery count.
 
-[保存・バックアップ・復元](docs/OPERATIONS.md) と [セキュリティ上の範囲](docs/SECURITY.md) を参照してください。
-復帰キーの控えはセーブのバックアップではありません。両方が必要です。
+When no one is connected, computation is deferred. Returning clients catch up
+chronologically; long absences can delay actions. Time is not skipped and no
+approximate offline reward replaces the simulation. A temporarily lost action
+reply is reconciled automatically using the exact same sequence and intent.
+Conflicts between devices still require review rather than blind resubmission.
 
-## 検証と制約
+## Updating an existing world
 
-実測条件と結果は [VERIFICATION.md](docs/VERIFICATION.md)、機械可読の記録は `evidence/` にあります。
-少数のネイティブ HTTP 試験、512人・8工房の負荷試験、厳密な出生・死亡・共有資源・全72レシピの照合を分けて記録します。
-登録上限64コアは、64の大きなコロニーが同時に実時間で動くことの保証ではありません。
+**Extract into a new directory. Do not overwrite a running installation.** Stop
+the old server, make a native logical backup, and restore it into an absent save
+root in the new directory. Keep the old program and pre-update backup for rollback.
+The procedure is in [Operations](docs/OPERATIONS.md#updating-an-existing-orbloam-save).
 
-ブラウザーの通常ナビゲーションは検証環境の管理ポリシーに遮断されました。
-代わりに、配信されたクライアントコードを空の文書に読み込み、実ネイティブ HTTP にだけ接続するテスト用ブリッジで
-操作を検証しています。これは通常のナビゲーション・CSP/CORS・TLS・ブラウザーの永続保存権限の検証ではありません。
-ブリッジは配布アプリの起動経路に含まれません。
+The immediate predecessor Orbloam v1 save was tested with the same recovery key,
+unchanged world admission, preserved research ranks, and new commands. The missing
+Stillworld save format is not supported. Deferred time will use the new lifespan
+rules when processed; already recorded history is not rewritten. Downgrading the
+program alone does not undo changed gameplay semantics.
 
-外部公開用の迷惑行為対策、アカウント管理、キーの失効、分散サーバー、無期限の負荷試験は未実装・未検証です。
-まずは自分と招待した人の環境で使う実験版です。[KNOWN-LIMITATIONS.md](docs/KNOWN-LIMITATIONS.md) に境界をまとめています。
+## Implementation and verification
 
-## ソースと開発
+One unchanged official **lkjscript v0.1.38** process serves the game, HTTP assets,
+transactions, authentication, and persistence. `project/` is the accepted meaning
+graph; `dist/application.lkja` is its built artifact. Python scripts author public
+reviewed changes and run developer tests. Browser JavaScript displays the world
+and requests actions; it never awards resources.
 
-`project/HEAD` と `project/packs/` は、実際に受理された lkjscript の意味グラフです。
-`dist/application.lkja` はその受理済みグラフから構築した実行成果物、`web/` は埋め込まれたブラウザー側の元ファイルです。
-`tools/*.py` は公開の変更レコードを生成し、正式な `change plan/apply` を実行する開発用ツールです。
-ゲームの Python 実装ではありません。
+[Verification](docs/VERIFICATION.md) identifies the exact artifact, clean
+rebuild, native action and recovery tests, independent population/production
+oracles, predecessor-save admission, and rendering tests. The 512-resident stress
+fixtures are seeded tests, not earned progression or proof of an unlimited MMO.
+
+Chromium in the test environment blocked normal local navigation. The browser
+review therefore used the real served code and native server through an explicitly
+recorded test bridge. That review does **not** verify ordinary browser navigation,
+CSP/CORS, TLS, native persistent browser storage, or a particular reverse proxy.
+The bridge is not used when running the game.
+
+See [Known limitations](docs/KNOWN-LIMITATIONS.md),
+[Security](docs/SECURITY.md), and [Architecture](docs/ARCHITECTURE.md).
+Historical reports retain their original hashes and language; they are not
+relabelled as evidence for this update. This ZIP is not a claim that remote
+GitHub `main` has been changed.
+
+## Developer checks
+
+From a checkout with the pinned runtime:
 
 ```sh
-# 受理済みのプログラムを、公式ランタイムだけで検証・再構築
-runtime/lkjscript --project project check
-runtime/lkjscript --project project build --output /tmp/orbloam-rebuilt.lkja
-sha256sum /tmp/orbloam-rebuilt.lkja dist/application.lkja
-
-# 実 HTTP・独立オラクル・再起動・論理復元の検証 (Python 3.10+、標準ライブラリのみ)
+python3 tests/rebuild.py
 python3 tests/acceptance.py
-
-# 現行ルールの新規グラフを公開変更手順で組み立てる開発経路
-python3 tools/build.py
+python3 tests/quiet_native.py
+python3 tests/catalogue.py
+node tests/presentation.mjs
+python3 tests/standalone.py
 ```
 
-新規グラフの作成では新しい所有者 ID が割り当てられます。
-「同じ受理済みグラフから同一成果物を作る」ことと「ゼロからの作成で同じ ID を得る」ことは別です。
-コードを編集しただけでは実行中の成果物は変わりません。再構築・検証・保存互換性の確認が必要です。
+The optional browser check requires Playwright and Chromium:
+`python3 tests/quiet_browser.py`. Its explicit `--bridge-if-blocked` option records
+the limitations above. `python3 tests/performance.py --seconds 120` runs the finite
+native fixture. None of these commands should target a player's live save.
 
-[Architecture](docs/ARCHITECTURE.md) / [Protocol](docs/PROTOCOL.md) / [Runtime provenance](docs/RUNTIME-PROVENANCE.md)
-
-Apache License 2.0。元の `LICENSE` を保持しています。公式ランタイムの第三者ライセンスは `runtime/` に含まれます。
+Continue development with public `change plan` / `change apply`, retaining actual
+requests and review plans. Do not regenerate a fresh graph at startup, mutate
+canonical pack bytes, or introduce an unreported helper backend.

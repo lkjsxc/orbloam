@@ -2,23 +2,23 @@
 from __future__ import annotations
 
 RAW = ['timber', 'stone', 'fiber', 'grain', 'ore', 'clay', 'crystal', 'water']
-RAW_NAMES = ['原木', '石材', '繊維', '穀物', '鉱石', '粘土', '結晶', '水']
+RAW_NAMES = ['Timber', 'Stone', 'Fiber', 'Grain', 'Ore', 'Clay', 'Crystal', 'Water']
 COLORS = ['#72cda0', '#b1bacc', '#d0bc87', '#e5bc68', '#c496a0', '#d79b7a', '#a998eb', '#79c9e3']
 BRANCHES = [
-    ('vitality', '生命', '新しい住民の席。ひとつの世代から、次の世代へ。', '#7bd1ab'),
-    ('reach', '探索', 'コアの移動速度・採集範囲・扱える資源の階位を広げる。', '#82bee9'),
-    ('harvest', '採集', '住民一人ひとりの採集量を増やす。', '#ddc77a'),
-    ('industry', '工業', '工房の数と高度な加工技術を解放する。', '#d49781'),
-    ('agronomy', '農学', '製粉と温室。穀物から豊かな食卓へ。', '#99c983'),
-    ('aquaculture', '養殖', '海をつくらず、小さな養殖池で生命を育てる。', '#7fcdd6'),
-    ('memory', '記憶', '世代から還るエッセンスと、倉庫の容量を増やす。', '#b1a0ee'),
-    ('fellowship', '交流', '隣人との対話と、物資を分け合う範囲を広げる。', '#df9fc1'),
+    ('vitality', 'Vitality', 'Make room for new lives. Each discovery adds 48 resident places.', '#7bd1ab'),
+    ('reach', 'Reach', 'Travel faster, gather farther, and work richer deposits.', '#82bee9'),
+    ('harvest', 'Harvest', 'Help every gatherer bring more home.', '#ddc77a'),
+    ('industry', 'Industry', 'More workshops, deeper production chains, better yields.', '#d49781'),
+    ('agronomy', 'Agronomy', 'Cultivate food, medicines, and living materials.', '#99c983'),
+    ('aquaculture', 'Aquaculture', 'Nurture small ponds, pearls, and aquatic life.', '#7fcdd6'),
+    ('memory', 'Memory', 'Receive more Essence from each life and keep larger stores.', '#b1a0ee'),
+    ('fellowship', 'Fellowship', 'Meet neighbors and share across greater distances.', '#df9fc1'),
 ]
 INDUSTRIES = [
-    ('sawmill', '製材所', 3, 0), ('kiln', '窯', 3, 1),
-    ('smelter', '精錬所', 3, 2), ('loom', '織物工房', 3, 1),
-    ('mill', '製粉所', 4, 0), ('greenhouse', '温室', 4, 1),
-    ('hatchery', '養殖池', 5, 1), ('atelier', '精密工房', 3, 3),
+    ('sawmill', 'Sawmill', 3, 0), ('kiln', 'Kiln', 3, 1),
+    ('smelter', 'Smelter', 3, 2), ('loom', 'Weavery', 3, 1),
+    ('mill', 'Mill', 4, 0), ('greenhouse', 'Greenhouse', 4, 1),
+    ('hatchery', 'Hatchery', 5, 1), ('atelier', 'Atelier', 3, 3),
 ]
 PRODUCT_KEYS = [
     ['plank', 'beam', 'laminate', 'hardwood', 'resinwood', 'engineered-wood', 'living-wood', 'harmonic-wood', 'heartwood'],
@@ -30,16 +30,7 @@ PRODUCT_KEYS = [
     ['fish', 'smoked-fish', 'fish-meal', 'shell', 'pearl', 'coral', 'biofilter', 'marine-enzyme', 'luminous-pearl'],
     ['tool', 'gear', 'pump', 'motor', 'sensor', 'controller', 'automaton', 'resonator', 'world-seed'],
 ]
-PRODUCT_NAMES = [
-    ['板材', '梁', '積層材', '硬質材', '樹脂材', '構造材', '生きた木材', '共鳴材', '心樹材'],
-    ['レンガ', 'タイル', 'ガラス', '陶材', '磁器', '絶縁材', '結晶ガラス', 'レンズ', 'プリズム'],
-    ['金属塊', '鋼', '合金', '線材', 'ばね', '導体', '精密合金', '流動金属', '星金属'],
-    ['布', '縄', '帆布', 'フェルト', '絹', 'メッシュ', 'フィラメント', '機能繊維', '記憶織物'],
-    ['小麦粉', 'パン', 'ビスケット', '保存食', '発酵種', '培養種', '栄養素', '祝祭食', '生命食'],
-    ['野菜', '薬草', '果実', '植物油', '染料', '薬', '抽出液', '触媒', '生命培養体'],
-    ['魚', '燻製魚', '魚粉', '貝殻', '真珠', 'サンゴ', '生物濾材', '水生酵素', '光真珠'],
-    ['道具', '歯車', 'ポンプ', '原動機', 'センサー', '制御器', '自動機', '共鳴器', '世界の種'],
-]
+PRODUCT_NAMES = [[key.replace('-', ' ').title() for key in group] for group in PRODUCT_KEYS]
 BASE_INPUTS = [
     [('timber', 4)], [('clay', 3), ('stone', 1)], [('ore', 3), ('timber', 2)],
     [('fiber', 4)], [('grain', 4)], [('water', 3), ('grain', 1)],
@@ -62,7 +53,7 @@ for kind in range(8):
                         'output': product, 'amount': 2 if kind != 7 else 1,
                         'a': inputs[0][0], 'na': inputs[0][1], 'b': inputs[1][0], 'nb': inputs[1][1],
                         'c': inputs[2][0], 'nc': inputs[2][1]})
-ITEMS.append({'key': 'insight', 'name': '交流の記録', 'color': '#df9fc1', 'tier': 0})
+ITEMS.append({'key': 'insight', 'name': 'Shared insight', 'color': '#df9fc1', 'tier': 0})
 RESEARCH = []
 for branch in range(8):
     for tier in range(1, 13):
@@ -72,11 +63,27 @@ for branch in range(8):
                          'raw': RAW[branch], 'raw_amount': 20 * tier * tier,
                          'product': item, 'product_amount': tier + 2 if item else 0})
 
+# Every family forks twice; leaves have explicit prerequisites, not a rank chain.
+# IDs and original costs remain stable. Existing branch ranks are preserved by
+# lazy per-family legacy baselines in progression.py.
+PARENTS = [-1, 0, 0, 1, 1, 2, 2, 3, 4, 5, 6, 6]
+DISCOVERIES = [
+    ['First light', 'Kindred sparks', 'A wider circle', 'Bright beginnings', 'Shared shelter', 'Rooted lives', 'Gentle renewal', 'A thousand mornings', 'Constellation', 'Flourishing', 'Enduring light', 'Many little worlds'],
+    ['Horizon', 'Wandering light', 'Long roots', 'Swift passage', 'Far-seeing', 'Open paths', 'Deep prospect', 'Beyond the grove', 'Distant stars', 'Wide embrace', 'Hidden abundance', 'Worldwalker'],
+    ['Gathering', 'Careful hands', 'Full baskets', 'Fine tools', 'Wild plenty', 'Patient tending', 'Shared bounty', "Nature's measure", 'Abundance', 'Seasonal wisdom', 'Golden harvest', 'Living wealth'],
+    ['Craft', 'Joinery', 'Fired earth', 'Metalwork', 'Fine weave', 'Mechanisms', 'Cooperation', 'Precision', 'Assembly', 'Automation', 'Resonance', 'Great works'],
+    ['Cultivation', 'Garden beds', 'Milling', 'Herbalism', 'Orchards', 'Fermentation', 'Nourishment', 'Living pharmacy', 'Perennial gardens', 'Culture', 'The generous table', 'Verdant mastery'],
+    ['Still water', 'Small ponds', 'Clear currents', 'Hatchlings', 'Shellcraft', 'Living filters', 'Pearl gardens', 'Coral nursery', 'Luminous waters', 'Aquatic symbiosis', 'Deep harmony', 'A living mosaic'],
+    ['Remembrance', 'Keepsakes', 'Quiet wisdom', 'Stories', 'Archives', 'Long memory', 'Inner light', 'A life remembered', 'The great library', 'Dreaming', 'Ancestral glow', 'Timeless'],
+    ['Neighborliness', 'Conversation', 'Open hands', 'Hospitality', 'Common ground', 'Wayfinding', 'Kinship', 'Shared stories', 'Gift circles', 'Fellow travelers', 'Together', 'A world of friends'],
+]
 CATALOG = {
-    'name': 'Orbloam', 'version': 1, 'tagline': '小さな命が、大きな文明をつくる。',
-    'step_ms': 10000, 'lifespan_ticks': 360, 'cell_size': 128, 'world_bound': 1000000,
+    'name': 'Orbloam', 'version': 2, 'tagline': 'Little lives. A world of their own.',
+    'step_ms': 10000, 'lifespan_ticks': 90, 'cell_size': 128, 'world_bound': 1000000,
     'maximum_cores': 64, 'maximum_deposits': 4096,
-    'items': ITEMS, 'raw': RAW, 'recipes': RECIPES, 'research': RESEARCH,
+    'items': ITEMS, 'raw': RAW, 'recipes': RECIPES,
+    'research': [dict(r, parent=(-1 if PARENTS[r['tier']-1] == -1 else r['branch']*12+PARENTS[r['tier']-1]),
+                      name=DISCOVERIES[r['branch']][r['tier']-1]) for r in RESEARCH],
     'branches': [{'id': i, 'key': k, 'name': n, 'description': d, 'color': col}
                  for i, (k, n, d, col) in enumerate(BRANCHES)],
     'industries': [{'id': i, 'key': key, 'name': name, 'branch': branch, 'rank': rank,

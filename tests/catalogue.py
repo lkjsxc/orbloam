@@ -33,13 +33,13 @@ def main():
             assert recipe['rank']>=facility['rank'] and recipe['branch']==facility['branch']
             if ranks[recipe['branch']]>=recipe['rank'] and all(k in known for k in graph[recipe['output']]):known.add(recipe['output'])
         for research in catalog['research']:
-            if ranks[research['branch']]+1==research['tier'] and (not research['product_amount'] or research['product'] in known):
+            if research['id'] not in completed and (research['parent'] < 0 or research['parent'] in completed) and (not research['product_amount'] or research['product'] in known):
                 assert research['raw'] in known
                 ranks[research['branch']]+=1;completed.add(research['id'])
         if before==(len(known),len(completed)):break
     assert len(completed)==96 and all(rank==12 for rank in ranks) and all(key in known for key in graph)
     report={'schema':'orbloam-catalogue-reachability-v1','status':'passed','artifact_sha256':sha256(ARTIFACT),
-            'acyclic_recipes':72,'reachable_research_steps':96,'reachable_products':72,
+            'acyclic_recipes':72,'reachable_research_steps':96, 'explicit_parent_edges':88, 'branching_prerequisites_checked':True,'reachable_products':72,
             'facility_gate_consistent':True,'assumption':'unlimited obtainable inputs and essence; logical unlock graph only',
             'nonclaims':['earned end-to-end progression','economy balance','time to completion']}
     (ROOT/'evidence/catalogue.json').write_text(json.dumps(report,indent=2)+'\n');print(json.dumps(report,indent=2))

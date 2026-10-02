@@ -2,6 +2,7 @@
 """One clean accepted-graph check plus equal clean/incremental artifact output."""
 from pathlib import Path
 import json
+import re
 import shutil
 import subprocess
 import tempfile
@@ -28,6 +29,10 @@ def main():
     try:
         checked=run('check',['check'])
         assert 'failed=0' in checked and 'differential=equal' in checked
+        report['tests_passed'] = int(re.search(r'tests passed=(\d+)', checked).group(1))
+        report['accepted_revision'] = re.search(r'revision=(rev_[a-f0-9]+)', checked).group(1)
+        evidence = ROOT/'evidence/quiet-world'; evidence.mkdir(parents=True,exist_ok=True)
+        (evidence/'native-check.txt').write_text(checked)
         a=work/'first.lkja';b=work/'second.lkja'
         run('first-build',['build','--output',str(a)])
         run('second-build',['build','--output',str(b)])

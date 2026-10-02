@@ -1,0 +1,38 @@
+{
+  "schema": "orbloam-recovery-integration-v1",
+  "status": "passed-with-browser-environment-limit",
+  "verified_at_utc": "2026-10-02T07:37:49.326011+00:00",
+  "base_commit": "08594a09ca26568d820da1ae9a8a6f38fbed8d79",
+  "delivered_source_commit": "31683760ac49a304b9ff09527aef1c578cc1cf91",
+  "delivery_zip_sha256": "5470d9082853ba85431a3d997d8731375ebddc3f4dad3adbcc51e76424a53513",
+  "artifact_sha256": "5b925822ae0f1351d1d41efef5ccc877cd90281d2f7097d046352d30ecda6693",
+  "runtime_sha256": "98a39bd192c1e98187a1a954f916f5ffc89ef2586317c25e1efa06c61b888c32",
+  "predecessor_artifact_sha256": "afd5213d7663e88d0a3fe1a13a1a8946bdd610f3f65279041536a66cae055828",
+  "original_receipts_and_evidence_unchanged": true,
+  "canonical_original_packs_unchanged": 83,
+  "canonical_packs_added": 107,
+  "accepted_update_receipts_verified": 14,
+  "package_file_hashes_verified": 380,
+  "dist_file_hashes_verified": 3,
+  "checks": {
+    "shell_syntax": "passed",
+    "python_compilation": "passed",
+    "javascript_syntax": "passed",
+    "git_diff_check": "passed",
+    "ci_exact_predecessor_fetch_and_hash": "passed",
+    "fresh_browser_acceptance": "blocked before navigation; see browser-blocked.json"
+  },
+  "fresh_evidence": {
+    "acceptance.json": "859c83cc177abf0c7c22903a87f920140c7cfc709305cac6e0f6547b8f6b89cf",
+    "browser-blocked.json": "3facf91890d51e40997ffdb5e165e3683467695a9d2c6943a64e46cea116ab75",
+    "catalogue.json": "e48d389ae0c93f15b7bba7c466244dd24b71b840997fe58a98a1dd4ff86a92b3",
+    "native-check.txt": "7e722084893ab2b9c25141d6e1d4856bdd3734caefaf225e863b618f7f1bf455",
+    "native-upgrade.json": "d2c62600782fc673225a3dcc682d48defb43de028f5dd704874f7be0e9dacaed",
+    "packaging.json": "dc3760d1076d2405bbb34da4a38036f9834a3b57bebf56f416ca31259bc584c3",
+    "performance.json": "e585d0b9ec45f4ecaa2c0fc5585af86917453e70ae26458d8f114871f4ea9c32",
+    "presentation.json": "cb2fcc5f315c6800c3bb26be03f1e3bc335e684a58f9bd073c612f9e8065e237",
+    "rebuild.json": "28d8aecb66077caa1c113f01bf4fc092f5337801454e3c5c89bfe29c3124b6fa",
+    "standalone.json": "116cf1f35643ae4b54d6a4ceb953d02a0f1ac94f5fe50c0220dd6492beec9ebe"
+  },
+  "publication_note": "Evidence describes the integration candidate before publication; it is not a deployment or remote-delivery claim."
+}

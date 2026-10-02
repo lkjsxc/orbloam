@@ -2,6 +2,8 @@
 from meaning import Game, I, L, F, R, LET
 import population
 import gathering
+import progression
+import automation
 import factories
 import simulation
 import actions
@@ -16,6 +18,8 @@ def compose(author):
     population.compose(g)
     gathering.compose(g)
     author.stages = [('ecology', len(author.records))]
+    progression.compose(g)
+    automation.compose(g)
     factories.compose(g)
     simulation.compose(g)
     actions.compose(g)

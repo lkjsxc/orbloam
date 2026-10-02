@@ -43,14 +43,14 @@ def compose(g):
     def research(world, colony, action):
         return LET([('rule', c('$research-rule', F(action, 'index'))),
                     ('rank', g.rank(colony, F(L('rule'), 'branch')))],
-             IF(g.eq(g.add(L('rank'), I(1)), F(L('rule'), 'tier')),
+             IF(c('$research-ready', F(colony, 'research'), F(action, 'index')),
                 IF(g.both(g.le(F(L('rule'), 'essence'), F(colony, 'essence')),
                           g.le(F(L('rule'), 'raw_amount'), g.mget(F(colony, 'inventory'), F(L('rule'), 'raw'))),
                           g.le(F(L('rule'), 'product_amount'), g.mget(F(colony, 'inventory'), F(L('rule'), 'product')))),
                    LET([('raw-paid', c('$pay-item', F(colony, 'inventory'), F(L('rule'), 'raw'), F(L('rule'), 'raw_amount'))),
                         ('paid', c('$pay-item', L('raw-paid'), F(L('rule'), 'product'), F(L('rule'), 'product_amount')))],
                        success(world, g.copy('Colony', colony, inventory=L('paid'),
-                           research=g.mset(F(colony, 'research'), g.decimal(F(L('rule'), 'branch')), F(L('rule'), 'tier')),
+                           research=c('$research-credit', F(colony, 'research'), F(action, 'index')),
                            essence=g.sub(F(colony, 'essence'), F(L('rule'), 'essence')),
                            experience=g.add(F(colony, 'experience'), g.mul(F(L('rule'), 'tier'), I(20))),
                            cohorts=IF(g.eq(F(L('rule'), 'branch'), I(0)),
@@ -102,10 +102,20 @@ def compose(g):
                       g.le(g.add(g.inv(colony, 'stone'), L('stone')), c('$storage-limit', colony))),
                edited(world, colony, building, c('$item-credit', c('$item-credit', F(colony, 'inventory'), I('timber'), L('wood')), I('stone'), L('stone')), I(True)),
                fail(world, 'warehouse_full')))
-        return IF(g.text_eq(F(action, 'op'), I('recipe')), IF(g.less(F(action, 'value'), I(72)), recipe, fail(world, 'invalid_action')),
+        fixed = g.copy('Colony', colony, research=g.mset(F(colony, 'research'),
+                         g.concat(I('manual:'), g.decimal(F(building, 'id'))), I(1)))
+        fixed_recipe = LET([('out', recipe)], IF(F(L('out'), 'ok'),
+             R(world=c('$replace-colony', F(L('out'), 'world'),
+                 g.copy('Colony', g.get(F(F(L('out'), 'world'), 'colonies'),
+                    c('$find-colony-index', F(F(L('out'), 'world'), 'colonies'), F(colony, 'id'), I(0)), '@Colony'),
+                    research=F(fixed, 'research'))), ok=I(True), error=I('')), L('out')))
+        automatic = success(world, g.copy('Colony', colony, research=g.mset(F(colony, 'research'),
+                         g.concat(I('manual:'), g.decimal(F(building, 'id'))), I(0))))
+        return IF(g.text_eq(F(action, 'op'), I('auto')), automatic,
+          IF(g.text_eq(F(action, 'op'), I('recipe')), IF(g.less(F(action, 'value'), I(72)), fixed_recipe, fail(world, 'invalid_action')),
              IF(g.text_eq(F(action, 'op'), I('pause')), IF(g.le(F(action, 'value'), I(1)),
                 edited(world, colony, g.copy('Building', building, enabled=g.eq(F(action, 'value'), I(1))), F(colony, 'inventory')), fail(world, 'invalid_action')),
-             IF(g.text_eq(F(action, 'op'), I('repair')), repair, demolish)))
+             IF(g.text_eq(F(action, 'op'), I('repair')), repair, demolish))))
     g.fn('action-building', {'world': '@World', 'colony': '@Colony', 'action': '@Action', 'building': '@Building'}, '@ActionResult', building_action)
     g.fn('action-edit-building', {'world': '@World', 'colony': '@Colony', 'action': '@Action'}, '@ActionResult', lambda world, colony, action:
          LET([('index', c('$find-building-index', F(colony, 'buildings'), F(action, 'index'), I(0)))],
@@ -134,7 +144,7 @@ def compose(g):
             ('transfer', c('$action-transfer', world, colony, action, now)),
             ('rename', IF(g.both(g.less(I(0), c('text-length', F(action, 'text'))), g.le(c('text-length', F(action, 'text')), I(32))),
                           success(world, g.copy('Colony', colony, name=F(action, 'text'))), fail(world, 'invalid_name'))),
-        ] + [(op, c('$action-edit-building', world, colony, action)) for op in ['recipe', 'pause', 'repair', 'dismantle']]
+        ] + [(op, c('$action-edit-building', world, colony, action)) for op in ['recipe', 'auto', 'pause', 'repair', 'dismantle']]
         result = fallback
         for op, body in reversed(choices):
             result = IF(g.text_eq(F(action, 'op'), I(op)), body, result)

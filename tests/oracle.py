@@ -26,13 +26,13 @@ def population(cohorts, tick):
             birthday = cohort['start'] + offset
             if birthday <= tick:
                 people.append(cohort['first'] + offset)
-                deaths += int(tick > birthday and (tick - birthday) % 360 == 0)
+                deaths += int(tick > birthday and (tick - birthday) % 90 == 0)
     return {'tick': tick, 'count': len(people), 'capacity': sum(c['count'] for c in cohorts),
             'deaths': deaths, 'roles': {str(role): sum(person % 10 == role for person in people) for role in range(10)}}
 
 
 def deaths_between(cohorts, start, end):
-    return sum(max(0, (end - group['start'] - slot) // 360) - max(0, (start - group['start'] - slot) // 360)
+    return sum(max(0, (end - group['start'] - slot) // 90) - max(0, (start - group['start'] - slot) // 90)
                for group in cohorts for slot in range(group['count']))
 
 
@@ -58,8 +58,8 @@ def available(node, tick):
     return min(180 + 30 * node['tier'], node['stock'] + max(0, tick - node['tick']) * (2 + node['tier'] // 3))
 
 
-def gather_only_step(before):
-    """One complete world step for a fixture without workshops; enumerate each life."""
+def gather_only_step(before, catalogue=None):
+    """Independent world step: enumerate lives, every candidate cell, and recipes."""
     world = copy.deepcopy(before)
     tick = world['tick'] + 1
     if tick % 36 == 0:
@@ -70,7 +70,8 @@ def gather_only_step(before):
         colony = world['colonies'][index]
         if colony['created_tick'] > tick:
             continue
-        assert not colony['buildings'], 'The independent spatial oracle deliberately has no workshop implementation'
+        if colony['buildings'] and catalogue is None:
+            raise AssertionError('Workshop oracle requires the native-served catalogue')
         people = population(colony['cohorts'], tick)
         rank = lambda branch: colony['research'].get(str(branch), 0)
         radius = 190 + 24 * rank(1)
@@ -103,8 +104,9 @@ def gather_only_step(before):
             routes.append({'job': job, 'x': node['x'], 'y': node['y'], 'tier': node['tier'], 'units': take, 'workers': workers})
             gathered += take
         colony['routes'] = routes
+        machine_experience = factory_step(colony, people, tick, catalogue) if colony['buildings'] else 0
         colony['gathered'] += gathered
-        colony['experience'] += gathered
+        colony['experience'] += gathered + machine_experience
         colony['deaths'] += people['deaths']
         colony['essence'] += people['deaths'] * (6 + 2 * rank(6))
         if tick % 6 == 0:
@@ -119,8 +121,68 @@ def gather_only_step(before):
     return world
 
 
+def factory_step(colony, people, tick, catalogue):
+    """Brute-force scheduling + conservative batches, no imported author formulas."""
+    stock, ranks = colony['inventory'], colony['research']
+    workers = people['roles']['8'] + people['roles']['9']
+    storage = 1000000 + 500000 * ranks.get('6', 0)
+    radius = 2 * (190 + 24 * ranks.get('1', 0))
+    px, py = position(colony, tick * 10000)
+    experience = 0
+    for building in colony['buildings']:
+        manual = ranks.get('manual:' + str(building['id']), 0) == 1
+        progressing = building['progress'] > 0 and building['status'] == 'working'
+        choice = building['recipe']
+        if not manual and not progressing:
+            eligible = []
+            for recipe in catalogue['recipes']:
+                if recipe['kind'] != building['kind'] or recipe['rank'] > ranks.get(str(recipe['branch']), 0):
+                    continue
+                amount = recipe['amount'] * (1 + ranks.get(str(recipe['branch']), 0) // 4)
+                if stock.get(recipe['output'], 0) + amount > storage:
+                    continue
+                if any(stock.get(recipe[k], 0) < recipe['n' + k] for k in ['a', 'b', 'c']):
+                    continue
+                coverage = stock.get(recipe['output'], 0) * 1000 // (12 * (recipe['tier'] + 1))
+                eligible.append((coverage, recipe['id']))
+            if eligible:
+                choice = min(eligible)[1]
+        if choice != building['recipe']:
+            building['recipe'], building['progress'] = choice, 0
+        rule = catalogue['recipes'][choice]
+        near = (building['x'] - px)**2 + (building['y'] - py)**2 <= radius**2
+        if tick % 6 == 0:
+            if near and workers > 0 and stock.get('timber', 0) >= 1 and stock.get('stone', 0) >= 1:
+                stock['timber'] -= 1; stock['stone'] -= 1
+                building['health'] = min(100, building['health'] + 1)
+            else:
+                building['health'] = max(0, building['health'] - 2)
+        if not building['enabled']: building['status'] = 'paused'
+        elif not near: building['status'] = 'distant'
+        elif building['health'] <= 0: building['status'] = 'maintenance'
+        elif workers < rule['workers']: building['status'] = 'workers'
+        else:
+            workers -= rule['workers']
+            building['status'] = 'working'
+            if building['progress'] + 1 < rule['period']:
+                building['progress'] += 1
+                continue
+            if any(stock.get(rule[k], 0) < rule['n' + k] for k in ['a', 'b', 'c']):
+                building['status'] = 'materials'; continue
+            amount = rule['amount'] * (1 + ranks.get(str(rule['branch']), 0) // 4)
+            if stock.get(rule['output'], 0) + amount > storage:
+                building['status'] = 'warehouse'; continue
+            for k in ['a', 'b', 'c']:
+                if rule['n' + k]: stock[rule[k]] = stock.get(rule[k], 0) - rule['n' + k]
+            stock[rule['output']] = stock.get(rule['output'], 0) + amount
+            building['produced'] += amount
+            building['progress'] = 0
+            experience += rule['tier'] * 4
+    return experience
+
+
 def assert_probe(report, catalogue):
-    counts, ticks = [0, 1, 16, 256, 512, 4096], [-1, 0, 1, 359, 360, 375, 720, 1024]
+    counts, ticks = [0, 1, 16, 256, 512, 4096], [-1, 0, 1, 89, 90, 105, 180, 1024]
     assert len(report['populations']) == len(counts) * len(ticks)
     for index, result in enumerate(report['populations']):
         count, tick = counts[index // len(ticks)], ticks[index % len(ticks)]

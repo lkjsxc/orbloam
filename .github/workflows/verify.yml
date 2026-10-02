@@ -43,10 +43,18 @@ jobs:
           python3 -m py_compile tools/*.py tests/*.py
       - name: Check the committed accepted graph and reproduce its artifact
         run: python3 tests/rebuild.py
+      - name: Retrieve the exact pre-update artifact for save compatibility
+        run: |
+          set -eu
+          git fetch --no-tags --depth=1 origin 08594a09ca26568d820da1ae9a8a6f38fbed8d79
+          git show 08594a09ca26568d820da1ae9a8a6f38fbed8d79:dist/application.lkja > "$RUNNER_TEMP/orbloam-predecessor.lkja"
+          printf '%s  %s\n' afd5213d7663e88d0a3fe1a13a1a8946bdd610f3f65279041536a66cae055828 "$RUNNER_TEMP/orbloam-predecessor.lkja" | sha256sum -c -
       - name: Native HTTP, independent oracles, restart and logical recovery
         run: |
           python3 tests/acceptance.py
           python3 tests/catalogue.py
+          python3 tests/quiet_native.py --predecessor "$RUNNER_TEMP/orbloam-predecessor.lkja"
+          node tests/presentation.mjs
       - name: Offline copied-package boundary and corruption refusal
         run: python3 tests/standalone.py
       - name: Retain this run's verification records
@@ -59,5 +67,8 @@ jobs:
             evidence/standalone.json
             evidence/rebuild.json
             evidence/catalogue.json
+            evidence/quiet-world/native.json
+            evidence/quiet-world/presentation.json
+            evidence/quiet-world/native-check.txt
           retention-days: 14
           if-no-files-found: error

@@ -1,0 +1,434 @@
+request base=rev_6aaf8ee080b208c3852bdbdcd1ce7aa4309ed9eca9354971d0a483969d5d713d
+type.structural-record as=@Header
+type.field parent=@Header index=0 name=name type=text
+type.field parent=@Header index=1 name=value type=bytes
+type.list as=@Headers item=@Header
+type.stream as=@Body item=bytes
+type.list as=@Texts item=text
+type.map as=@Query key=text value=@Texts
+type.structural-record as=@Request
+type.field parent=@Request index=0 name=body type=@Body
+type.field parent=@Request index=1 name=headers type=@Headers
+type.field parent=@Request index=2 name=method type=text
+type.field parent=@Request index=3 name=path type=text
+type.field parent=@Request index=4 name=query type=text
+type.field parent=@Request index=5 name=query_parameters type=@Query
+type.structural-record as=@Response
+type.field parent=@Response index=0 name=body type=bytes
+type.field parent=@Response index=1 name=headers type=@Headers
+type.field parent=@Response index=2 name=status type=i64
+type.named as=@DataKeyPart declaration=pkg_10000000000000000000000000000001/decl_14b03b7e7e25e1cf4bd5a5e3932e73ab
+type.named as=@DataEntry declaration=pkg_10000000000000000000000000000001/decl_8b2cf37fae3bc1fd3cdd43367ac5b3e6
+type.named as=@DataSchema declaration=pkg_10000000000000000000000000000001/decl_5ad011a7306a7a1da03f982c3d96318c
+type.named as=@DataExpectation declaration=pkg_10000000000000000000000000000001/decl_388aa498465975c5de5d579e6230a28a
+type.named as=@TransactionAbortReason declaration=pkg_10000000000000000000000000000001/decl_717a93982fa4cfc42d0397150df09872
+type.list as=@Entries item=@DataEntry
+type.function as=@authoring-ready-port result=bool
+type.structural-record as=@Point
+type.field parent=@Point index=0 name=x type=i64
+type.field parent=@Point index=1 name=y type=i64
+type.map as=@Inventory key=text value=i64
+type.map as=@Receipts key=text value=text
+type.structural-record as=@Cohort
+type.field parent=@Cohort index=0 name=first type=i64
+type.field parent=@Cohort index=1 name=count type=i64
+type.field parent=@Cohort index=2 name=start type=i64
+type.list as=@Cohorts item=@Cohort
+type.structural-record as=@Building
+type.field parent=@Building index=0 name=id type=i64
+type.field parent=@Building index=1 name=kind type=i64
+type.field parent=@Building index=2 name=recipe type=i64
+type.field parent=@Building index=3 name=x type=i64
+type.field parent=@Building index=4 name=y type=i64
+type.field parent=@Building index=5 name=health type=i64
+type.field parent=@Building index=6 name=progress type=i64
+type.field parent=@Building index=7 name=produced type=i64
+type.field parent=@Building index=8 name=enabled type=bool
+type.field parent=@Building index=9 name=status type=text
+type.list as=@Buildings item=@Building
+type.structural-record as=@Route
+type.field parent=@Route index=0 name=job type=i64
+type.field parent=@Route index=1 name=x type=i64
+type.field parent=@Route index=2 name=y type=i64
+type.field parent=@Route index=3 name=tier type=i64
+type.field parent=@Route index=4 name=units type=i64
+type.field parent=@Route index=5 name=workers type=i64
+type.list as=@Routes item=@Route
+type.structural-record as=@Colony
+type.field parent=@Colony index=0 name=id type=i64
+type.field parent=@Colony index=1 name=name type=text
+type.field parent=@Colony index=2 name=created_tick type=i64
+type.field parent=@Colony index=3 name=from_x type=i64
+type.field parent=@Colony index=4 name=from_y type=i64
+type.field parent=@Colony index=5 name=to_x type=i64
+type.field parent=@Colony index=6 name=to_y type=i64
+type.field parent=@Colony index=7 name=move_at type=i64
+type.field parent=@Colony index=8 name=move_ms type=i64
+type.field parent=@Colony index=9 name=cohorts type=@Cohorts
+type.field parent=@Colony index=10 name=inventory type=@Inventory
+type.field parent=@Colony index=11 name=research type=@Inventory
+type.field parent=@Colony index=12 name=buildings type=@Buildings
+type.field parent=@Colony index=13 name=routes type=@Routes
+type.field parent=@Colony index=14 name=essence type=i64
+type.field parent=@Colony index=15 name=experience type=i64
+type.field parent=@Colony index=16 name=deaths type=i64
+type.field parent=@Colony index=17 name=gathered type=i64
+type.field parent=@Colony index=18 name=conversations type=i64
+type.field parent=@Colony index=19 name=neighbor type=i64
+type.field parent=@Colony index=20 name=next_building type=i64
+type.field parent=@Colony index=21 name=sequence type=i64
+type.field parent=@Colony index=22 name=last_intent type=text
+type.field parent=@Colony index=23 name=receipts type=@Receipts
+type.list as=@Colonies item=@Colony
+type.structural-record as=@Node
+type.field parent=@Node index=0 name=stock type=i64
+type.field parent=@Node index=1 name=tick type=i64
+type.field parent=@Node index=2 name=x type=i64
+type.field parent=@Node index=3 name=y type=i64
+type.field parent=@Node index=4 name=kind type=i64
+type.field parent=@Node index=5 name=tier type=i64
+type.map as=@Nodes key=text value=@Node
+type.structural-record as=@World
+type.field parent=@World index=0 name=version type=i64
+type.field parent=@World index=1 name=tick type=i64
+type.field parent=@World index=2 name=next_id type=i64
+type.field parent=@World index=3 name=colonies type=@Colonies
+type.field parent=@World index=4 name=nodes type=@Nodes
+type.structural-record as=@Recipe
+type.field parent=@Recipe index=0 name=id type=i64
+type.field parent=@Recipe index=1 name=kind type=i64
+type.field parent=@Recipe index=2 name=tier type=i64
+type.field parent=@Recipe index=3 name=branch type=i64
+type.field parent=@Recipe index=4 name=rank type=i64
+type.field parent=@Recipe index=5 name=period type=i64
+type.field parent=@Recipe index=6 name=workers type=i64
+type.field parent=@Recipe index=7 name=output type=text
+type.field parent=@Recipe index=8 name=amount type=i64
+type.field parent=@Recipe index=9 name=a type=text
+type.field parent=@Recipe index=10 name=na type=i64
+type.field parent=@Recipe index=11 name=b type=text
+type.field parent=@Recipe index=12 name=nb type=i64
+type.field parent=@Recipe index=13 name=c type=text
+type.field parent=@Recipe index=14 name=nc type=i64
+type.structural-record as=@Research
+type.field parent=@Research index=0 name=id type=i64
+type.field parent=@Research index=1 name=branch type=i64
+type.field parent=@Research index=2 name=tier type=i64
+type.field parent=@Research index=3 name=essence type=i64
+type.field parent=@Research index=4 name=raw type=text
+type.field parent=@Research index=5 name=raw_amount type=i64
+type.field parent=@Research index=6 name=product type=text
+type.field parent=@Research index=7 name=product_amount type=i64
+type.structural-record as=@Envelope
+type.field parent=@Envelope index=0 name=me type=i64
+type.field parent=@Envelope index=1 name=world type=@World
+type.field parent=@Envelope index=2 name=now_ms type=i64
+type.field parent=@Envelope index=3 name=backlog_ticks type=i64
+type.structural-record as=@Population
+type.field parent=@Population index=0 name=tick type=i64
+type.field parent=@Population index=1 name=count type=i64
+type.field parent=@Population index=2 name=capacity type=i64
+type.field parent=@Population index=3 name=deaths type=i64
+type.field parent=@Population index=4 name=roles type=@Inventory
+type.structural-record as=@Candidate
+type.field parent=@Candidate index=0 name=key type=text
+type.field parent=@Candidate index=1 name=node type=@Node
+type.field parent=@Candidate index=2 name=distance type=i64
+type.field parent=@Candidate index=3 name=valid type=bool
+type.structural-record as=@GatherContext
+type.field parent=@GatherContext index=0 name=point type=@Point
+type.field parent=@GatherContext index=1 name=tick type=i64
+type.field parent=@GatherContext index=2 name=roles type=@Inventory
+type.field parent=@GatherContext index=3 name=tier type=i64
+type.field parent=@GatherContext index=4 name=radius type=i64
+type.field parent=@GatherContext index=5 name=multiplier type=i64
+type.field parent=@GatherContext index=6 name=storage type=i64
+type.field parent=@GatherContext index=7 name=min_x type=i64
+type.field parent=@GatherContext index=8 name=max_x type=i64
+type.field parent=@GatherContext index=9 name=min_y type=i64
+type.field parent=@GatherContext index=10 name=max_y type=i64
+type.structural-record as=@GatherState
+type.field parent=@GatherState index=0 name=inventory type=@Inventory
+type.field parent=@GatherState index=1 name=nodes type=@Nodes
+type.field parent=@GatherState index=2 name=routes type=@Routes
+type.field parent=@GatherState index=3 name=units type=i64
+type.structural-record as=@NodeEntry
+type.field parent=@NodeEntry index=0 name=key type=text
+type.field parent=@NodeEntry index=1 name=value type=@Node
+type.list as=@NodeEntries item=@NodeEntry
+type.structural-record as=@RecipeChoice
+type.field parent=@RecipeChoice index=0 name=id type=i64
+type.field parent=@RecipeChoice index=1 name=score type=i64
+type.structural-record as=@FactoryContext
+type.field parent=@FactoryContext index=0 name=tick type=i64
+type.field parent=@FactoryContext index=1 name=point type=@Point
+type.field parent=@FactoryContext index=2 name=radius type=i64
+type.field parent=@FactoryContext index=3 name=storage type=i64
+type.field parent=@FactoryContext index=4 name=research type=@Inventory
+type.structural-record as=@FactoryState
+type.field parent=@FactoryState index=0 name=inventory type=@Inventory
+type.field parent=@FactoryState index=1 name=buildings type=@Buildings
+type.field parent=@FactoryState index=2 name=workers type=i64
+type.field parent=@FactoryState index=3 name=experience type=i64
+type.structural-record as=@MachineResult
+type.field parent=@MachineResult index=0 name=inventory type=@Inventory
+type.field parent=@MachineResult index=1 name=building type=@Building
+type.field parent=@MachineResult index=2 name=experience type=i64
+type.structural-record as=@ColonyStep
+type.field parent=@ColonyStep index=0 name=colony type=@Colony
+type.field parent=@ColonyStep index=1 name=nodes type=@Nodes
+type.structural-record as=@Action
+type.field parent=@Action index=0 name=op type=text
+type.field parent=@Action index=1 name=sequence type=i64
+type.field parent=@Action index=2 name=index type=i64
+type.field parent=@Action index=3 name=value type=i64
+type.field parent=@Action index=4 name=x type=i64
+type.field parent=@Action index=5 name=y type=i64
+type.field parent=@Action index=6 name=text type=text
+type.structural-record as=@ActionResult
+type.field parent=@ActionResult index=0 name=world type=@World
+type.field parent=@ActionResult index=1 name=ok type=bool
+type.field parent=@ActionResult index=2 name=error type=text
+type.structural-record as=@Error
+type.field parent=@Error index=0 name=error type=text
+type.structural-record as=@Join
+type.field parent=@Join index=0 name=name type=text
+type.field parent=@Join index=1 name=token type=text
+type.structural-record as=@Joined
+type.field parent=@Joined index=0 name=id type=i64
+type.field parent=@Joined index=1 name=token type=text
+type.structural-record as=@WorldRead
+type.field parent=@WorldRead index=0 name=exists type=bool
+type.field parent=@WorldRead index=1 name=valid type=bool
+type.field parent=@WorldRead index=2 name=world type=@World
+type.field parent=@WorldRead index=3 name=expectation type=@DataExpectation
+type.structural-record as=@Media
+type.field parent=@Media index=0 name=count type=i64
+type.field parent=@Media index=1 name=valid type=bool
+effect.row as=@view-effects
+effect.requirement parent=@view-effects index=0 requirement=pkg_8e4d55489066456031faaa0d27c35ead/req_df92ad3de8475d92b7faca0a216bbf52
+effect.requirement parent=@view-effects index=1 requirement=pkg_8e4d55489066456031faaa0d27c35ead/req_1d67b8e3de3101aa0799f20fd084dd0b
+type.task-function as=@view-port result=@Response effect=@view-effects
+type.argument parent=@view-port index=0 type=@Request
+effect.row as=@sync-effects
+effect.requirement parent=@sync-effects index=0 requirement=pkg_8e4d55489066456031faaa0d27c35ead/req_df92ad3de8475d92b7faca0a216bbf52
+effect.requirement parent=@sync-effects index=1 requirement=pkg_8e4d55489066456031faaa0d27c35ead/req_1d67b8e3de3101aa0799f20fd084dd0b
+type.task-function as=@sync-port result=@Response effect=@sync-effects
+type.argument parent=@sync-port index=0 type=@Request
+effect.row as=@join-effects
+effect.requirement parent=@join-effects index=0 requirement=pkg_8e4d55489066456031faaa0d27c35ead/req_df92ad3de8475d92b7faca0a216bbf52
+effect.requirement parent=@join-effects index=1 requirement=pkg_8e4d55489066456031faaa0d27c35ead/req_5fe21121fa8b61ed3e41cb720efe64ef
+effect.requirement parent=@join-effects index=2 requirement=pkg_8e4d55489066456031faaa0d27c35ead/req_1d67b8e3de3101aa0799f20fd084dd0b
+type.task-function as=@join-port result=@Response effect=@join-effects
+type.argument parent=@join-port index=0 type=@Request
+effect.row as=@action-effects
+effect.requirement parent=@action-effects index=0 requirement=pkg_8e4d55489066456031faaa0d27c35ead/req_df92ad3de8475d92b7faca0a216bbf52
+effect.requirement parent=@action-effects index=1 requirement=pkg_8e4d55489066456031faaa0d27c35ead/req_1d67b8e3de3101aa0799f20fd084dd0b
+effect.requirement parent=@action-effects index=2 requirement=pkg_8e4d55489066456031faaa0d27c35ead/req_5fe21121fa8b61ed3e41cb720efe64ef
+type.task-function as=@action-port result=@Response effect=@action-effects
+type.argument parent=@action-port index=0 type=@Request
+type.function as=@health-port result=@Response
+type.argument parent=@health-port index=0 type=@Request
+type.function as=@catalog-port result=@Response
+type.argument parent=@catalog-port index=0 type=@Request
+type.function as=@asset-0-port result=@Response
+type.argument parent=@asset-0-port index=0 type=@Request
+type.function as=@asset-1-port result=@Response
+type.argument parent=@asset-1-port index=0 type=@Request
+type.function as=@asset-2-port result=@Response
+type.argument parent=@asset-2-port index=0 type=@Request
+type.function as=@asset-2-index-port result=@Response
+type.argument parent=@asset-2-index-port index=0 type=@Request
+type.function as=@asset-3-port result=@Response
+type.argument parent=@asset-3-port index=0 type=@Request
+type.function as=@asset-4-port result=@Response
+type.argument parent=@asset-4-port index=0 type=@Request
+type.function as=@asset-5-port result=@Response
+type.argument parent=@asset-5-port index=0 type=@Request
+effect.row as=@fixture-create-effects
+effect.requirement parent=@fixture-create-effects index=0 requirement=pkg_8e4d55489066456031faaa0d27c35ead/req_df92ad3de8475d92b7faca0a216bbf52
+effect.requirement parent=@fixture-create-effects index=1 requirement=pkg_8e4d55489066456031faaa0d27c35ead/req_1d67b8e3de3101aa0799f20fd084dd0b
+effect.requirement parent=@fixture-create-effects index=2 requirement=pkg_8e4d55489066456031faaa0d27c35ead/req_d22ed8ef4b4779fb4047e6216a0e862e
+type.task-function as=@fixture-create-port result=text effect=@fixture-create-effects
+type.argument parent=@fixture-create-port index=0 type=i64
+type.argument parent=@fixture-create-port index=1 type=i64
+type.function as=@population-probe-port result=@Population
+type.argument parent=@population-probe-port index=0 type=i64
+type.argument parent=@population-probe-port index=1 type=i64
+type.list as=@Populations item=@Population
+type.structural-record as=@MachineProbe
+type.field parent=@MachineProbe index=0 name=id type=i64
+type.field parent=@MachineProbe index=1 name=ready type=@MachineResult
+type.field parent=@MachineProbe index=2 name=blocked type=@MachineResult
+type.field parent=@MachineProbe index=3 name=warehouse type=@MachineResult
+type.list as=@MachineProbes item=@MachineProbe
+type.structural-record as=@ProbeReport
+type.field parent=@ProbeReport index=0 name=populations type=@Populations
+type.field parent=@ProbeReport index=1 name=machines type=@MachineProbes
+type.field parent=@ProbeReport index=2 name=before type=@World
+type.field parent=@ProbeReport index=3 name=after type=@World
+type.field parent=@ProbeReport index=4 name=split_equal type=bool
+type.function as=@diagnostics-port result=text
+type.function as=@diagnostic-page-port result=text
+type.argument parent=@diagnostic-page-port index=0 type=i64
+add.parameter as=$research-parent-index function=$research-parent name=index type=i64
+expression.block as=$research-parent-definition-root
+  (let (binding parent (if (call pkg_10000000000000000000000000000001/decl_222d72e76ff0ecd3763618cf1815c6f8 (call decl_cc86564735e034719cf021de78c1aacb (local $research-parent-index) (i64 12)) (i64 0)) (i64 -1) (if (call pkg_10000000000000000000000000000001/decl_222d72e76ff0ecd3763618cf1815c6f8 (call decl_cc86564735e034719cf021de78c1aacb (local $research-parent-index) (i64 12)) (i64 1)) (i64 0) (if (call pkg_10000000000000000000000000000001/decl_222d72e76ff0ecd3763618cf1815c6f8 (call decl_cc86564735e034719cf021de78c1aacb (local $research-parent-index) (i64 12)) (i64 2)) (i64 0) (if (call pkg_10000000000000000000000000000001/decl_222d72e76ff0ecd3763618cf1815c6f8 (call decl_cc86564735e034719cf021de78c1aacb (local $research-parent-index) (i64 12)) (i64 3)) (i64 1) (if (call pkg_10000000000000000000000000000001/decl_222d72e76ff0ecd3763618cf1815c6f8 (call decl_cc86564735e034719cf021de78c1aacb (local $research-parent-index) (i64 12)) (i64 4)) (i64 1) (if (call pkg_10000000000000000000000000000001/decl_222d72e76ff0ecd3763618cf1815c6f8 (call decl_cc86564735e034719cf021de78c1aacb (local $research-parent-index) (i64 12)) (i64 5)) (i64 2) (if (call pkg_10000000000000000000000000000001/decl_222d72e76ff0ecd3763618cf1815c6f8 (call decl_cc86564735e034719cf021de78c1aacb (local $research-parent-index) (i64 12)) (i64 6)) (i64 2) (if (call pkg_10000000000000000000000000000001/decl_222d72e76ff0ecd3763618cf1815c6f8 (call decl_cc86564735e034719cf021de78c1aacb (local $research-parent-index) (i64 12)) (i64 7)) (i64 3) (if (call pkg_10000000000000000000000000000001/decl_222d72e76ff0ecd3763618cf1815c6f8 (call decl_cc86564735e034719cf021de78c1aacb (local $research-parent-index) (i64 12)) (i64 8)) (i64 4) (if (call pkg_10000000000000000000000000000001/decl_222d72e76ff0ecd3763618cf1815c6f8 (call decl_cc86564735e034719cf021de78c1aacb (local $research-parent-index) (i64 12)) (i64 9)) (i64 5) (if (call pkg_10000000000000000000000000000001/decl_222d72e76ff0ecd3763618cf1815c6f8 (call decl_cc86564735e034719cf021de78c1aacb (local $research-parent-index) (i64 12)) (i64 10)) (i64 6) (i64 6))))))))))))) (in (if (call pkg_10000000000000000000000000000001/decl_3b91f4bc0297fb837202526c46a9e7a7 (local parent) (i64 0)) (i64 -1) (call pkg_10000000000000000000000000000001/decl_72b38e6cd864cb4239b329b7e337577f (call pkg_10000000000000000000000000000001/decl_91e108ccfd1c56c9b2963262b61a1941 (call pkg_10000000000000000000000000000001/decl_2359f838521f88ca35a944d96a3152ac (local $research-parent-index) (i64 12)) (i64 12)) (local parent)))))
+expression.end
+create.function as=$research-parent module=mod_c25e1735449d57cce6fde6804d06edd7 name=research-parent visibility=private result=i64 effect=pure body=$research-parent-definition-root
+add.parameter as=$research-owned-research function=$research-owned name=research type=@Inventory
+add.parameter as=$research-owned-index function=$research-owned name=index type=i64
+expression.block as=$research-owned-definition-root
+  (let (binding family (call pkg_10000000000000000000000000000001/decl_444d6371a7f34b79c024180a4dcc8d31 (call pkg_10000000000000000000000000000001/decl_2359f838521f88ca35a944d96a3152ac (local $research-owned-index) (i64 12)))) (binding legacy (call pkg_10000000000000000000000000000001/decl_1d94901847c6dc3c6530f1b6d171a2b5 (types text i64) (local $research-owned-research) (call pkg_10000000000000000000000000000001/decl_0cf98ef16b347545d0b461527dfe756d (text "legacy:") (local family)) (call pkg_10000000000000000000000000000001/decl_1d94901847c6dc3c6530f1b6d171a2b5 (types text i64) (local $research-owned-research) (local family) (i64 0)))) (in (if (call pkg_10000000000000000000000000000001/decl_3b91f4bc0297fb837202526c46a9e7a7 (call decl_cc86564735e034719cf021de78c1aacb (local $research-owned-index) (i64 12)) (local legacy)) (bool true) (if (call pkg_10000000000000000000000000000001/decl_222d72e76ff0ecd3763618cf1815c6f8 (call pkg_10000000000000000000000000000001/decl_1d94901847c6dc3c6530f1b6d171a2b5 (types text i64) (local $research-owned-research) (call pkg_10000000000000000000000000000001/decl_0cf98ef16b347545d0b461527dfe756d (text "node:") (call pkg_10000000000000000000000000000001/decl_444d6371a7f34b79c024180a4dcc8d31 (local $research-owned-index))) (i64 0)) (i64 1)) (bool true) (bool false)))))
+expression.end
+create.function as=$research-owned module=mod_c25e1735449d57cce6fde6804d06edd7 name=research-owned visibility=private result=bool effect=pure body=$research-owned-definition-root
+add.parameter as=$research-ready-research function=$research-ready name=research type=@Inventory
+add.parameter as=$research-ready-index function=$research-ready name=index type=i64
+expression.block as=$research-ready-definition-root
+  (if (call pkg_10000000000000000000000000000001/decl_fc4d85787297d9f5e635f0becb7a42d7 (i64 0) (local $research-ready-index)) (if (call pkg_10000000000000000000000000000001/decl_3b91f4bc0297fb837202526c46a9e7a7 (local $research-ready-index) (i64 96)) (if (call pkg_10000000000000000000000000000001/decl_6fce40b629ef278a1c614e38e7baa9a4 (call $research-owned (local $research-ready-research) (local $research-ready-index))) (if (let (binding parent (call $research-parent (local $research-ready-index))) (in (if (call pkg_10000000000000000000000000000001/decl_3b91f4bc0297fb837202526c46a9e7a7 (local parent) (i64 0)) (bool true) (call $research-owned (local $research-ready-research) (local parent))))) (bool true) (bool false)) (bool false)) (bool false)) (bool false))
+expression.end
+create.function as=$research-ready module=mod_c25e1735449d57cce6fde6804d06edd7 name=research-ready visibility=private result=bool effect=pure body=$research-ready-definition-root
+add.parameter as=$research-credit-research function=$research-credit name=research type=@Inventory
+add.parameter as=$research-credit-index function=$research-credit name=index type=i64
+expression.block as=$research-credit-definition-root
+  (let (binding family (call pkg_10000000000000000000000000000001/decl_444d6371a7f34b79c024180a4dcc8d31 (call pkg_10000000000000000000000000000001/decl_2359f838521f88ca35a944d96a3152ac (local $research-credit-index) (i64 12)))) (binding rank (call pkg_10000000000000000000000000000001/decl_1d94901847c6dc3c6530f1b6d171a2b5 (types text i64) (local $research-credit-research) (local family) (i64 0))) (binding key (call pkg_10000000000000000000000000000001/decl_0cf98ef16b347545d0b461527dfe756d (text "legacy:") (local family))) (binding retained (call pkg_10000000000000000000000000000001/decl_b2da13c627447a81add6f646a2a62830 (types text i64) (local $research-credit-research) (local key) (call pkg_10000000000000000000000000000001/decl_1d94901847c6dc3c6530f1b6d171a2b5 (types text i64) (local $research-credit-research) (local key) (local rank)))) (binding acquired (call pkg_10000000000000000000000000000001/decl_b2da13c627447a81add6f646a2a62830 (types text i64) (local retained) (call pkg_10000000000000000000000000000001/decl_0cf98ef16b347545d0b461527dfe756d (text "node:") (call pkg_10000000000000000000000000000001/decl_444d6371a7f34b79c024180a4dcc8d31 (local $research-credit-index))) (i64 1))) (in (call pkg_10000000000000000000000000000001/decl_b2da13c627447a81add6f646a2a62830 (types text i64) (local acquired) (local family) (call pkg_10000000000000000000000000000001/decl_72b38e6cd864cb4239b329b7e337577f (local rank) (i64 1)))))
+expression.end
+create.function as=$research-credit module=mod_c25e1735449d57cce6fde6804d06edd7 name=research-credit visibility=private result=@Inventory effect=pure body=$research-credit-definition-root
+add.parameter as=$recipe-coverage-research function=$recipe-coverage name=research type=@Inventory
+add.parameter as=$recipe-coverage-inventory function=$recipe-coverage name=inventory type=@Inventory
+add.parameter as=$recipe-coverage-rule function=$recipe-coverage name=rule type=@Recipe
+add.parameter as=$recipe-coverage-storage function=$recipe-coverage name=storage type=i64
+expression.block as=$recipe-coverage-definition-root
+  (if (if (call pkg_10000000000000000000000000000001/decl_fc4d85787297d9f5e635f0becb7a42d7 (field (local $recipe-coverage-rule) (name rank)) (call pkg_10000000000000000000000000000001/decl_1d94901847c6dc3c6530f1b6d171a2b5 (types text i64) (local $recipe-coverage-research) (call pkg_10000000000000000000000000000001/decl_444d6371a7f34b79c024180a4dcc8d31 (field (local $recipe-coverage-rule) (name branch))) (i64 0))) (if (call pkg_10000000000000000000000000000001/decl_fc4d85787297d9f5e635f0becb7a42d7 (field (local $recipe-coverage-rule) (name na)) (call pkg_10000000000000000000000000000001/decl_1d94901847c6dc3c6530f1b6d171a2b5 (types text i64) (local $recipe-coverage-inventory) (field (local $recipe-coverage-rule) (name a)) (i64 0))) (if (call pkg_10000000000000000000000000000001/decl_fc4d85787297d9f5e635f0becb7a42d7 (field (local $recipe-coverage-rule) (name nb)) (call pkg_10000000000000000000000000000001/decl_1d94901847c6dc3c6530f1b6d171a2b5 (types text i64) (local $recipe-coverage-inventory) (field (local $recipe-coverage-rule) (name b)) (i64 0))) (if (call pkg_10000000000000000000000000000001/decl_fc4d85787297d9f5e635f0becb7a42d7 (field (local $recipe-coverage-rule) (name nc)) (call pkg_10000000000000000000000000000001/decl_1d94901847c6dc3c6530f1b6d171a2b5 (types text i64) (local $recipe-coverage-inventory) (field (local $recipe-coverage-rule) (name c)) (i64 0))) (if (call pkg_10000000000000000000000000000001/decl_fc4d85787297d9f5e635f0becb7a42d7 (call pkg_10000000000000000000000000000001/decl_72b38e6cd864cb4239b329b7e337577f (call pkg_10000000000000000000000000000001/decl_1d94901847c6dc3c6530f1b6d171a2b5 (types text i64) (local $recipe-coverage-inventory) (field (local $recipe-coverage-rule) (name output)) (i64 0)) (call pkg_10000000000000000000000000000001/decl_91e108ccfd1c56c9b2963262b61a1941 (field (local $recipe-coverage-rule) (name amount)) (call pkg_10000000000000000000000000000001/decl_72b38e6cd864cb4239b329b7e337577f (i64 1) (call pkg_10000000000000000000000000000001/decl_2359f838521f88ca35a944d96a3152ac (call pkg_10000000000000000000000000000001/decl_1d94901847c6dc3c6530f1b6d171a2b5 (types text i64) (local $recipe-coverage-research) (call pkg_10000000000000000000000000000001/decl_444d6371a7f34b79c024180a4dcc8d31 (field (local $recipe-coverage-rule) (name branch))) (i64 0)) (i64 4))))) (local $recipe-coverage-storage)) (bool true) (bool false)) (bool false)) (bool false)) (bool false)) (bool false)) (call pkg_10000000000000000000000000000001/decl_2359f838521f88ca35a944d96a3152ac (call pkg_10000000000000000000000000000001/decl_91e108ccfd1c56c9b2963262b61a1941 (call pkg_10000000000000000000000000000001/decl_1d94901847c6dc3c6530f1b6d171a2b5 (types text i64) (local $recipe-coverage-inventory) (field (local $recipe-coverage-rule) (name output)) (i64 0)) (i64 1000)) (call pkg_10000000000000000000000000000001/decl_91e108ccfd1c56c9b2963262b61a1941 (i64 12) (call pkg_10000000000000000000000000000001/decl_72b38e6cd864cb4239b329b7e337577f (i64 1) (field (local $recipe-coverage-rule) (name tier))))) (i64 1000000000000))
+expression.end
+create.function as=$recipe-coverage module=mod_c25e1735449d57cce6fde6804d06edd7 name=recipe-coverage visibility=private result=i64 effect=pure body=$recipe-coverage-definition-root
+add.parameter as=$automatic-recipe-loop-research function=$automatic-recipe-loop name=research type=@Inventory
+add.parameter as=$automatic-recipe-loop-inventory function=$automatic-recipe-loop name=inventory type=@Inventory
+add.parameter as=$automatic-recipe-loop-index function=$automatic-recipe-loop name=index type=i64
+add.parameter as=$automatic-recipe-loop-end function=$automatic-recipe-loop name=end type=i64
+add.parameter as=$automatic-recipe-loop-storage function=$automatic-recipe-loop name=storage type=i64
+add.parameter as=$automatic-recipe-loop-best function=$automatic-recipe-loop name=best type=@RecipeChoice
+expression.block as=$automatic-recipe-loop-definition-root
+  (if (call pkg_10000000000000000000000000000001/decl_3b91f4bc0297fb837202526c46a9e7a7 (local $automatic-recipe-loop-index) (local $automatic-recipe-loop-end)) (let (binding rule (call decl_323f33238a3602c1242fb91868ad06d1 (local $automatic-recipe-loop-index))) (binding score (call $recipe-coverage (local $automatic-recipe-loop-research) (local $automatic-recipe-loop-inventory) (local rule) (local $automatic-recipe-loop-storage))) (binding next (if (call pkg_10000000000000000000000000000001/decl_3b91f4bc0297fb837202526c46a9e7a7 (local score) (field (local $automatic-recipe-loop-best) (name score))) (record structural (field id (local $automatic-recipe-loop-index)) (field score (local score))) (local $automatic-recipe-loop-best))) (in (call $automatic-recipe-loop (local $automatic-recipe-loop-research) (local $automatic-recipe-loop-inventory) (call pkg_10000000000000000000000000000001/decl_72b38e6cd864cb4239b329b7e337577f (local $automatic-recipe-loop-index) (i64 1)) (local $automatic-recipe-loop-end) (local $automatic-recipe-loop-storage) (local next)))) (field (local $automatic-recipe-loop-best) (name id)))
+expression.end
+create.function as=$automatic-recipe-loop module=mod_c25e1735449d57cce6fde6804d06edd7 name=automatic-recipe-loop visibility=private result=i64 effect=pure body=$automatic-recipe-loop-definition-root
+add.parameter as=$automatic-recipe-research function=$automatic-recipe name=research type=@Inventory
+add.parameter as=$automatic-recipe-inventory function=$automatic-recipe name=inventory type=@Inventory
+add.parameter as=$automatic-recipe-building function=$automatic-recipe name=building type=@Building
+add.parameter as=$automatic-recipe-storage function=$automatic-recipe name=storage type=i64
+expression.block as=$automatic-recipe-definition-root
+  (if (if (call pkg_10000000000000000000000000000001/decl_222d72e76ff0ecd3763618cf1815c6f8 (call pkg_10000000000000000000000000000001/decl_1d94901847c6dc3c6530f1b6d171a2b5 (types text i64) (local $automatic-recipe-research) (call pkg_10000000000000000000000000000001/decl_0cf98ef16b347545d0b461527dfe756d (text "manual:") (call pkg_10000000000000000000000000000001/decl_444d6371a7f34b79c024180a4dcc8d31 (field (local $automatic-recipe-building) (name id)))) (i64 0)) (i64 1)) (bool true) (if (if (call pkg_10000000000000000000000000000001/decl_3b91f4bc0297fb837202526c46a9e7a7 (i64 0) (field (local $automatic-recipe-building) (name progress))) (if (call pkg_10000000000000000000000000000001/decl_c9fdb1f4b300f81480dfd2f74d2e7bab (field (local $automatic-recipe-building) (name status)) (text "working")) (bool true) (bool false)) (bool false)) (bool true) (bool false))) (field (local $automatic-recipe-building) (name recipe)) (let (binding start (call pkg_10000000000000000000000000000001/decl_91e108ccfd1c56c9b2963262b61a1941 (field (local $automatic-recipe-building) (name kind)) (i64 9))) (in (call $automatic-recipe-loop (local $automatic-recipe-research) (local $automatic-recipe-inventory) (local start) (call pkg_10000000000000000000000000000001/decl_72b38e6cd864cb4239b329b7e337577f (local start) (i64 9)) (local $automatic-recipe-storage) (record structural (field id (field (local $automatic-recipe-building) (name recipe))) (field score (i64 1000000000000)))))))
+expression.end
+create.function as=$automatic-recipe module=mod_c25e1735449d57cce6fde6804d06edd7 name=automatic-recipe visibility=private result=i64 effect=pure body=$automatic-recipe-definition-root
+expression.block as=$update-test-branch-root-ready-actual
+  (call $research-ready (map text i64 ) (i64 0))
+expression.end
+expression.block as=$update-test-branch-root-ready-expected
+  (bool true)
+expression.end
+create.test as=$update-test-branch-root-ready module=mod_c25e1735449d57cce6fde6804d06edd7 name=branch-root-ready visibility=private actual=$update-test-branch-root-ready-actual expected=$update-test-branch-root-ready-expected
+expression.block as=$update-test-branch-parent-required-actual
+  (call $research-ready (map text i64 ) (i64 2))
+expression.end
+expression.block as=$update-test-branch-parent-required-expected
+  (bool false)
+expression.end
+create.test as=$update-test-branch-parent-required module=mod_c25e1735449d57cce6fde6804d06edd7 name=branch-parent-required visibility=private actual=$update-test-branch-parent-required-actual expected=$update-test-branch-parent-required-expected
+expression.block as=$update-test-branch-left-fork-ready-actual
+  (call $research-ready (call $research-credit (map text i64 ) (i64 0)) (i64 1))
+expression.end
+expression.block as=$update-test-branch-left-fork-ready-expected
+  (bool true)
+expression.end
+create.test as=$update-test-branch-left-fork-ready module=mod_c25e1735449d57cce6fde6804d06edd7 name=branch-left-fork-ready visibility=private actual=$update-test-branch-left-fork-ready-actual expected=$update-test-branch-left-fork-ready-expected
+expression.block as=$update-test-branch-right-fork-ready-actual
+  (call $research-ready (call $research-credit (map text i64 ) (i64 0)) (i64 2))
+expression.end
+expression.block as=$update-test-branch-right-fork-ready-expected
+  (bool true)
+expression.end
+create.test as=$update-test-branch-right-fork-ready module=mod_c25e1735449d57cce6fde6804d06edd7 name=branch-right-fork-ready visibility=private actual=$update-test-branch-right-fork-ready-actual expected=$update-test-branch-right-fork-ready-expected
+expression.block as=$update-test-branch-sibling-not-auto-owned-actual
+  (call $research-owned (call $research-credit (call $research-credit (map text i64 ) (i64 0)) (i64 2)) (i64 1))
+expression.end
+expression.block as=$update-test-branch-sibling-not-auto-owned-expected
+  (bool false)
+expression.end
+create.test as=$update-test-branch-sibling-not-auto-owned module=mod_c25e1735449d57cce6fde6804d06edd7 name=branch-sibling-not-auto-owned visibility=private actual=$update-test-branch-sibling-not-auto-owned-actual expected=$update-test-branch-sibling-not-auto-owned-expected
+expression.block as=$update-test-branch-right-leaf-ready-actual
+  (call $research-ready (call $research-credit (call $research-credit (map text i64 ) (i64 0)) (i64 2)) (i64 5))
+expression.end
+expression.block as=$update-test-branch-right-leaf-ready-expected
+  (bool true)
+expression.end
+create.test as=$update-test-branch-right-leaf-ready module=mod_c25e1735449d57cce6fde6804d06edd7 name=branch-right-leaf-ready visibility=private actual=$update-test-branch-right-leaf-ready-actual expected=$update-test-branch-right-leaf-ready-expected
+expression.block as=$update-test-branch-left-leaf-still-locked-actual
+  (call $research-ready (call $research-credit (call $research-credit (map text i64 ) (i64 0)) (i64 2)) (i64 3))
+expression.end
+expression.block as=$update-test-branch-left-leaf-still-locked-expected
+  (bool false)
+expression.end
+create.test as=$update-test-branch-left-leaf-still-locked module=mod_c25e1735449d57cce6fde6804d06edd7 name=branch-left-leaf-still-locked visibility=private actual=$update-test-branch-left-leaf-still-locked-actual expected=$update-test-branch-left-leaf-still-locked-expected
+expression.block as=$update-test-branch-duplicate-research-blocked-actual
+  (call $research-ready (call $research-credit (call $research-credit (map text i64 ) (i64 0)) (i64 2)) (i64 2))
+expression.end
+expression.block as=$update-test-branch-duplicate-research-blocked-expected
+  (bool false)
+expression.end
+create.test as=$update-test-branch-duplicate-research-blocked module=mod_c25e1735449d57cce6fde6804d06edd7 name=branch-duplicate-research-blocked visibility=private actual=$update-test-branch-duplicate-research-blocked-actual expected=$update-test-branch-duplicate-research-blocked-expected
+expression.block as=$update-test-branch-legacy-retained-actual
+  (call $research-owned (map text i64 (entry (text "0") (i64 4))) (i64 3))
+expression.end
+expression.block as=$update-test-branch-legacy-retained-expected
+  (bool true)
+expression.end
+create.test as=$update-test-branch-legacy-retained module=mod_c25e1735449d57cce6fde6804d06edd7 name=branch-legacy-retained visibility=private actual=$update-test-branch-legacy-retained-actual expected=$update-test-branch-legacy-retained-expected
+expression.block as=$update-test-branch-legacy-branch-choice-actual
+  (call $research-ready (map text i64 (entry (text "0") (i64 4))) (i64 6))
+expression.end
+expression.block as=$update-test-branch-legacy-branch-choice-expected
+  (bool true)
+expression.end
+create.test as=$update-test-branch-legacy-branch-choice module=mod_c25e1735449d57cce6fde6804d06edd7 name=branch-legacy-branch-choice visibility=private actual=$update-test-branch-legacy-branch-choice-actual expected=$update-test-branch-legacy-branch-choice-expected
+expression.block as=$update-test-branch-legacy-not-inflated-actual
+  (call $research-owned (call $research-credit (map text i64 (entry (text "0") (i64 4))) (i64 6)) (i64 4))
+expression.end
+expression.block as=$update-test-branch-legacy-not-inflated-expected
+  (bool false)
+expression.end
+create.test as=$update-test-branch-legacy-not-inflated module=mod_c25e1735449d57cce6fde6804d06edd7 name=branch-legacy-not-inflated visibility=private actual=$update-test-branch-legacy-not-inflated-actual expected=$update-test-branch-legacy-not-inflated-expected
+expression.block as=$update-test-automation-fills-missing-intermediate-actual
+  (call $automatic-recipe (map text i64 (entry (text "3") (i64 1))) (map text i64 (entry (text "timber") (i64 100)) (entry (text "plank") (i64 50))) (record structural (field id (i64 1)) (field kind (i64 0)) (field recipe (i64 0)) (field x (i64 0)) (field y (i64 0)) (field health (i64 100)) (field progress (i64 0)) (field produced (i64 0)) (field enabled (bool true)) (field status (text "working"))) (i64 1000000))
+expression.end
+expression.block as=$update-test-automation-fills-missing-intermediate-expected
+  (i64 1)
+expression.end
+create.test as=$update-test-automation-fills-missing-intermediate module=mod_c25e1735449d57cce6fde6804d06edd7 name=automation-fills-missing-intermediate visibility=private actual=$update-test-automation-fills-missing-intermediate-actual expected=$update-test-automation-fills-missing-intermediate-expected
+expression.block as=$update-test-automation-respects-unlocks-actual
+  (call $automatic-recipe (map text i64 ) (map text i64 (entry (text "timber") (i64 100)) (entry (text "plank") (i64 50))) (record structural (field id (i64 1)) (field kind (i64 0)) (field recipe (i64 0)) (field x (i64 0)) (field y (i64 0)) (field health (i64 100)) (field progress (i64 0)) (field produced (i64 0)) (field enabled (bool true)) (field status (text "working"))) (i64 1000000))
+expression.end
+expression.block as=$update-test-automation-respects-unlocks-expected
+  (i64 0)
+expression.end
+create.test as=$update-test-automation-respects-unlocks module=mod_c25e1735449d57cce6fde6804d06edd7 name=automation-respects-unlocks visibility=private actual=$update-test-automation-respects-unlocks-actual expected=$update-test-automation-respects-unlocks-expected
+expression.block as=$update-test-automation-respects-manual-actual
+  (call $automatic-recipe (map text i64 (entry (text "3") (i64 1)) (entry (text "manual:1") (i64 1))) (map text i64 (entry (text "timber") (i64 100)) (entry (text "plank") (i64 50))) (record structural (field id (i64 1)) (field kind (i64 0)) (field recipe (i64 0)) (field x (i64 0)) (field y (i64 0)) (field health (i64 100)) (field progress (i64 0)) (field produced (i64 0)) (field enabled (bool true)) (field status (text "working"))) (i64 1000000))
+expression.end
+expression.block as=$update-test-automation-respects-manual-expected
+  (i64 0)
+expression.end
+create.test as=$update-test-automation-respects-manual module=mod_c25e1735449d57cce6fde6804d06edd7 name=automation-respects-manual visibility=private actual=$update-test-automation-respects-manual-actual expected=$update-test-automation-respects-manual-expected
+expression.block as=$update-test-automation-keeps-work-in-progress-actual
+  (call $automatic-recipe (map text i64 (entry (text "3") (i64 1))) (map text i64 (entry (text "timber") (i64 100)) (entry (text "plank") (i64 50))) (record structural (field id (field (record structural (field id (i64 1)) (field kind (i64 0)) (field recipe (i64 0)) (field x (i64 0)) (field y (i64 0)) (field health (i64 100)) (field progress (i64 0)) (field produced (i64 0)) (field enabled (bool true)) (field status (text "working"))) (name id))) (field kind (field (record structural (field id (i64 1)) (field kind (i64 0)) (field recipe (i64 0)) (field x (i64 0)) (field y (i64 0)) (field health (i64 100)) (field progress (i64 0)) (field produced (i64 0)) (field enabled (bool true)) (field status (text "working"))) (name kind))) (field recipe (field (record structural (field id (i64 1)) (field kind (i64 0)) (field recipe (i64 0)) (field x (i64 0)) (field y (i64 0)) (field health (i64 100)) (field progress (i64 0)) (field produced (i64 0)) (field enabled (bool true)) (field status (text "working"))) (name recipe))) (field x (field (record structural (field id (i64 1)) (field kind (i64 0)) (field recipe (i64 0)) (field x (i64 0)) (field y (i64 0)) (field health (i64 100)) (field progress (i64 0)) (field produced (i64 0)) (field enabled (bool true)) (field status (text "working"))) (name x))) (field y (field (record structural (field id (i64 1)) (field kind (i64 0)) (field recipe (i64 0)) (field x (i64 0)) (field y (i64 0)) (field health (i64 100)) (field progress (i64 0)) (field produced (i64 0)) (field enabled (bool true)) (field status (text "working"))) (name y))) (field health (field (record structural (field id (i64 1)) (field kind (i64 0)) (field recipe (i64 0)) (field x (i64 0)) (field y (i64 0)) (field health (i64 100)) (field progress (i64 0)) (field produced (i64 0)) (field enabled (bool true)) (field status (text "working"))) (name health))) (field progress (i64 1)) (field produced (field (record structural (field id (i64 1)) (field kind (i64 0)) (field recipe (i64 0)) (field x (i64 0)) (field y (i64 0)) (field health (i64 100)) (field progress (i64 0)) (field produced (i64 0)) (field enabled (bool true)) (field status (text "working"))) (name produced))) (field enabled (field (record structural (field id (i64 1)) (field kind (i64 0)) (field recipe (i64 0)) (field x (i64 0)) (field y (i64 0)) (field health (i64 100)) (field progress (i64 0)) (field produced (i64 0)) (field enabled (bool true)) (field status (text "working"))) (name enabled))) (field status (field (record structural (field id (i64 1)) (field kind (i64 0)) (field recipe (i64 0)) (field x (i64 0)) (field y (i64 0)) (field health (i64 100)) (field progress (i64 0)) (field produced (i64 0)) (field enabled (bool true)) (field status (text "working"))) (name status)))) (i64 1000000))
+expression.end
+expression.block as=$update-test-automation-keeps-work-in-progress-expected
+  (i64 0)
+expression.end
+create.test as=$update-test-automation-keeps-work-in-progress module=mod_c25e1735449d57cce6fde6804d06edd7 name=automation-keeps-work-in-progress visibility=private actual=$update-test-automation-keeps-work-in-progress-actual expected=$update-test-automation-keeps-work-in-progress-expected
+expression.block as=$update-test-automation-empty-stock-safe-actual
+  (call $automatic-recipe (map text i64 (entry (text "3") (i64 1))) (map text i64 ) (record structural (field id (i64 1)) (field kind (i64 0)) (field recipe (i64 0)) (field x (i64 0)) (field y (i64 0)) (field health (i64 100)) (field progress (i64 0)) (field produced (i64 0)) (field enabled (bool true)) (field status (text "working"))) (i64 1000000))
+expression.end
+expression.block as=$update-test-automation-empty-stock-safe-expected
+  (i64 0)
+expression.end
+create.test as=$update-test-automation-empty-stock-safe module=mod_c25e1735449d57cce6fde6804d06edd7 name=automation-empty-stock-safe visibility=private actual=$update-test-automation-empty-stock-safe-actual expected=$update-test-automation-empty-stock-safe-expected

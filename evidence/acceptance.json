@@ -1,11 +1,11 @@
 {
   "schema": "orbloam-native-acceptance-v1",
-  "artifact_sha256": "afd5213d7663e88d0a3fe1a13a1a8946bdd610f3f65279041536a66cae055828",
+  "artifact_sha256": "5b925822ae0f1351d1d41efef5ccc877cd90281d2f7097d046352d30ecda6693",
   "runtime_sha256": "98a39bd192c1e98187a1a954f916f5ffc89ef2586317c25e1efa06c61b888c32",
   "groups": {
     "http-and-recovery": {
       "status": "passed",
-      "elapsed_seconds": 1.3885551450002822,
+      "elapsed_seconds": 1.8179322000000866,
       "observations": {
         "http_observations": 66,
         "registered_cores": 2,
@@ -31,7 +31,7 @@
     },
     "independent-native-oracles": {
       "status": "passed",
-      "elapsed_seconds": 10.784006280000085,
+      "elapsed_seconds": 6.585267267999825,
       "observations": {
         "enumerative_population_cases": 48,
         "native_recipe_cases": 72,
@@ -48,17 +48,19 @@
     },
     "one-hour-exact-catchup": {
       "status": "passed",
-      "elapsed_seconds": 5.020688810000138,
+      "elapsed_seconds": 3.52007275699998,
       "observations": {
         "fixture_population": 512,
         "fixture_workshops": 8,
         "requested_absence_ticks": 360,
-        "processed_ticks": 361,
-        "calculated_deaths": 513,
-        "actual_deaths": 513,
-        "catchup_wall_seconds": 3.625368136999896,
+        "processed_ticks": 360,
+        "calculated_deaths": 2048,
+        "actual_deaths": 2048,
+        "catchup_wall_seconds": 2.267174350000005,
         "final_backlog_ticks": 0,
         "all_eight_processing_totals_exact": true,
+        "automatic_recipe_choices_and_entire_world_equal": true,
+        "life_ticks": 90,
         "post_load_move_and_replay": true,
         "existing_world_not_overwritten": true
       }

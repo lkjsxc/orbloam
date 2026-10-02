@@ -8,7 +8,7 @@ The authoritative simulation has one 10-second economic tick. Core motion has an
 
 ## Population without a per-person economic loop
 
-A cohort is `(first, count, start)`. Seat `i` has stable role `(first + i) modulo 10`, and first birth at tick `start + i`. Its successive lives last exactly 360 ticks. Roles 0–7 gather the eight raw materials; 8–9 supply workshop labor. At a death boundary a life returns essence and the next generation occupies that seat immediately.
+A cohort is `(first, count, start)`. Seat `i` has stable role `(first + i) modulo 10`, and first birth at tick `start + i`. Its successive lives last exactly 90 ticks (15 minutes). Roles 0–7 gather the eight raw materials; 8–9 supply workshop labor. At a death boundary a life returns essence and the next generation occupies that seat immediately.
 
 The accepted graph counts births, deaths and role occupancy with integer formulas. A test-only independent Python oracle enumerates every seat instead, including populations up to 4,096 and boundary ticks. These observations establish equality for the stated fixtures, not a proof for every future code change. The browser may enumerate visible seats to draw them; that does not move economic authority into JavaScript.
 
@@ -28,9 +28,11 @@ Colony processing order rotates each tick so a single fixed registration index d
 
 ## Industry and progression
 
-The catalogue has 8 facilities, 9 recipes per facility and 8 research branches with 12 ranks each. Recipe dependency edges go from earlier-tier products to later-tier products; high-rank research consumes prior processing output. Research, product quantities, experience and currency are native game values.
+The catalogue has 8 facilities, 9 recipes per facility and 8 research families with 12 discoveries each. Each family has four forks, encoded as explicit parent IDs. Costs and existing discovery IDs remain stable. An unowned sibling does not block its neighboring path. Each owned discovery increments its family strength by one; this count governs existing production and capacity formulas. Recipe dependency edges go from earlier-tier products to later-tier products; high-rank research consumes prior processing output. Research, product quantities, experience and currency are native game values.
 
-Workshops receive available craft workers in construction order. They retain progress while waiting for input, output capacity or workers. A completed cycle debits all inputs and credits output together. Verification compares all 72 recipes against independent material-balance calculations, for successful completion, missing input and a full output warehouse.
+By default, a workshop examines all nine recipes of its kind and selects an unlocked, affordable batch with room for output, preferring lower tier-adjusted stock coverage. It finishes an active in-progress batch before reconsidering. The persisted `manual:<building-id>` flag enables an explicit fixed recipe; `auto` returns to native selection. This is not global supply-chain optimization, demand forecasting, or a browser timer issuing commands.
+
+Workshops receive available craft workers in construction order. Fixed recipes retain progress while waiting for input, output capacity or workers. In automatic mode a blocked recipe may be replaced on a later tick when another eligible recipe is more useful; a replacement starts at zero progress and cannot credit an unfinished batch. A completed cycle debits all inputs and credits output together. Verification compares all 72 recipes against independent material-balance calculations, for successful completion, missing input and a full output warehouse.
 
 Every sixth tick a workshop attempts maintenance. Nearby core, available labor and one timber plus one stone permit upkeep; otherwise condition falls by two points. Healthy upkeep restores one point up to 100. Stopped machines still need upkeep. At zero health production stops. Range applies to automatic operation and maintenance; owner commands for repair, settings and demolition are remote. Inputs and labor waiting are observable statuses, not silent production.
 
@@ -55,3 +57,17 @@ The unchanged v0.1.38 executable creates and validates a graph. `tools/build.py`
 The first bulk diagnostics command exceeded the runtime's 65,536-byte compact-output record bound. A reviewed body replacement changed it into a guide to bounded diagnostic pages; a separate local command emits small pages. The failed pilot evidence is retained. No runtime format limit was bypassed.
 
 `project/` retains the accepted graph, `authoring/` retains the actual proposal/review evidence, and `dist/` contains the tested artifact and operator descriptor. Fresh generator runs allocate fresh graph identities. Rebuilding the retained accepted graph is the reproducible artifact boundary.
+
+## Compatible quiet-world update
+
+The 2026-09-21 update uses public body replacement against the committed graph, retaining the world schema and stable function/parameter owners. `tools/update.py` resolves references from actual apply receipts; intermediate `--defer-build` changes deliberately leave the distribution untouched until a complete build succeeds. Every new block label includes the update identity so subsequent edits cannot accidentally reuse a former expression owner as a fresh allocation.
+
+Research uses the existing text-to-integer map. `legacy:<family>` freezes a predecessor prefix when that family receives its first new purchase; `node:<id>` records independently owned discoveries. Before the prefix is frozen, an existing family rank means its original leading discoveries remain owned. New family strength cannot retroactively grant unpurchased siblings. The operator-facing world schema is unchanged, but gameplay semantics are not: do not use the old application as a downgrade without its matching pre-update backup.
+
+Existing birth schedules remain intact. Ninety-tick returns apply to steps processed by the new version. Already processed history and earned counters are not rewritten; deferred pre-update time is processed under the new rules when caught up.
+
+## View aggregation
+
+At a distance, analytical modulo-eight cell counts and clipped tier bands aggregate every deposit into adjacent power-of-two regional levels. Cross-fading these levels keeps zoom transitions continuous. Saved depletion is subtracted exactly after native regrowth; an empty deposit is not silently replaced by a full representative. Small regional color marks and tier contours replace individual sprites. Residents fade before becoming subpixel noise; distant cores cluster into bounded screen markers. None of this lowers simulation population or grants resources.
+
+Research labels are placed in screen space by priority and collision checks. A selection and its adjacent choices take priority over labels for distant locked nodes. The accessible Browse view exposes every discovery independently of canvas size.

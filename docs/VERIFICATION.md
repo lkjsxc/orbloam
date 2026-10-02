@@ -1,181 +1,198 @@
-# Verification — Orbloam reconstruction
+# Verification — Quiet World update
 
-This records the actual reconstructed application tested on 2026-09-20, not the lost
-Stillworld ZIP and not acceptance of GitHub's remote main. The game's new economic
-rules use exact 10-second ticks and birth-time cohorts. Measurements must not be
-represented as an unchanged-workload speedup over the predecessor.
+This report identifies the updated Orbloam bytes, not the lost Stillworld build,
+not an unchanged-workload speedup, and not a remote-main publication. The previous
+reconstruction report is preserved as [historical evidence](VERIFICATION-20260920.md).
 
-## Exact bytes and accepted meaning
+## Exact accepted program
 
 ```text
-Application bytes: 3290046
-Application SHA-256: afd5213d7663e88d0a3fe1a13a1a8946bdd610f3f65279041536a66cae055828
-Runtime: unchanged official lkjscript v0.1.38, Linux x86_64 musl target
+Edition: quiet-world-20260921
+Application bytes: 3657183
+Application SHA-256: 5b925822ae0f1351d1d41efef5ccc877cd90281d2f7097d046352d30ecda6693
+Runtime: unchanged official lkjscript v0.1.38 (Linux x86_64 musl)
 Runtime SHA-256: 98a39bd192c1e98187a1a954f916f5ffc89ef2586317c25e1efa06c61b888c32
-Accepted revision: rev_6aaf8ee080b208c3852bdbdcd1ce7aa4309ed9eca9354971d0a483969d5d713d
-Artifact bundle: artifact_bundle_cd32fa3ee94e0d46443dbf5234d3516ecec2628d1d3aac068a15e59f026ce618
+Accepted revision: rev_743c088998cb6d3c51e73c82591bb5b4295ef295ec797ef16deb748bce13d2f4
 ```
 
-The native public `check` returned **72 passed, 0 failed, differential=equal**.
-This count includes standard-package tests; it does not mean 72 independent game
-journeys. Public proposal, logical-review, and apply records are retained under
-`authoring/`; the actual accepted meaning is in `project/`, not in a handwritten
-replacement for its storage. See [build identity](../evidence/build/identity.json),
-[native check](../evidence/build/check.txt), and [build](../evidence/build/build.txt).
+Fourteen accepted public updates follow the five original construction stages.
+They retain the original world type and stable function/parameter owners. The
+complete request → logical review → apply chain, including deferred intermediate
+builds, is bound by [BUILD.json](../dist/BUILD.json) and retained in `authoring/`.
+The source generator is not a replacement authority for `project/`.
 
-The separate [clean rebuild](../evidence/rebuild.json) copied the accepted project
-without derived compiler caches. A clean check succeeded in 299.500 seconds. Two
-subsequent native builds took 22.206 and 21.142 seconds and returned byte-identical
-artifacts, also identical to the shipped artifact. None of those lifecycle
-commands changed the canonical HEAD. The first build follows a clean check that
-has populated compiler state; its time is not a completely cold-build measurement.
-Fresh authoring allocates new identities and is not claimed to reproduce those
-identities; rebuilding this same accepted graph does reproduce the delivered bytes.
+The [clean check](../evidence/quiet-world/native-check.txt) returned
+**89 passed, 0 failed, differential=equal**. This includes the standard
+package's tests; it is not that many independent end-to-end game journeys.
+The separate [rebuild](../evidence/rebuild.json) copied the accepted project without
+derived compiler state, checked it in 196.768 seconds, then built it
+twice in 14.282 and 13.738 seconds.
+Both artifacts match each other and the shipped bytes. Canonical HEAD stayed
+unchanged. The builds follow the clean check's compiler-state population, so those
+build times are not cold-compilation measurements.
 
-## Actual native HTTP, transactions, and recovery
+## Native gameplay, conservation, and recovery
 
-[Native acceptance](../evidence/acceptance.json) contains three separate groups.
-The HTTP/recovery group made 66 observations against real native processes, not a
-Python or JavaScript implementation of the game. It covered two distinct colonies,
-registration retry after a lost response, valid and invalid credentials, strict
-JSON rejection, ownership, host variation, and all nine command kinds: move,
-rename, research, build, pause, recipe, transfer, repair, and dismantle.
+[Acceptance](../evidence/acceptance.json) made 66 HTTP/recovery observations against
+real native processes. Registration retry, identity, invalid inputs, ownership,
+command sequence conflicts, identical-intent replay after later actions, concurrent
+identical intent, restart, and logical backup/restore passed. Public world output
+and backups contained no plaintext recovery credential. These are finite tests,
+not a public-abuse or penetration audit.
 
-Identical command replay after later accepted operations preserved the original
-receipt without a second effect. Concurrent identical intent was applied once;
-reused numbers with different intent were rejected. Restart and logical backup /
-restore returned equal world values. Public world output and the logical backup
-contained no plaintext recovery credential. Native data verification succeeded.
-These are finite application tests, not a penetration test or public-abuse audit.
+An independent individual-seat enumeration matched native population arithmetic
+in 48 cases, including lifetime boundaries and large diagnostic populations. All
+72 recipes were compared on completion, missing-input, and full-warehouse paths:
+216 recipe paths with exact input/output and factory-state checks. A two-colony,
+512-residents-per-colony world matched an independently written full-grid oracle;
+splitting chronological advancement preserved the complete world.
 
-The independent-oracle group compared arithmetic cohort counts against individual
-seat enumeration in **48 cases**, including 512 and 4,096 seats and lifetime
-boundaries. It compared a complete two-colony world with 512 inhabitants in each
-against an independently authored brute-force full-grid resource calculation.
-Splitting advancement into batches preserved the complete canonical world.
-The 4,096-seat observations test population arithmetic, not live capacity.
+The [new native journey](../evidence/quiet-world/native.json) specifically proved:
 
-All **72 recipes** were invoked through native execution with three paths each:
-completion, missing input, and full warehouse. Exact resulting inputs, products,
-and factory states were compared with independent expected values. This is 216
-recipe paths, not 216 separately earned progression runs. The native result was
-paged through 20 bounded diagnostic invocations instead of raising output limits.
+- A child without its parent rejects; after the root, the right sibling can be
+  bought before the left. Its unbought sibling stays unowned, and that sibling's
+  children remain blocked. A duplicate purchase does not charge again.
+- Fixed-recipe and automatic mode persist. An outsider cannot override another
+  colony's workshop. Replay and process restart preserve the resulting world.
+- The independently seeded 512-resident test buys two Vitality discoveries and
+  reaches 608 places. This is a deliberately nonstandard fixture; normal maximum
+  capacity remains 592, not 608.
 
-The separate [catalogue audit](../evidence/catalogue.json) read the actual served
-catalogue: all 72 recipe dependencies are acyclic, all 96 research steps and 72
-products are logically reachable, and facility gates are consistent. It assumes
-unlimited obtainable inputs and essence. It does not prove economic balance,
-earned end-to-end progression, or a reasonable completion time.
+[Catalogue validation](../evidence/catalogue.json) checks acyclic recipe inputs,
+96 reachable discoveries, and 72 reachable products. It assumes unlimited
+obtainable inputs and Essence; it is not an earned full-game playthrough, a balance
+study, or a guarantee about time to completion.
 
-## Exact one-hour absence
+## Immediate predecessor save admission
 
-The native acceptance seeded **512 inhabitants and eight workshops** in a fresh,
-private fixture. It requested a 360-tick absence. The wall clock crossed another
-tick during setup, so the final execution processed **361 ten-second ticks**,
-not exactly 360. The independent expected and actual death totals were both **513**.
-All eight processing totals and related states agreed with the oracle.
+The predecessor test uses the real old application artifact with SHA-256
+`afd5213d7663e88d0a3fe1a13a1a8946bdd610f3f65279041536a66cae055828` to create a typed world in a private store.
+It stops that process, switches only the application artifact, and starts the new
+one against the same store. Read-only admission returns an exactly equal world;
+the same recovery key still works. A new discovery and a fixed-recipe override
+work, and the pre-existing family ranks remain unchanged.
 
-Catch-up took **3.625 seconds** of measured wall time and ended with zero backlog
-ticks. A subsequent actual move and its replay succeeded. The fixture command
-refused to overwrite an existing world. Seeded ranks, residents, and stock are
-test setup, not player-earned progress. This is one observed hour-sized backlog,
-not acceptance of arbitrary absences or arbitrary world sizes.
+Native and presentation tests also check legacy-prefix ownership and the rule
+that new family strength cannot retroactively unlock unbought siblings. No live
+world was reset, regenerated, or rewritten to make the compatibility test pass.
+This is admission of the immediately preceding **Orbloam v1** save, not migration
+of the missing Stillworld format. Deferred steps run under the new lifespan rules;
+already recorded totals are not recomputed. Keep a pre-update backup for rollback.
 
-## Live 512-inhabitant, eight-workshop measurement
+## One hour of exact catch-up with 15-minute lives
 
-[Raw samples and report](../evidence/performance.json) bind the same final artifact.
-A real native HTTP process handled one sync request per second for **120.005
-seconds**, for **121 requests**, with its actual wall clock and durable data.
-There was no separate game backend, hidden clock slowdown, skipped economic tick,
-or reduction in the fixture's population.
+The fixture has 512 resident seats and eight workshops, with seeded stock/ranks.
+It requests 360 ten-second steps of absence and actually
+processes **360 steps**. Individual enumeration expects
+**2048 resident returns**; native execution records
+**2048**. The entire world, automatic recipe choices, eight
+processing totals, and related stock/state match the independent oracle.
 
-| Observation | Measured result |
-|---|---:|
+Measured catch-up is **2.267 seconds**, ending with
+**0 backlog ticks**. A real subsequent move and its replay
+succeed. The fixture command refuses to overwrite an existing world. These are
+seeded tests, not player-earned progress or proof of arbitrarily long absences.
+
+## Live 512-resident / eight-workshop observation
+
+[Raw samples](../evidence/performance.json) use these exact final bytes with actual
+wall time and native durable data for **120.003 seconds** and
+**121 sync requests**. No simulation slowdown, skipped steps, reduced
+population, or replacement backend was used.
+
+| Observation | Result |
+| --- | ---: |
 | Maximum sampled backlog | 0 ticks |
 | Final backlog | 0 ticks |
-| Median sync latency | 3.87 ms |
-| p95 sync latency | 25.46 ms |
-| Maximum sync latency | 39.86 ms |
-| Native server CPU time during the interval | 0.58 s |
-| Peak sampled resident memory | 20,525,056 bytes, approximately 19.6 MiB |
-| Post-load sync plus acknowledged move | 8.90 ms |
-| Gathered units during measurement | 1,856 |
+| Median sync latency | 2.46 ms |
+| p95 sync latency | 9.31 ms |
+| Maximum sync latency | 26.31 ms |
+| Native server CPU time | 0.29 s |
+| Peak sampled resident memory | 23,715,840 bytes |
+| Post-load sync plus acknowledged move | 6.20 ms |
+| Gathered units during observation | 1856 |
 
-All eight workshops produced real outputs; the first seven produced 24 units each
-and the eighth produced 12. Replaying the final move returned an equal receipt.
-The server was joined and its native data verified after the interval.
+Workshop output totals were `[12, 18, 12, 18, 18, 18, 18, 9]`. Post-load replay was equal,
+shutdown was joined, and native data verification passed.
 
-**Most sync requests do not have a new economic tick due.** These request latencies
-must not be labelled as full-world tick times. Resident-memory samples do not prove
-an absolute transient maximum. The post-load figure includes the helper's sync
-and action, not just one isolated native instruction or visual animation.
+**Most sync requests have no new ten-second economic step due.** These latencies
+are not full-world-step execution times. RSS samples are not absolute transient
+maxima. The post-load figure includes the helper's synchronization and action.
+This finite test does not establish indefinite real time, many busy colonies,
+every CPU, or browser frame rate.
 
-Host observations: Intel Xeon Platinum 8573C, Linux 6.18.44 x86_64, five CPUs in the
-process affinity mask, cgroup CPU setting `400000 100000` (four-CPU quota), and a
-4-GiB cgroup memory limit. No other CPU-heavy test/build was run during the timed
-interval; a shared container host is not a guarantee of exclusive hardware.
-This does not establish indefinite real time, 64 busy colonies, every CPU, or
-browser frame rate. The one-world typed-value representation and other capacity
-limits remain documented in [known limitations](KNOWN-LIMITATIONS.md).
+Host: AMD EPYC 9V74 80-Core Processor; `Linux-6.18.44-x86_64-with-glibc2.41`; 5 CPUs in the
+affinity mask; CPU quota `400000 100000` and memory limit
+`4294967296`. The clean rebuild and browser tests completed
+before this interval. The shared host was not claimed to be exclusive hardware.
 
-## Standalone application boundary
+## Rendering and interface checks
 
-[Standalone acceptance](../evidence/standalone.json) copied only the launcher,
-matching runtime, application artifact, descriptor, and manifest into a directory
-whose path contained spaces. It launched from an unrelated working directory.
-There was no `project/`, `web/`, `tools/`, or test checkout in that copy. A process
-observation found only the native server child, not a Python or Node game server.
+[Presentation tests](../evidence/quiet-world/presentation.json) compare analytical
+regional totals with exhaustive cell-by-cell enumeration for 63 combinations of
+strides and coordinates, including negative coordinates and resource-tier
+boundaries. All eight resource-kind counts and capacities agree. They test
+3,980 adjacent zoom samples for continuity. This checks
+render aggregation, not a lower-fidelity economic model.
 
-Embedded assets, registration, shutdown, restart, and the same colony were
-verified. The all-IPv4 profile was exercised through the distinct loopback address
-`127.0.0.2`; this is not a separate-device LAN or Internet-reachability test.
-Unsafe parent traversal was rejected. A deliberately damaged private test store
-was rejected without reset or overwrite. Temporary runtime descriptors were
-removed after joined shutdown. The application artifact remained unchanged.
+The tree has **96 nodes and 32 structural forks**, is acyclic, and has no center
+separation below 54.36 world units. Native parent gates and
+client ownership projection are tested separately. Browser label-placement checks
+record zero label-box overlaps at desktop fit, selected fork, and mobile fit.
+Low-priority labels yield rather than shrinking indefinitely or overlapping.
 
-## Browser review and its important boundary
+The [browser report](../evidence/quiet-world/browser/report.json) uses Chromium
+144.0.7559.96, desktop 1440 × 960, mobile 390 × 844, and a reduced-motion viewport.
+It confirms that every served HTML/CSS/JavaScript asset is exactly the committed
+web source. Controls exercise native registration, an actual canvas research
+purchase, explicit fork navigation, one-click paid building, persistent fixed/auto
+recipes, and an automatically reconciled response deliberately dropped **after
+native commit**. The action runs once; no manual retry button is needed.
 
-The [browser report](../evidence/browser/report.json) records Chromium
-144.0.7559.96, desktop 1440 x 960, and mobile 390 x 844. Normal navigation to the
-local server was attempted and rejected by the environment with
-`ERR_BLOCKED_BY_ADMINISTRATOR`.
+Dragging and touch pinching change the camera without issuing a move. Four LOD
+views remain finite; distant views draw aggregate regions, no resident sprites,
+and no full resource sprites. Regional details, cinematic mode, safe untrusted
+names, mobile recovery, no horizontal overflow, reduced-motion repainting, and a
+single game-request lane pass. No client page exception was recorded.
 
-The explicitly selected fallback loaded the actual native-served client bytes
-into a blank document, using a development-only bridge that forwarded requests
-to the real native server. Module URLs were adapted for that document, and an
-in-memory test storage adapter was declared. There was **no canned world, mock
-reward system, or replacement game simulation**. The bridge is absent from the
-production launcher and shipped game's execution path.
+**Important browser boundary:** normal local navigation was attempted and blocked
+with `ERR_BLOCKED_BY_ADMINISTRATOR`. The explicitly selected fallback executes the
+real served client in a blank document, forwarding calls to the real native server.
+There is no mock world, client-awarded resource system, or replacement simulation.
+The declared test storage adapter and module-URL adaptation do **not** verify
+normal navigation, CSP/CORS, TLS, native persistent browser storage, clipboard
+permissions, or an external reverse proxy. The production launcher does not use
+the bridge. Screenshots show that test environment, not proof of those boundaries.
 
-The tested controls performed actual registration, research, construction,
-movement, second-identity entry, and same-key recovery on a mobile layout.
-Untrusted colony names remained text. Extreme zoom remained finite; the mobile
-layout had no horizontal overflow. The game request lane reached a maximum of
-one simultaneous request. No client page exception was recorded. A response was
-deliberately discarded after native command commit; retrying the stored same
-intent did not double-execute it.
+[World](../evidence/quiet-world/browser/screenshots/world.png) ·
+[Close-up](../evidence/quiet-world/browser/screenshots/close-up.png) ·
+[Research](../evidence/quiet-world/browser/screenshots/research-tree.png) ·
+[Fork](../evidence/quiet-world/browser/screenshots/research-fork.png) ·
+[Atlas](../evidence/quiet-world/browser/screenshots/atlas.png) ·
+[Mobile](../evidence/quiet-world/browser/screenshots/mobile-world.png)
 
-This review **does not verify ordinary browser navigation, CSP/CORS enforcement,
-TLS, native persistent localStorage, clipboard permissions, or an external
-reverse proxy**. Screenshots show this bridge-based review, not proof that those
-boundaries passed:
-[world](../evidence/browser/screenshots/world.png),
-[research](../evidence/browser/screenshots/research.png), and
-[mobile](../evidence/browser/screenshots/mobile.png).
+## Copied application, retained failures, and ZIP delivery
 
-## Retained failures and delivery status
+[Standalone acceptance](../evidence/standalone.json) copies only the runtime,
+launcher, artifact, descriptor, and manifests into a path containing spaces. It
+runs from an unrelated directory with no `project/`, `web/`, `tools/`, or tests
+present. Only the native server is the launcher's child. Assets, registration,
+Ctrl+C, joined shutdown, restart, and equal world admission pass. The all-IPv4
+listener is exercised through `127.0.0.2`, not a separate LAN device. A damaged
+private test store is rejected without reset; parent traversal rejects and
+ephemeral descriptors are removed.
 
-`evidence/history/unpaged-diagnostics-failure.json` retains the earlier verification
-request that exceeded the native output limit. The final diagnostic-page targets
-fixed the test-output design; the limit was not raised. `evidence/browser-pilot/`
-is an earlier, differently hashed candidate and is not final-artifact acceptance.
-One derived-cache update failed during retired-owner admission; the accepted
-revision remained valid and the later clean checks/builds above passed. These
-observations are not hidden behind a relabelled successful historic report.
+Rejected authoring attempts are retained under `authoring/rejected/`; they are not
+accepted revisions. Earlier test failures and their corrections are described in
+[evidence/history/quiet-world](../evidence/history/quiet-world/README.md). Historical
+baseline/pilot reports keep their original hashes and are not final-build proof.
 
-The revised GitHub workflow is source configuration only: it was **not executed
-remotely for this final reconstruction**. Local tests above do not imply a green
-remote CI run. The read-only [remote observation](../evidence/remote.json) still
-found main at `9b3d8db72e2483bcf083aeb604d5366848417bf9`. A local commit or Git bundle
-is not remote main integration. Follow the non-force handoff in
-[operations](OPERATIONS.md) only after saving the complete bundle locally.
+`tools/package.py` refuses a dirty checkout, missing or differently hashed final
+reports, wrong runtime, mismatched web source, or tracked saves/caches. Its ZIP
+contains the accepted graph, source, artifact, runtime, and licenses, with a full
+payload checksum manifest. A source ZIP is also produced; Git history is optional
+and separate. The final delivery inspection is performed on a newly extracted ZIP
+and recorded alongside that ZIP, not asserted merely because packaging completed.
+
+The updated GitHub workflow is configuration, not evidence of a remote CI run.
+Neither these tests, a local commit, nor a ZIP implies publication to remote main.

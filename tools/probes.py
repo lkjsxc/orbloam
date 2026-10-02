@@ -3,7 +3,7 @@ from meaning import I, L, F, R, IF, LET
 from catalog import ITEMS
 
 COUNTS = [0, 1, 16, 256, 512, 4096]
-TICKS = [-1, 0, 1, 359, 360, 375, 720, 1024]
+TICKS = [-1, 0, 1, 89, 90, 105, 180, 1024]
 
 
 def compose(g):

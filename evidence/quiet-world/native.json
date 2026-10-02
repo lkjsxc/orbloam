@@ -1,0 +1,28 @@
+{
+  "schema": "orbloam-quiet-native-v2",
+  "status": "passed",
+  "artifact_sha256": "5b925822ae0f1351d1d41efef5ccc877cd90281d2f7097d046352d30ecda6693",
+  "runtime_sha256": "98a39bd192c1e98187a1a954f916f5ffc89ef2586317c25e1efa06c61b888c32",
+  "native_journey": {
+    "child_before_root_rejected": true,
+    "right_sibling_before_left_accepted": true,
+    "unbought_sibling_remains_unowned": true,
+    "unbought_parent_still_blocks": true,
+    "duplicate_purchase_no_charge": true,
+    "replay_same_world": true,
+    "automatic_and_manual_server_modes": true,
+    "foreign_building_override_rejected": true,
+    "restart_keeps_branch_ownership": true,
+    "seed_population": 512,
+    "population_after_two_fixture_purchases": 608
+  },
+  "predecessor_artifact_sha256": "afd5213d7663e88d0a3fe1a13a1a8946bdd610f3f65279041536a66cae055828",
+  "old_save_admission": {
+    "exact_world_unchanged_on_view": true,
+    "same_key_accepted": true,
+    "new_discovery_on_old_save": true,
+    "existing_branch_prefixes_retained": true,
+    "manual_override_on_old_workshop": true,
+    "schema_rewrite_or_data_reset": false
+  }
+}

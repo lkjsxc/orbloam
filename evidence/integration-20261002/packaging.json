@@ -1,0 +1,22 @@
+{
+  "status": "passed",
+  "source": "temporary local packaging-only commit; not published",
+  "archives": {
+    "orbloam-quiet-world.zip": {
+      "entries": 384,
+      "sha256": "2a3126abb5954e6da65a02f656649a969e556b4ad849641e283ff07022a92363",
+      "legacy_recovery_excluded": true,
+      "no_player_data_or_caches": true,
+      "canonical_and_artifact_present": true,
+      "runtime_present": true
+    },
+    "orbloam-source.zip": {
+      "entries": 404,
+      "sha256": "156c8100409f65ba848a845cb83b9a43e290ea2827ab401b1fb6ce16be90c5dd",
+      "legacy_recovery_excluded": true,
+      "no_player_data_or_caches": true,
+      "canonical_and_artifact_present": true,
+      "runtime_present": false
+    }
+  }
+}

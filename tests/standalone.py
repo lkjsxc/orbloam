@@ -24,7 +24,7 @@ def main():
     (package/'runtime').mkdir();(package/'dist').mkdir()
     shutil.copy2(BINARY,package/'runtime/lkjscript')
     shutil.copy2(ROOT/'start.sh',package/'start.sh')
-    for name in ['application.lkja','service.deployment.json','SHA256SUMS']:
+    for name in ['application.lkja','service.deployment.json','BUILD.json','SHA256SUMS']:
         shutil.copy2(ROOT/'dist'/name,package/'dist'/name)
     assert not any((package/n).exists() for n in ['project','web','tools','tests'])
     def available_port():
@@ -32,7 +32,13 @@ def main():
     def launch(lan=False):
         port=available_port();log=package/'launch.log';handle=log.open('w')
         cmd=['sh',str(package/'start.sh'),'--port',str(port)]+(['--lan'] if lan else [])
-        process=subprocess.Popen(cmd,cwd='/tmp',stdout=handle,stderr=subprocess.STDOUT,start_new_session=True)
+        # A shell that starts this verifier asynchronously may inherit SIGINT=IGN.
+        # Model a foreground terminal invocation, rather than propagating that harness state.
+        def foreground_signals():
+            signal.signal(signal.SIGINT, signal.SIG_DFL)
+            signal.signal(signal.SIGTERM, signal.SIG_DFL)
+        process=subprocess.Popen(cmd,cwd='/tmp',stdout=handle,stderr=subprocess.STDOUT,
+                                 start_new_session=True,preexec_fn=foreground_signals)
         deadline=time.monotonic()+30
         while time.monotonic()<deadline:
             text=log.read_text()
@@ -94,7 +100,10 @@ def main():
         if process is not None and process.poll() is None:
             process.send_signal(signal.SIGINT)
             try:process.wait(timeout=35)
-            except subprocess.TimeoutExpired:process.kill();process.wait()
+            except subprocess.TimeoutExpired:
+                # This process owns the isolated launcher session; leave no native orphan.
+                import os
+                os.killpg(process.pid, signal.SIGKILL);process.wait()
         if handle and not handle.closed:handle.close()
     report['artifact_unchanged']=sha256(ARTIFACT)==report['artifact_sha256']
     if not report['artifact_unchanged']:report['status']='failed'

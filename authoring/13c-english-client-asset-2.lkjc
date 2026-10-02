@@ -1,0 +1,277 @@
+request base=rev_24ccf756c82711ae44f587fcd7c962d18aa4eeb101702685fb79cb37c7c92ec5
+type.structural-record as=@Header
+type.field parent=@Header index=0 name=name type=text
+type.field parent=@Header index=1 name=value type=bytes
+type.list as=@Headers item=@Header
+type.stream as=@Body item=bytes
+type.list as=@Texts item=text
+type.map as=@Query key=text value=@Texts
+type.structural-record as=@Request
+type.field parent=@Request index=0 name=body type=@Body
+type.field parent=@Request index=1 name=headers type=@Headers
+type.field parent=@Request index=2 name=method type=text
+type.field parent=@Request index=3 name=path type=text
+type.field parent=@Request index=4 name=query type=text
+type.field parent=@Request index=5 name=query_parameters type=@Query
+type.structural-record as=@Response
+type.field parent=@Response index=0 name=body type=bytes
+type.field parent=@Response index=1 name=headers type=@Headers
+type.field parent=@Response index=2 name=status type=i64
+type.named as=@DataKeyPart declaration=pkg_10000000000000000000000000000001/decl_14b03b7e7e25e1cf4bd5a5e3932e73ab
+type.named as=@DataEntry declaration=pkg_10000000000000000000000000000001/decl_8b2cf37fae3bc1fd3cdd43367ac5b3e6
+type.named as=@DataSchema declaration=pkg_10000000000000000000000000000001/decl_5ad011a7306a7a1da03f982c3d96318c
+type.named as=@DataExpectation declaration=pkg_10000000000000000000000000000001/decl_388aa498465975c5de5d579e6230a28a
+type.named as=@TransactionAbortReason declaration=pkg_10000000000000000000000000000001/decl_717a93982fa4cfc42d0397150df09872
+type.list as=@Entries item=@DataEntry
+type.function as=@authoring-ready-port result=bool
+type.structural-record as=@Point
+type.field parent=@Point index=0 name=x type=i64
+type.field parent=@Point index=1 name=y type=i64
+type.map as=@Inventory key=text value=i64
+type.map as=@Receipts key=text value=text
+type.structural-record as=@Cohort
+type.field parent=@Cohort index=0 name=first type=i64
+type.field parent=@Cohort index=1 name=count type=i64
+type.field parent=@Cohort index=2 name=start type=i64
+type.list as=@Cohorts item=@Cohort
+type.structural-record as=@Building
+type.field parent=@Building index=0 name=id type=i64
+type.field parent=@Building index=1 name=kind type=i64
+type.field parent=@Building index=2 name=recipe type=i64
+type.field parent=@Building index=3 name=x type=i64
+type.field parent=@Building index=4 name=y type=i64
+type.field parent=@Building index=5 name=health type=i64
+type.field parent=@Building index=6 name=progress type=i64
+type.field parent=@Building index=7 name=produced type=i64
+type.field parent=@Building index=8 name=enabled type=bool
+type.field parent=@Building index=9 name=status type=text
+type.list as=@Buildings item=@Building
+type.structural-record as=@Route
+type.field parent=@Route index=0 name=job type=i64
+type.field parent=@Route index=1 name=x type=i64
+type.field parent=@Route index=2 name=y type=i64
+type.field parent=@Route index=3 name=tier type=i64
+type.field parent=@Route index=4 name=units type=i64
+type.field parent=@Route index=5 name=workers type=i64
+type.list as=@Routes item=@Route
+type.structural-record as=@Colony
+type.field parent=@Colony index=0 name=id type=i64
+type.field parent=@Colony index=1 name=name type=text
+type.field parent=@Colony index=2 name=created_tick type=i64
+type.field parent=@Colony index=3 name=from_x type=i64
+type.field parent=@Colony index=4 name=from_y type=i64
+type.field parent=@Colony index=5 name=to_x type=i64
+type.field parent=@Colony index=6 name=to_y type=i64
+type.field parent=@Colony index=7 name=move_at type=i64
+type.field parent=@Colony index=8 name=move_ms type=i64
+type.field parent=@Colony index=9 name=cohorts type=@Cohorts
+type.field parent=@Colony index=10 name=inventory type=@Inventory
+type.field parent=@Colony index=11 name=research type=@Inventory
+type.field parent=@Colony index=12 name=buildings type=@Buildings
+type.field parent=@Colony index=13 name=routes type=@Routes
+type.field parent=@Colony index=14 name=essence type=i64
+type.field parent=@Colony index=15 name=experience type=i64
+type.field parent=@Colony index=16 name=deaths type=i64
+type.field parent=@Colony index=17 name=gathered type=i64
+type.field parent=@Colony index=18 name=conversations type=i64
+type.field parent=@Colony index=19 name=neighbor type=i64
+type.field parent=@Colony index=20 name=next_building type=i64
+type.field parent=@Colony index=21 name=sequence type=i64
+type.field parent=@Colony index=22 name=last_intent type=text
+type.field parent=@Colony index=23 name=receipts type=@Receipts
+type.list as=@Colonies item=@Colony
+type.structural-record as=@Node
+type.field parent=@Node index=0 name=stock type=i64
+type.field parent=@Node index=1 name=tick type=i64
+type.field parent=@Node index=2 name=x type=i64
+type.field parent=@Node index=3 name=y type=i64
+type.field parent=@Node index=4 name=kind type=i64
+type.field parent=@Node index=5 name=tier type=i64
+type.map as=@Nodes key=text value=@Node
+type.structural-record as=@World
+type.field parent=@World index=0 name=version type=i64
+type.field parent=@World index=1 name=tick type=i64
+type.field parent=@World index=2 name=next_id type=i64
+type.field parent=@World index=3 name=colonies type=@Colonies
+type.field parent=@World index=4 name=nodes type=@Nodes
+type.structural-record as=@Recipe
+type.field parent=@Recipe index=0 name=id type=i64
+type.field parent=@Recipe index=1 name=kind type=i64
+type.field parent=@Recipe index=2 name=tier type=i64
+type.field parent=@Recipe index=3 name=branch type=i64
+type.field parent=@Recipe index=4 name=rank type=i64
+type.field parent=@Recipe index=5 name=period type=i64
+type.field parent=@Recipe index=6 name=workers type=i64
+type.field parent=@Recipe index=7 name=output type=text
+type.field parent=@Recipe index=8 name=amount type=i64
+type.field parent=@Recipe index=9 name=a type=text
+type.field parent=@Recipe index=10 name=na type=i64
+type.field parent=@Recipe index=11 name=b type=text
+type.field parent=@Recipe index=12 name=nb type=i64
+type.field parent=@Recipe index=13 name=c type=text
+type.field parent=@Recipe index=14 name=nc type=i64
+type.structural-record as=@Research
+type.field parent=@Research index=0 name=id type=i64
+type.field parent=@Research index=1 name=branch type=i64
+type.field parent=@Research index=2 name=tier type=i64
+type.field parent=@Research index=3 name=essence type=i64
+type.field parent=@Research index=4 name=raw type=text
+type.field parent=@Research index=5 name=raw_amount type=i64
+type.field parent=@Research index=6 name=product type=text
+type.field parent=@Research index=7 name=product_amount type=i64
+type.structural-record as=@Envelope
+type.field parent=@Envelope index=0 name=me type=i64
+type.field parent=@Envelope index=1 name=world type=@World
+type.field parent=@Envelope index=2 name=now_ms type=i64
+type.field parent=@Envelope index=3 name=backlog_ticks type=i64
+type.structural-record as=@Population
+type.field parent=@Population index=0 name=tick type=i64
+type.field parent=@Population index=1 name=count type=i64
+type.field parent=@Population index=2 name=capacity type=i64
+type.field parent=@Population index=3 name=deaths type=i64
+type.field parent=@Population index=4 name=roles type=@Inventory
+type.structural-record as=@Candidate
+type.field parent=@Candidate index=0 name=key type=text
+type.field parent=@Candidate index=1 name=node type=@Node
+type.field parent=@Candidate index=2 name=distance type=i64
+type.field parent=@Candidate index=3 name=valid type=bool
+type.structural-record as=@GatherContext
+type.field parent=@GatherContext index=0 name=point type=@Point
+type.field parent=@GatherContext index=1 name=tick type=i64
+type.field parent=@GatherContext index=2 name=roles type=@Inventory
+type.field parent=@GatherContext index=3 name=tier type=i64
+type.field parent=@GatherContext index=4 name=radius type=i64
+type.field parent=@GatherContext index=5 name=multiplier type=i64
+type.field parent=@GatherContext index=6 name=storage type=i64
+type.field parent=@GatherContext index=7 name=min_x type=i64
+type.field parent=@GatherContext index=8 name=max_x type=i64
+type.field parent=@GatherContext index=9 name=min_y type=i64
+type.field parent=@GatherContext index=10 name=max_y type=i64
+type.structural-record as=@GatherState
+type.field parent=@GatherState index=0 name=inventory type=@Inventory
+type.field parent=@GatherState index=1 name=nodes type=@Nodes
+type.field parent=@GatherState index=2 name=routes type=@Routes
+type.field parent=@GatherState index=3 name=units type=i64
+type.structural-record as=@NodeEntry
+type.field parent=@NodeEntry index=0 name=key type=text
+type.field parent=@NodeEntry index=1 name=value type=@Node
+type.list as=@NodeEntries item=@NodeEntry
+type.structural-record as=@RecipeChoice
+type.field parent=@RecipeChoice index=0 name=id type=i64
+type.field parent=@RecipeChoice index=1 name=score type=i64
+type.structural-record as=@FactoryContext
+type.field parent=@FactoryContext index=0 name=tick type=i64
+type.field parent=@FactoryContext index=1 name=point type=@Point
+type.field parent=@FactoryContext index=2 name=radius type=i64
+type.field parent=@FactoryContext index=3 name=storage type=i64
+type.field parent=@FactoryContext index=4 name=research type=@Inventory
+type.structural-record as=@FactoryState
+type.field parent=@FactoryState index=0 name=inventory type=@Inventory
+type.field parent=@FactoryState index=1 name=buildings type=@Buildings
+type.field parent=@FactoryState index=2 name=workers type=i64
+type.field parent=@FactoryState index=3 name=experience type=i64
+type.structural-record as=@MachineResult
+type.field parent=@MachineResult index=0 name=inventory type=@Inventory
+type.field parent=@MachineResult index=1 name=building type=@Building
+type.field parent=@MachineResult index=2 name=experience type=i64
+type.structural-record as=@ColonyStep
+type.field parent=@ColonyStep index=0 name=colony type=@Colony
+type.field parent=@ColonyStep index=1 name=nodes type=@Nodes
+type.structural-record as=@Action
+type.field parent=@Action index=0 name=op type=text
+type.field parent=@Action index=1 name=sequence type=i64
+type.field parent=@Action index=2 name=index type=i64
+type.field parent=@Action index=3 name=value type=i64
+type.field parent=@Action index=4 name=x type=i64
+type.field parent=@Action index=5 name=y type=i64
+type.field parent=@Action index=6 name=text type=text
+type.structural-record as=@ActionResult
+type.field parent=@ActionResult index=0 name=world type=@World
+type.field parent=@ActionResult index=1 name=ok type=bool
+type.field parent=@ActionResult index=2 name=error type=text
+type.structural-record as=@Error
+type.field parent=@Error index=0 name=error type=text
+type.structural-record as=@Join
+type.field parent=@Join index=0 name=name type=text
+type.field parent=@Join index=1 name=token type=text
+type.structural-record as=@Joined
+type.field parent=@Joined index=0 name=id type=i64
+type.field parent=@Joined index=1 name=token type=text
+type.structural-record as=@WorldRead
+type.field parent=@WorldRead index=0 name=exists type=bool
+type.field parent=@WorldRead index=1 name=valid type=bool
+type.field parent=@WorldRead index=2 name=world type=@World
+type.field parent=@WorldRead index=3 name=expectation type=@DataExpectation
+type.structural-record as=@Media
+type.field parent=@Media index=0 name=count type=i64
+type.field parent=@Media index=1 name=valid type=bool
+effect.row as=@view-effects
+effect.requirement parent=@view-effects index=0 requirement=pkg_8e4d55489066456031faaa0d27c35ead/req_df92ad3de8475d92b7faca0a216bbf52
+effect.requirement parent=@view-effects index=1 requirement=pkg_8e4d55489066456031faaa0d27c35ead/req_1d67b8e3de3101aa0799f20fd084dd0b
+type.task-function as=@view-port result=@Response effect=@view-effects
+type.argument parent=@view-port index=0 type=@Request
+effect.row as=@sync-effects
+effect.requirement parent=@sync-effects index=0 requirement=pkg_8e4d55489066456031faaa0d27c35ead/req_df92ad3de8475d92b7faca0a216bbf52
+effect.requirement parent=@sync-effects index=1 requirement=pkg_8e4d55489066456031faaa0d27c35ead/req_1d67b8e3de3101aa0799f20fd084dd0b
+type.task-function as=@sync-port result=@Response effect=@sync-effects
+type.argument parent=@sync-port index=0 type=@Request
+effect.row as=@join-effects
+effect.requirement parent=@join-effects index=0 requirement=pkg_8e4d55489066456031faaa0d27c35ead/req_df92ad3de8475d92b7faca0a216bbf52
+effect.requirement parent=@join-effects index=1 requirement=pkg_8e4d55489066456031faaa0d27c35ead/req_5fe21121fa8b61ed3e41cb720efe64ef
+effect.requirement parent=@join-effects index=2 requirement=pkg_8e4d55489066456031faaa0d27c35ead/req_1d67b8e3de3101aa0799f20fd084dd0b
+type.task-function as=@join-port result=@Response effect=@join-effects
+type.argument parent=@join-port index=0 type=@Request
+effect.row as=@action-effects
+effect.requirement parent=@action-effects index=0 requirement=pkg_8e4d55489066456031faaa0d27c35ead/req_df92ad3de8475d92b7faca0a216bbf52
+effect.requirement parent=@action-effects index=1 requirement=pkg_8e4d55489066456031faaa0d27c35ead/req_1d67b8e3de3101aa0799f20fd084dd0b
+effect.requirement parent=@action-effects index=2 requirement=pkg_8e4d55489066456031faaa0d27c35ead/req_5fe21121fa8b61ed3e41cb720efe64ef
+type.task-function as=@action-port result=@Response effect=@action-effects
+type.argument parent=@action-port index=0 type=@Request
+type.function as=@health-port result=@Response
+type.argument parent=@health-port index=0 type=@Request
+type.function as=@catalog-port result=@Response
+type.argument parent=@catalog-port index=0 type=@Request
+type.function as=@asset-0-port result=@Response
+type.argument parent=@asset-0-port index=0 type=@Request
+type.function as=@asset-1-port result=@Response
+type.argument parent=@asset-1-port index=0 type=@Request
+type.function as=@asset-2-port result=@Response
+type.argument parent=@asset-2-port index=0 type=@Request
+type.function as=@asset-2-index-port result=@Response
+type.argument parent=@asset-2-index-port index=0 type=@Request
+type.function as=@asset-3-port result=@Response
+type.argument parent=@asset-3-port index=0 type=@Request
+type.function as=@asset-4-port result=@Response
+type.argument parent=@asset-4-port index=0 type=@Request
+type.function as=@asset-5-port result=@Response
+type.argument parent=@asset-5-port index=0 type=@Request
+effect.row as=@fixture-create-effects
+effect.requirement parent=@fixture-create-effects index=0 requirement=pkg_8e4d55489066456031faaa0d27c35ead/req_df92ad3de8475d92b7faca0a216bbf52
+effect.requirement parent=@fixture-create-effects index=1 requirement=pkg_8e4d55489066456031faaa0d27c35ead/req_1d67b8e3de3101aa0799f20fd084dd0b
+effect.requirement parent=@fixture-create-effects index=2 requirement=pkg_8e4d55489066456031faaa0d27c35ead/req_d22ed8ef4b4779fb4047e6216a0e862e
+type.task-function as=@fixture-create-port result=text effect=@fixture-create-effects
+type.argument parent=@fixture-create-port index=0 type=i64
+type.argument parent=@fixture-create-port index=1 type=i64
+type.function as=@population-probe-port result=@Population
+type.argument parent=@population-probe-port index=0 type=i64
+type.argument parent=@population-probe-port index=1 type=i64
+type.list as=@Populations item=@Population
+type.structural-record as=@MachineProbe
+type.field parent=@MachineProbe index=0 name=id type=i64
+type.field parent=@MachineProbe index=1 name=ready type=@MachineResult
+type.field parent=@MachineProbe index=2 name=blocked type=@MachineResult
+type.field parent=@MachineProbe index=3 name=warehouse type=@MachineResult
+type.list as=@MachineProbes item=@MachineProbe
+type.structural-record as=@ProbeReport
+type.field parent=@ProbeReport index=0 name=populations type=@Populations
+type.field parent=@ProbeReport index=1 name=machines type=@MachineProbes
+type.field parent=@ProbeReport index=2 name=before type=@World
+type.field parent=@ProbeReport index=3 name=after type=@World
+type.field parent=@ProbeReport index=4 name=split_equal type=bool
+type.function as=@diagnostics-port result=text
+type.function as=@diagnostic-page-port result=text
+type.argument parent=@diagnostic-page-port index=0 type=i64
+expression.block as=$update-asset-2-body
+  (call decl_c7f997eedeaf51885599c21a1e253c0f (i64 200) (call pkg_10000000000000000000000000000001/decl_a84fb8598c42e86ff66208829b86ae55 (text "<!doctype html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1,viewport-fit=cover\">\n<meta name=\"theme-color\" content=\"#111e22\"><meta name=\"description\" content=\"Orbloam — little lives, a world of their own. A quiet shared colony game.\">\n<title>Orbloam — Little lives. A world of their own.</title>\n<link rel=\"stylesheet\" href=\"./styles.css\"><script type=\"module\" src=\"./client.js\"></script>\n</head>\n<body>\n<canvas id=\"world\" aria-label=\"Shared world. Drag to pan, scroll or pinch to zoom. Click a resident, resource, workshop, or core to inspect. Click empty ground to move your core.\" tabindex=\"0\"></canvas>\n<header class=\"topbar chrome\">\n <button id=\"home-brand\" class=\"wordmark\" title=\"Return to your core\">orbloam<span class=\"brand-dot\"></span></button>\n <button id=\"colony-hud\" class=\"colony-chip glass hidden\" aria-label=\"Open colony details\"><span id=\"colony-name\"></span><span class=\"chip-divider\"></span><span title=\"Residents\"><b id=\"population\">0</b><small>lives</small></span><span class=\"essence\" title=\"Essence\"><i>✧</i><b id=\"essence\">0</b></span></button>\n <div class=\"top-right\"><span id=\"connection\" title=\"Connection status\"><i id=\"status-dot\" class=\"status-dot\"></i><span id=\"network\" class=\"sr-only\">Connecting</span></span><button id=\"menu-button\" class=\"round-button\" aria-label=\"Open menu\" title=\"Menu\">···</button></div>\n</header>\n<aside id=\"sidebar\" class=\"drawer glass hidden chrome\" aria-label=\"Colony details\">\n <div class=\"side-heading\"><div><span class=\"eyebrow\">YOUR LITTLE WORLD</span><h2 id=\"panel-title\">Colony</h2></div><button id=\"close-sidebar\" class=\"icon\" aria-label=\"Close colony panel\">×</button></div>\n <nav class=\"tabs\" aria-label=\"Colony panels\"><button data-tab=\"overview\">Overview</button><button data-tab=\"inventory\">Stores</button><button data-tab=\"industry\">Workshops</button><button data-tab=\"neighbors\">Neighbors</button></nav>\n <div id=\"panel-content\" class=\"panel-content\"></div>\n</aside>\n<section id=\"selection\" class=\"selection glass hidden chrome\" aria-label=\"Selection details\"><button id=\"close-selection\" class=\"icon close\" aria-label=\"Close selection\">×</button><div id=\"selection-body\"></div></section>\n<footer id=\"toolbar\" class=\"dock glass hidden chrome\" aria-label=\"Game tools\">\n <button id=\"open-research\"><span class=\"tool-icon\">♧</span><span>Research</span></button><span class=\"dock-divider\"></span><button id=\"build-mode\"><span class=\"tool-icon\">⌂</span><span>Build</span></button><button id=\"inventory-button\"><span class=\"tool-icon\">◫</span><span>Colony</span></button>\n</footer>\n<div id=\"camera-tools\" class=\"camera-tools hidden chrome\"><button id=\"center\" class=\"round-button\" aria-label=\"Center on your core\" title=\"Home\">◎</button><div class=\"zoom-controls glass\"><button id=\"zoom-out\" aria-label=\"Zoom out\">−</button><span id=\"zoom-label\">125%</span><button id=\"zoom-in\" aria-label=\"Zoom in\">+</button></div></div>\n<div id=\"scale\" class=\"map-scale chrome\"><span id=\"scale-line\"></span><span id=\"scale-label\"></span><small id=\"survey\"></small></div>\n<div id=\"mode-hint\" class=\"mode-hint hidden chrome\"><span id=\"mode-text\"></span><button id=\"cancel-mode\">Cancel</button></div>\n<div id=\"hover-label\" class=\"hover-label hidden\" aria-hidden=\"true\"></div>\n<div id=\"toast\" class=\"toast hidden\" role=\"status\"></div>\n<div id=\"backlog\" class=\"notice progress-notice glass hidden\" role=\"status\"><span class=\"spinner\"></span><span><b>Catching up</b><small id=\"backlog-text\"></small></span></div>\n<div id=\"pending\" class=\"notice glass hidden\" role=\"status\"><span id=\"pending-text\">Checking your last action…</span><button id=\"retry-pending\">Check again</button><button id=\"discard-pending\" class=\"quiet\">Review</button></div>\n<div id=\"backup-key\" class=\"notice glass hidden\"><span>Keep a recovery key for this core.</span><button id=\"save-first-key\">Save key</button><button id=\"dismiss-key\" class=\"icon\" aria-label=\"Dismiss reminder\">×</button></div>\n<div id=\"auth\" class=\"veil\">\n <section class=\"auth-card glass\"><canvas id=\"auth-orb\" width=\"256\" height=\"256\" aria-hidden=\"true\"></canvas><span class=\"eyebrow\">A QUIET, SHARED WORLD</span><h1>Orbloam</h1><p class=\"tagline\">Little lives. A world of their own.</p><p class=\"intro\">A small light becomes a home.<br>Let life gather, create, and begin again.</p>\n <form id=\"join-form\"><label for=\"nickname\">Name your colony</label><input id=\"nickname\" name=\"nickname\" required maxlength=\"32\" placeholder=\"A little place called…\" autocomplete=\"off\"><button class=\"primary wide\" type=\"submit\">Begin a new life <span>↗</span></button></form>\n <details><summary>Return with a recovery key</summary><form id=\"recover-form\"><label for=\"recovery-key\">Your 64-character key</label><input id=\"recovery-key\" type=\"password\" required minlength=\"64\" maxlength=\"64\" autocomplete=\"off\" spellcheck=\"false\" placeholder=\"Paste your saved key\"><button type=\"submit\" class=\"wide\">Return to your core</button></form></details>\n <label class=\"remember\"><input id=\"remember\" type=\"checkbox\" checked>Remember me on this browser</label><p id=\"auth-error\" class=\"error\" role=\"alert\"></p><p class=\"small muted\">A name is not a login. Keep your recovery key private.</p>\n </section>\n</div>\n<section id=\"research-overlay\" class=\"research-overlay hidden\" aria-label=\"Research tree\">\n <canvas id=\"research-canvas\" tabindex=\"0\" aria-label=\"A branching research tree with 96 discoveries. Drag to pan, scroll or pinch to zoom. Use Browse for keyboard access.\"></canvas>\n <header class=\"research-heading\"><div><button id=\"research-close\" class=\"quiet\">← World</button><span class=\"eyebrow\">GROW IN YOUR OWN DIRECTION</span><h1>Research <small id=\"research-progress\"></small></h1></div><div class=\"research-tools glass\"><span id=\"research-essence\" class=\"essence\"></span><button id=\"research-list-toggle\">Browse</button><button id=\"research-fit\" aria-label=\"Fit the entire tree\">Fit</button><button id=\"research-minus\" aria-label=\"Zoom research out\">−</button><button id=\"research-plus\" aria-label=\"Zoom research in\">+</button></div></header>\n <aside id=\"research-detail\" class=\"research-detail glass hidden\" aria-label=\"Discovery details\"></aside>\n <aside id=\"research-list\" class=\"research-list glass hidden\" aria-label=\"Browse discoveries\"></aside>\n <p class=\"tree-guide\">One root. Many paths. <span>Choose a glowing discovery to begin.</span></p>\n</section>\n<dialog id=\"menu-dialog\" class=\"glass dialog menu-dialog\"><button class=\"icon close\" data-close=\"menu-dialog\" aria-label=\"Close menu\">×</button><span class=\"eyebrow\">ORBLOAM</span><h2>Make yourself at home.</h2><button id=\"help-button\" class=\"wide\">How life works</button><button id=\"key-button\" class=\"wide\">Recovery key</button><button id=\"hide-ui\" class=\"wide\">Hide interface <kbd>H</kbd></button><p class=\"small muted\">Click to discover. Drag to wander.<br>Everything else can wait.</p></dialog>\n<dialog id=\"help-dialog\" class=\"glass dialog\"><button class=\"icon close\" data-close=\"help-dialog\" aria-label=\"Close help\">×</button><span class=\"eyebrow\">A LITTLE GUIDANCE</span><h2>Watch. Wander. Let life grow.</h2>\n <h3>Fifteen little minutes</h3><p>Residents gather and work by themselves. A life lasts 15 minutes, then returns Essence to your core and begins a new generation. Research and buildings remain. Your first 16 places fill gradually; Vitality discoveries add 48 more.</p>\n <h3>Your world, not a dashboard</h3><p>Click a core, resident, resource, or workshop for details. Click empty ground to move your core. Drag to pan and scroll or pinch to zoom. In the distant atlas, click a region to see its resources or double-click to look closer. Home returns to your core; Escape closes a panel. H hides the interface.</p>\n <h3>A tree, not a checklist</h3><p>Each family forks into separate paths. A discovery requires its connected parent, not every earlier number. Every discovery strengthens that family. Nothing is lost when you choose another branch later.</p>\n <h3>Workshops think for themselves</h3><p>Build a workshop once. It chooses unlocked, affordable recipes according to the stock you need, finishes work in progress, and maintains itself while near your core and supplied with workers, timber, and stone. Open a workshop only to override its recipe, pause it, repair it immediately, or dismantle it.</p>\n <h3>The wider landscape</h3><p>Deposits are finite and shared. They regrow over time. Moving and researching Reach open richer gathering areas. At a distance, the atlas combines deposits into true regional totals; it does not change the simulation. Walking and carrying are visual representations, not individual pathfinding.</p>\n <h3>Away and back again</h3><p>The native server resolves elapsed 10-second steps in order when someone connects. After a long absence, catch-up can delay actions. An uncertain action is retried with the same ID, never silently duplicated. Keep both your recovery key and the server’s data backup.</p><button class=\"primary wide\" data-close=\"help-dialog\">Back to the world</button></dialog>\n<dialog id=\"key-dialog\" class=\"glass dialog\"><button class=\"icon close\" data-close=\"key-dialog\" aria-label=\"Close recovery key\">×</button><span class=\"eyebrow\">YOUR RECOVERY KEY</span><h2>A way back to this little world.</h2><p>This is a password. Anyone who has it can control your core.</p><input id=\"key-value\" type=\"password\" readonly autocomplete=\"off\" aria-label=\"Recovery key\"><div class=\"button-row\"><button id=\"reveal-key\">Reveal</button><button id=\"copy-key\">Copy</button><button id=\"download-key\" class=\"primary\">Save file</button></div><p class=\"small muted\">The same key works on another device connected to this server. It is not a backup of the world itself.</p><button id=\"logout\" class=\"wide quiet\">Sign out of this browser</button></dialog>\n<button id=\"restore-ui\" class=\"restore-ui hidden\" aria-label=\"Show interface\">Show interface · H</button>\n</body>\n</html>\n")) (text "text/html; charset=utf-8"))
+expression.end
+replace.body function=decl_cd779bd86c804b79e6d4de623bb7c615 body=$update-asset-2-body

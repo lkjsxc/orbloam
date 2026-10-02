@@ -33,13 +33,18 @@ Actions require all of the following fields:
 |---|---|
 | `move` | `x`,`y`: core destination |
 | `rename` | `text`: nonempty name, at most 32 characters |
-| `research` | `index`: catalogue research ID 0..95, in branch order |
+| `research` | `index`: catalogue research ID 0..95; its parent must be owned and the node must be unowned |
 | `build` | `index`: facility kind 0..7; `value`: its recipe ID; `x`,`y`: placement |
-| `recipe` | `index`: owned building ID; `value`: compatible unlocked recipe ID |
+| `recipe` | `index`: owned building ID; `value`: compatible unlocked recipe ID; selects fixed-recipe mode |
+| `auto` | `index`: owned building ID; restores native automatic recipe selection |
 | `pause` | `index`: owned building ID; `value`: 0 paused, 1 enabled |
 | `repair` | `index`: owned building ID |
 | `dismantle` | `index`: owned building ID |
 | `transfer` | `index`: other core ID; `value`: positive amount; `text`: inventory item key |
+
+Research ownership uses independent node IDs and explicit parent links. A pre-update family's rank remains an owned prefix; its first new discovery freezes that prefix under `legacy:<family>` and records ownership under `node:<id>`. The numeric family rank still counts discoveries for capacities, yields and recipe access. Buying one sibling does not buy another.
+
+Workshop overrides use `manual:<building-id>` in the existing research map: `1` selects fixed-recipe mode, while `0` or an absent key selects automatic mode. Older workshops have no override key, so they become automatic when eligible; select `recipe` again to retain a specific recipe. Work already progressing in the working state keeps its recipe. These extra map keys preserve the typed world schema; they do not make the new gameplay semantics reversible by swapping the binary alone.
 
 Accepted intents use a 64-slot receipt ring. A retained identical old sequence returns the current snapshot without applying its action again, even after later actions. Different content or an expired old receipt yields 409 `sequence_conflict`. A retry acknowledgement is not a promise to return the original response bytes; other accepted state may have changed.
 

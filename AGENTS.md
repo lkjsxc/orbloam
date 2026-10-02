@@ -1,6 +1,6 @@
 # Orbloam contributor contract
 
-Orbloam is a shared, cooperative browser colony game. Preserve the user's circle-based visual language, mouse-first controls, one shared resource world, approximately one-hour resident lives, persistent research, and substantial industry.
+Orbloam is a shared, cooperative browser colony game. Preserve the user's circle-based visual language, mouse-first controls, one shared resource world, 15-minute resident lives, persistent research, and substantial industry.
 
 ## Authority and execution
 
@@ -8,9 +8,15 @@ Use the unchanged pinned official lkjscript runtime. Gameplay, admission, comman
 
 The source generators produce a fresh graph with fresh identities; they are not a second live authority. Prefer reviewed changes to the accepted graph for continued development. Re-creation requires explicit schema/transport compatibility checks. Never regenerate an accepted project silently during startup or CI.
 
+## Interaction and rendering
+
+Keep player-facing strings and current guides in English. The default view is the world, not an open dashboard: details appear on selection. Empty-ground clicks move the core; drags and pinches must never issue game commands. Workshops choose recipes natively by default; explicit fixed-recipe control remains available. A real parent graph, not a rank chain, gates each research discovery. Preserve older rank prefixes through explicit per-family legacy baselines. Never infer ownership from the increased count after a branch purchase.
+
+Use screen-space, collision-checked research labels and continuous, world-anchored LOD. Regional resource totals include all kinds and real depletion; do not replace them with arbitrary stride samples. Sphere materials and resource silhouettes are local cached canvas assets. Client interpolation and render aggregation do not change economic authority.
+
 ## Correctness
 
-Retain exact chronological 10-second economic ticks. Birth slots, one-hour deaths, roles, shared scarcity/regrowth, input consumption, maintenance, ownership and action receipts are deterministic new-version rules. Cosmetic interpolation is not physical simulation. Never hide backlog, skip elapsed time, silently delete residents/depleted resources, or market a new model as an identical-workload speedup of the predecessor.
+Retain exact chronological 10-second economic ticks. Birth slots, 90-tick deaths, roles, shared scarcity/regrowth, input consumption, maintenance, ownership and action receipts are deterministic new-version rules. Cosmetic interpolation is not physical simulation. Never hide backlog, skip elapsed time, silently delete residents/depleted resources, or market a new model as an identical-workload speedup of the predecessor.
 
 A successful response must follow committed native transaction completion. Preserve registration retries, bearer-key confidentiality, explicit sequence conflicts and replay of the exact uncertain intent. Do not replace type/JSON errors with a fresh world. Do not migrate/delete saves automatically. An absent-root logical restore must be verified before an operator switches the descriptor.
 

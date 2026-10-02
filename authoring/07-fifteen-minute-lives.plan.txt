@@ -1,0 +1,36 @@
+result status=prepared command=change.plan
+project path=/mnt/data/work/orbloam/project repository=repo_10402312054de7e1f7a6a69d96460099 package=pkg_8e4d55489066456031faaa0d27c35ead
+revision base=rev_a8530f1ea3e0d1629202876550d51c638972d250c0dced4facf5f9f9bbc66619 result=rev_8469f80e938511307206742546717c28e1f4a7d75c6a3916319b6fd452a4e8e2
+plan token=plan_2e498ef85128abad2ec5191c556b198915c6940dface9c333491e7e5b03ce1cfe00847f0c377bf3f10732bec4320c146473b44bdd8bf9b3d6f2ff457dd481088 request-commitment=request_2e498ef85128abad2ec5191c556b198915c6940dface9c333491e7e5b03ce1cf prepared-commitment=prepared_e00847f0c377bf3f10732bec4320c146473b44bdd8bf9b3d6f2ff457dd481088
+plan-output path=/mnt/data/work/orbloam/authoring/07-fifteen-minute-lives.logical-plan status=published bytes=370590 records=1271
+change transaction=transaction_fe2adf2b63d8feb36d24957b2732c1d2358752a02aa902fa9bf8a8ba19ffed65 semantic-diff=semantic_diff_c275f1f84e19545cf59ee6bc92b2872cbe759c82ed358929355fa26ef1b10467
+identity symbol=$update-cohort-deaths-body id=expr_2fc36a5007c04a8a8de77b187f850f38
+identity symbol=$update-test-lifetime-0 id=decl_812850eb235b2df6c0ae60fead121f09
+identity symbol=$update-test-lifetime-0-actual id=expr_30509b74b781bd3ac520e8c06ede7140
+identity symbol=$update-test-lifetime-0-expected id=expr_5ed0de32b1340617ae356b520bbf8b8a
+identity symbol=$update-test-lifetime-105 id=decl_ea1a9238d84507d184eb860ef64dc64d
+identity symbol=$update-test-lifetime-105-actual id=expr_da6a2e6f44cd4ca5dc1a1c57fbbdf972
+identity symbol=$update-test-lifetime-105-expected id=expr_edcba97fd6d57f047b9a0486bd26521c
+identity symbol=$update-test-lifetime-106 id=decl_ae83b4ed98d520f35af6f72afa4d9923
+identity symbol=$update-test-lifetime-106-actual id=expr_4c494cd5cc2bfd62d1650efd0a33c83f
+identity symbol=$update-test-lifetime-106-expected id=expr_12fa32ee4ad95cfa88c1ab3baf3e9d10
+identity symbol=$update-test-lifetime-180 id=decl_bbacbdd1ab0715ca47d52e8ba91be81a
+identity symbol=$update-test-lifetime-180-actual id=expr_76ffe5b3dfac60186158d46308c5dba7
+identity symbol=$update-test-lifetime-180-expected id=expr_d7496ee3e5e4fd7327aad5e7ab5e563a
+identity symbol=$update-test-lifetime-720 id=decl_671e7bd8808aeb6e523ac4c31ae59d37
+identity symbol=$update-test-lifetime-720-actual id=expr_299f2d8373640514041b7da92db16f54
+identity symbol=$update-test-lifetime-720-expected id=expr_7b709c32750608f1ddc97397aaac94e6
+identity symbol=$update-test-lifetime-89 id=decl_b51746ecc8bf67f6c378f2ab68753a21
+identity symbol=$update-test-lifetime-89-actual id=expr_9cfd9d6e633ebe782177b096f1a4ece6
+identity symbol=$update-test-lifetime-89-expected id=expr_d7f0904c29befbc47a63fd090abb1999
+identity symbol=$update-test-lifetime-90 id=decl_ec797d4d9daa80ea1d870b8e9409c9b5
+identity symbol=$update-test-lifetime-90-actual id=expr_5569e40b505227644709fa1a72cc0434
+identity symbol=$update-test-lifetime-90-expected id=expr_0d996dd2b6f316575e3c50d37de283fb
+identity symbol=$update-test-overlapping-generations id=decl_e540fda8916c32c82626526aee9344b3
+identity symbol=$update-test-overlapping-generations-actual id=expr_773cc4f751fc166220698d71d5bf2bfd
+identity symbol=$update-test-overlapping-generations-expected id=expr_c78eab7dc21a263697cae498e0aadd91
+summary created=95 updated=1 deleted=87 types=0 dependencies=0 retirements=87 witness=926
+validation structural-owners=183 semantic-owners=184 summaries-reused=9540 relation-edges=1016 tests-selected=18 tests-passed=0 compiler-units=17
+receipt digest=receipt_object_c1fa7130a04099cc2b908683d188f8107912dc29e70b82f7f0aa7813e906383f revision-record=revision_object_8175e4c43ac337a0453de3325a72cc7740f54ee1d23fdc685b401c65e023867c
+schema capabilities=53e66b5dae2b5c8c08b20ca7272b9e15d36564ae521f2d9af39d15f4b66a17d5
+next kind=apply plan=plan_2e498ef85128abad2ec5191c556b198915c6940dface9c333491e7e5b03ce1cfe00847f0c377bf3f10732bec4320c146473b44bdd8bf9b3d6f2ff457dd481088 input-file=/mnt/data/work/orbloam/authoring/07-fifteen-minute-lives.lkjc

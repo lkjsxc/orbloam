@@ -36,22 +36,14 @@ A reverse proxy must preserve Authorization, restrict request-body logging, and 
 
 `python3 tests/acceptance.py` creates fresh private temporary stores under `.test-state/`, exercises real native commands and HTTP, and writes a redacted report. It does not use a Python game server. `python3 tests/performance.py --seconds 120` is an explicit 512-person/8-workshop fixture, not earned progress or proof of 64 busy colonies.
 
-`python3 tests/browser.py` requires Playwright and Chromium and prefers real navigation. `--bridge-if-blocked` permits an explicitly recorded blank-document bridge only when navigation reports `ERR_BLOCKED_BY_ADMINISTRATOR`. The bridge uses the real HTTP application and a declared test storage adapter; it does not validate native browser storage/security. Never include that bridge in the launch path.
+`python3 tests/quiet_browser.py` requires Playwright and Chromium and prefers real navigation. `--bridge-if-blocked` permits an explicitly recorded blank-document bridge only when navigation reports `ERR_BLOCKED_BY_ADMINISTRATOR`. The bridge uses the real HTTP application and a declared test storage adapter; it does not validate native browser storage/security. Never include that bridge in the launch path.
 
 Fixtures contain private generated credentials and are excluded from distribution/version control. Leave user-owned data alone. Tests must not run against a player's live save.
 
-## Remote integration handoff
+## Updating an existing Orbloam save
 
-The reconstruction bundle is based on the exact public initial commit `9b3d8db72e2483bcf083aeb604d5366848417bf9`. It includes that actual signed ancestor, not a replacement orphan history. The continuation environment offered read-only GitHub operations and no usable authenticated CLI, so local reconstruction is **not** a remote-main completion claim.
+Stop the previous process and make a native logical backup first. Extract this ZIP into a **new directory**, leaving the old application and data intact. Restore the backup into a new absent `dist/data/` under the new directory, verify it, then start the new application. Keep the same private recovery key. Do not merge data directories or copy over a running process.
 
-To inspect without touching an existing checkout:
+The immediate predecessor's typed world is admitted without resetting it. Research prefixes remain owned, and fixed-recipe overrides can be selected again. Lifespan rules now use 90 ticks; unprocessed time is caught up under those rules, while previously recorded totals remain unchanged. For a rollback, use the pre-update backup together with the old program; binary compatibility does not undo changed game semantics.
 
-```sh
-git clone --branch main orbloam-reconstructed.bundle orbloam-recovered
-cd orbloam-recovered
-git remote set-url origin https://github.com/lkjsxc/orbloam.git
-git fetch origin
-git merge-base --is-ancestor origin/main main && git push origin main
-```
-
-Run the push only if the ancestry check succeeded. Do not use `--force`. If remote main has advanced, reconcile that work in a normal branch/review before integration. The bundle/source files must first be saved locally; the bundle does not need the expired ZIP or a ChatGPT session to reconstruct its Git history. Once accepted source is on GitHub, future retrieval should use that repository rather than temporary chat links.
+This ZIP is a delivery artifact, not a remote-main publication claim. `docs/VERIFICATION.md` and `evidence/quiet-world/` identify the tests for these bytes. Temporary chat links should not be your only copy.

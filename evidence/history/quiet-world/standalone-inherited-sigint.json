@@ -1,0 +1,9 @@
+{
+  "schema": "orbloam-standalone-v1",
+  "status": "failed",
+  "artifact_sha256": "5b925822ae0f1351d1d41efef5ccc877cd90281d2f7097d046352d30ecda6693",
+  "runtime_sha256": "98a39bd192c1e98187a1a954f916f5ffc89ef2586317c25e1efa06c61b888c32",
+  "error": "Command '['sh', '/mnt/data/work/orbloam/.test-state/standalone-evgz_xbr/package with spaces/start.sh', '--port', '53275']' timed out after 35 seconds",
+  "traceback": "Traceback (most recent call last):\n  File \"/mnt/data/work/orbloam/tests/standalone.py\", line 71, in main\n    stop(process,handle);process=None\n    ~~~~^^^^^^^^^^^^^^^^\n  File \"/mnt/data/work/orbloam/tests/standalone.py\", line 56, in stop\n    assert process.wait(timeout=35)==0\n           ~~~~~~~~~~~~^^^^^^^^^^^^\n  File \"/usr/lib/python3.13/subprocess.py\", line 1280, in wait\n    return self._wait(timeout=timeout)\n           ~~~~~~~~~~^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.13/subprocess.py\", line 2058, in _wait\n    raise TimeoutExpired(self.args, timeout)\nsubprocess.TimeoutExpired: Command '['sh', '/mnt/data/work/orbloam/.test-state/standalone-evgz_xbr/package with spaces/start.sh', '--port', '53275']' timed out after 35 seconds\n",
+  "artifact_unchanged": true
+}
